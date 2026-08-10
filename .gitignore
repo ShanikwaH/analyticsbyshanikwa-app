@@ -1,0 +1,11 @@
+build/
+.dart_tool/
+.flutter-plugins*
+*.iml
+.idea/
+android/local.properties
+android/key.properties
+*.jks
+*.keystore
+ios/Pods/
+.DS_Store

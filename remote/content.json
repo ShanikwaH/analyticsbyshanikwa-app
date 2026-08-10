@@ -1,0 +1,1508 @@
+{
+ "version": 5,
+ "updated": "2026-08-03",
+ "urls": {
+  "site": "https://analyticsbyshanikwa.com",
+  "newsletter": "https://analyticsbyshanikwa.com/index.html#join",
+  "payhip_store": "https://payhip.com/AnalyticsByShanikwa",
+  "shopify_store": "https://jrip3r-qz.myshopify.com/",
+  "free_resources": "https://analyticsbyshanikwa.com/free-resources.html",
+  "streamlit_dashboard": "https://ai-bi-dashboard-yajxi5tkqxsrpguy7yh8zu.streamlit.app/",
+  "github_portfolio": "https://github.com/ShanikwaH/WGU_Portfolio",
+  "youtube": "https://www.youtube.com/@analyticsbyshanikwa",
+  "tiktok": "https://www.tiktok.com/@analyticsbyshanikwa",
+  "pinterest": "https://www.pinterest.com/analyticsbyshanikwa",
+  "remote_content": "https://analyticsbyshanikwa.com/app/content.json"
+ },
+ "this_week": {
+  "title": "The parable of the talents, audited.",
+  "verse": "To whom much is given, much will be required.",
+  "reference": "Luke 12:48",
+  "read_time": "7 min read",
+  "summary": "The servant who buried his talent didn't lose money. He just refused to put it to work. That's a perfectly acceptable financial control — and a perfectly terrible career move. This week we audit what we've been entrusted with, and what it costs to bury it.",
+  "url": "https://analyticsbyshanikwa.com/bible-stories.html#this-week"
+ },
+ "stewardship_audit": [
+  {
+   "q": "What was I given?",
+   "hint": "List the skills, relationships, data access, and responsibilities that landed in your lap this week — earned or not."
+  },
+  {
+   "q": "What did I produce?",
+   "hint": "Name one output — a report, a query, a conversation — that used what you were given. Be specific. No filler."
+  },
+  {
+   "q": "What did I bury?",
+   "hint": "Name one thing you knew how to do — but didn't. One insight you had — but didn't surface. This is where the audit gets honest."
+  },
+  {
+   "q": "What does the next week require?",
+   "hint": "One commitment. Not a goal. A commitment. Something you'll have done by Friday that uses what you've been given."
+  }
+ ],
+ "stories": [
+  {
+   "id": "s01",
+   "series": "Rarely Mentioned",
+   "theme": "Willing",
+   "reference": "Judges 4:17–22",
+   "tagline": "Tent peg.",
+   "title": "The Woman Who Killed a General With a Tent Peg",
+   "summary": "One of the greatest military victories in biblical history — won not by a soldier, a king, or a prophet. Jael wasn't on anybody's radar. She acted with the tools she had, right where she was. And history changed.",
+   "url": "https://analyticsbyshanikwa.com/stories/jael-tent-peg.html"
+  },
+  {
+   "id": "s02",
+   "series": "Rarely Mentioned",
+   "theme": "Grace",
+   "reference": "Jonah 1–4",
+   "tagline": "Ran the other way.",
+   "title": "The Man Swallowed by Something Worse Than a Whale",
+   "summary": "Everybody knows Jonah and the whale. But the real story is what happened after — a heart full of hatred disguised as religion, furious that God showed mercy to people Jonah had already written off.",
+   "url": "https://analyticsbyshanikwa.com/stories/jonah-real-message.html"
+  },
+  {
+   "id": "s03",
+   "series": "Rarely Mentioned",
+   "theme": "Pride",
+   "reference": "Daniel 4:1–37",
+   "tagline": "Ate grass.",
+   "title": "The King Who Went Insane and Ate Grass",
+   "summary": "The most powerful man on earth — crawling in a field, eating grass like an animal, for seven years. The moment he looked up and acknowledged something greater than himself, everything was restored.",
+   "url": "https://analyticsbyshanikwa.com/stories/nebuchadnezzar-ate-grass.html"
+  },
+  {
+   "id": "s04",
+   "series": "Rarely Mentioned",
+   "theme": "Preparation",
+   "reference": "1 Kings 17:1–6",
+   "tagline": "Fed by ravens.",
+   "title": "The Prophet Who Was Fed by Ravens",
+   "summary": "God told His boldest prophet to hide — and sent birds to feed him twice a day. The brook dried up. But it wasn't abandonment. It was redirection. The hidden season was never wasted.",
+   "url": "https://analyticsbyshanikwa.com/stories/elijah-fed-by-ravens.html"
+  },
+  {
+   "id": "s05",
+   "series": "Rarely Mentioned",
+   "theme": "Reverence",
+   "reference": "2 Kings 2:23–25",
+   "tagline": "She-bears.",
+   "title": "The Two Bears and the Mocking Children",
+   "summary": "Youths mocked the prophet — \"baldhead.\" Two bears came out of the woods. One of the most uncomfortable passages in Scripture, and a clear warning: God's authority is not a joke.",
+   "url": "https://analyticsbyshanikwa.com/stories/elisha-she-bears.html"
+  },
+  {
+   "id": "s06",
+   "series": "Rarely Mentioned",
+   "theme": "Ordinary",
+   "reference": "Judges 3:31",
+   "tagline": "One verse.",
+   "title": "The Man Who Killed 600 With an Ox Goad",
+   "summary": "His entire story is one verse. No sword — a farming tool. Six hundred Philistine soldiers. Shamgar didn't wait for better equipment or more favorable circumstances. He used what was in his hand.",
+   "url": "https://analyticsbyshanikwa.com/stories/shamgar-ox-goad.html"
+  },
+  {
+   "id": "s07",
+   "series": "Rarely Mentioned",
+   "theme": "Reckoning",
+   "reference": "1 Samuel 28:3–25",
+   "tagline": "Final accounting.",
+   "title": "The Witch of Endor and the Dead Prophet",
+   "summary": "A desperate king, a forbidden medium, and a dead prophet summoned from the grave. What Samuel's voice told Saul was not comfort — it was a final accounting of a kingdom mishandled one small disobedience at a time.",
+   "url": "https://analyticsbyshanikwa.com/stories/saul-medium-endor.html"
+  },
+  {
+   "id": "s08",
+   "series": "Rarely Mentioned",
+   "theme": "Obedience",
+   "reference": "2 Samuel 6:1–7",
+   "tagline": "Touched the ark.",
+   "title": "The Man Who Touched the Ark and Died Instantly",
+   "summary": "He was just trying to help — the ark was falling. But good intentions don't override God's instructions. How you carry a sacred thing matters as much as whether you carry it at all.",
+   "url": "https://analyticsbyshanikwa.com/stories/uzzah-touched-ark.html"
+  },
+  {
+   "id": "s09",
+   "series": "Rarely Mentioned",
+   "theme": "Deliverance",
+   "reference": "2 Kings 19:35–37",
+   "tagline": "One angel.",
+   "title": "The Angel Who Killed 185,000 Soldiers Overnight",
+   "summary": "One night. One angel. An entire Assyrian army dead by morning — because Hezekiah took the enemy's threatening letter to the temple and spread it out before God instead of fighting alone.",
+   "url": "https://analyticsbyshanikwa.com/stories/sennacherib-one-angel.html"
+  },
+  {
+   "id": "s10",
+   "series": "Rarely Mentioned",
+   "theme": "Bold Prayer",
+   "reference": "Joshua 10:12–14",
+   "tagline": "Sun stood still.",
+   "title": "The Man Who Stopped the Sun",
+   "summary": "Joshua didn't ask for a general blessing. He commanded the sun to stand still — out loud, in front of everyone. The God who stopped the sun for Joshua is the same God who hears your prayer today.",
+   "url": "https://analyticsbyshanikwa.com/stories/joshua-stopped-sun.html"
+  },
+  {
+   "id": "s11",
+   "series": "Women & Children",
+   "theme": "Courage",
+   "reference": "Exodus 1:15–21",
+   "tagline": "Defied Pharaoh.",
+   "title": "The Midwives Who Defied a Pharaoh and Saved a Nation",
+   "summary": "Before Moses ever floated in a basket, two Hebrew midwives were ordered to kill every newborn boy. They said no. A nation survived because Shiphrah and Puah feared God more than they feared the most powerful man alive.",
+   "url": "https://analyticsbyshanikwa.com/stories/shiphrah-puah-pharaoh.html"
+  },
+  {
+   "id": "s12",
+   "series": "Women & Children",
+   "theme": "Faith",
+   "reference": "1 Samuel 1:1–2:11",
+   "tagline": "Silent prayer.",
+   "title": "The Mother Who Let Her Son Go",
+   "summary": "Hannah prayed so hard the priest thought she was drunk. God heard the prayer no one could even see. Then she received the miracle she prayed for — and gave him back to God. What she surrendered changed history.",
+   "url": "https://analyticsbyshanikwa.com/stories/hannah-let-son-go.html"
+  },
+  {
+   "id": "s13",
+   "series": "Women & Children",
+   "theme": "Witness",
+   "reference": "2 Kings 5:1–4",
+   "tagline": "Four sentences.",
+   "title": "The Little Servant Girl Who Saved a General",
+   "summary": "She had no name, no power, and every reason to stay silent. Four sentences from a kidnapped child set the greatest healing miracle of Elisha's ministry in motion. You don't need a platform to change a life.",
+   "url": "https://analyticsbyshanikwa.com/stories/servant-girl-naaman.html"
+  },
+  {
+   "id": "s14",
+   "series": "Women & Children",
+   "theme": "Prayer",
+   "reference": "Luke 18:1–8",
+   "tagline": "Wouldn't stop.",
+   "title": "The Woman Who Wouldn't Stop Until She Got Justice",
+   "summary": "Jesus told this parable specifically to address the feeling that prayers are going unanswered. The widow's persistence wasn't annoying to Jesus — it was the example He pointed to. Don't stop asking.",
+   "url": "https://analyticsbyshanikwa.com/stories/persistent-widow-justice.html"
+  },
+  {
+   "id": "s15",
+   "series": "Women & Children",
+   "theme": "Advocacy",
+   "reference": "Numbers 27:1–11",
+   "tagline": "Five sisters.",
+   "title": "Five Sisters Who Changed the Law",
+   "summary": "They walked to the most sacred, public space in Israel and stated their case before Moses and the entire assembly. God ruled in their favor — and changed the law for every daughter who came after them.",
+   "url": "https://analyticsbyshanikwa.com/stories/daughters-zelophehad.html"
+  },
+  {
+   "id": "s16",
+   "series": "Women & Children",
+   "theme": "Legacy",
+   "reference": "2 Timothy 1:5",
+   "tagline": "Grandmother's faith.",
+   "title": "The Grandmother Who Shaped a Nation's Faith",
+   "summary": "Paul credited Timothy's extraordinary faith not to a great teacher or a dramatic conversion — but to a grandmother named Lois. What she modeled in ordinary moments changed the ancient world.",
+   "url": "https://analyticsbyshanikwa.com/stories/lois-eunice-grandmother.html"
+  },
+  {
+   "id": "s17",
+   "series": "Women & Children",
+   "theme": "Calling",
+   "reference": "1 Samuel 3:1–21",
+   "tagline": "Voice in the night.",
+   "title": "The Child Who Heard God's Voice at Night",
+   "summary": "A boy sleeping in the temple, called by name three times in the dark. He ran to Eli each time before anyone understood what was happening. God calls young people — and He calls them by name.",
+   "url": "https://analyticsbyshanikwa.com/stories/samuel-voice-night.html"
+  },
+  {
+   "id": "s18",
+   "series": "Women & Children",
+   "theme": "Sacrifice",
+   "reference": "1 Kings 3:16–28",
+   "tagline": "Split the baby.",
+   "title": "The Mother Who Split a Baby to Save It",
+   "summary": "Two mothers. One living baby. A king's impossible judgment. The real mother would rather lose her child to a stranger than see him die — and that willingness to let go proved her love.",
+   "url": "https://analyticsbyshanikwa.com/stories/solomon-wisdom-baby.html"
+  },
+  {
+   "id": "s19",
+   "series": "Women & Children",
+   "theme": "Bitterness",
+   "reference": "Matthew 14:1–12",
+   "tagline": "Danced for death.",
+   "title": "The Girl Who Danced a Man to His Death",
+   "summary": "A birthday party. A dance. A king's foolish oath. The head of John the Baptist on a platter — because a girl raised in her mother's hatred became an instrument of it. The bitterness we carry flows into those we raise.",
+   "url": "https://analyticsbyshanikwa.com/stories/salome-danced-death.html"
+  },
+  {
+   "id": "s20",
+   "series": "Women & Children",
+   "theme": "Worship",
+   "reference": "John 12:1–8",
+   "tagline": "Broken jar.",
+   "title": "The Woman Who Anointed Jesus When No One Else Understood",
+   "summary": "She broke a jar worth a year's wages over Jesus. The room called it waste. Jesus called it beautiful — and said it would be told wherever the gospel is preached. She understood what the disciples had missed.",
+   "url": "https://analyticsbyshanikwa.com/stories/mary-anointed-jesus.html"
+  },
+  {
+   "id": "s21",
+   "series": "Serving",
+   "theme": "Compassion",
+   "reference": "Luke 10:25–37",
+   "tagline": "Wrong side.",
+   "title": "The Good Samaritan — The Story That Redefined \"Neighbor\"",
+   "summary": "The priest passed. The Levite passed. Jesus' answer to \"who is my neighbor?\" destroyed the idea that religion qualifies you to decide who deserves your compassion. Your neighbor is whoever the road puts in front of you.",
+   "url": "https://analyticsbyshanikwa.com/stories/good-samaritan-neighbor.html"
+  },
+  {
+   "id": "s22",
+   "series": "Serving",
+   "theme": "Provision",
+   "reference": "John 6:1–14",
+   "tagline": "Five loaves.",
+   "title": "Jesus Feeds Five Thousand With a Boy's Lunch",
+   "summary": "A boy offered his whole lunch to a stranger. He had no idea it would feed twenty thousand people. You don't need to have enough to make a difference — just bring what you have to the right hands.",
+   "url": "https://analyticsbyshanikwa.com/stories/feeding-five-thousand.html"
+  },
+  {
+   "id": "s23",
+   "series": "Serving",
+   "theme": "Healing",
+   "reference": "Mark 1:40–45",
+   "tagline": "Touched him first.",
+   "title": "Jesus and the Man Nobody Would Touch",
+   "summary": "He hadn't been touched by another human being in years. Jesus reached out and touched him — before healing him, before saying a word. The touch was the first miracle. Then came the rest.",
+   "url": "https://analyticsbyshanikwa.com/stories/leper-nobody-touched.html"
+  },
+  {
+   "id": "s24",
+   "series": "Serving",
+   "theme": "Surrender",
+   "reference": "Matthew 19:16–30",
+   "tagline": "Walked away sad.",
+   "title": "The Rich Man Who Walked Away Sad",
+   "summary": "He kept all the commandments, ran to Jesus, and genuinely wanted eternal life. Mark says Jesus looked at him and loved him — then asked for the one thing he couldn't give. The greatest obstacle is rarely the obvious sin.",
+   "url": "https://analyticsbyshanikwa.com/stories/rich-young-ruler.html"
+  },
+  {
+   "id": "s25",
+   "series": "Serving",
+   "theme": "Grace",
+   "reference": "Luke 15:1–32",
+   "tagline": "All three lost.",
+   "title": "The Sheep, the Coin, and the Son — Three Parables About the Lost",
+   "summary": "Three things lost. Three parties when found. The father who ran — undignified, watching the road — is the picture Jesus drew of God. Heaven throws a party over one person coming home.",
+   "url": "https://analyticsbyshanikwa.com/stories/lost-sheep-coin-son.html"
+  },
+  {
+   "id": "s26",
+   "series": "Serving",
+   "theme": "Restoration",
+   "reference": "John 4:1–42",
+   "tagline": "Noon at the well.",
+   "title": "Jesus at the Well — The Woman the World Gave Up On",
+   "summary": "She came to the well alone at noon, carrying a history everyone knew. Jesus already knew it too — and waited there anyway. The woman the town had rejected became the town's evangelist.",
+   "url": "https://analyticsbyshanikwa.com/stories/samaritan-woman-well.html"
+  },
+  {
+   "id": "s27",
+   "series": "Serving",
+   "theme": "Repentance",
+   "reference": "Luke 19:1–10",
+   "tagline": "Climbed a tree.",
+   "title": "Zacchaeus — The Man Who Climbed a Tree to See Jesus",
+   "summary": "A wealthy, despised tax collector abandoned his dignity to climb a sycamore just to see Jesus. Jesus stopped, looked up, and called him by name. By dinner's end, Zacchaeus committed half his wealth to the poor.",
+   "url": "https://analyticsbyshanikwa.com/stories/zacchaeus-climbed-tree.html"
+  },
+  {
+   "id": "s28",
+   "series": "Serving",
+   "theme": "Generosity",
+   "reference": "Mark 12:41–44",
+   "tagline": "Two coins.",
+   "title": "The Widow's Offering — When Two Coins Outweigh a Fortune",
+   "summary": "The wealthy gave large, visible amounts. A poor widow dropped in two copper coins. Jesus called His disciples over and said she gave more than all of them. God doesn't measure giving by amount — He measures by proportion and love.",
+   "url": "https://analyticsbyshanikwa.com/stories/widows-offering-two-coins.html"
+  },
+  {
+   "id": "s29",
+   "series": "Serving",
+   "theme": "Healing",
+   "reference": "John 5:1–15",
+   "tagline": "38 years.",
+   "title": "Jesus Heals on the Sabbath — When Rules Replaced Compassion",
+   "summary": "He had been waiting by the pool for 38 years. Jesus asked the one uncomfortable question: \"Do you want to get well?\" Then He healed him — and the religious leaders' response was outrage, not rejoicing.",
+   "url": "https://analyticsbyshanikwa.com/stories/healed-sabbath-pool.html"
+  },
+  {
+   "id": "s30",
+   "series": "Serving",
+   "theme": "Justice",
+   "reference": "Matthew 25:31–46",
+   "tagline": "How he'll judge.",
+   "title": "The Sheep and the Goats — How Jesus Says He'll Judge the World",
+   "summary": "Jesus described Judgment Day — and the criteria had almost nothing to do with what most people expect. It was about hungry people, strangers, the sick, and prisoners. How you treat the least is how you treat Him.",
+   "url": "https://analyticsbyshanikwa.com/stories/sheep-and-goats.html"
+  }
+ ],
+ "products": [
+  {
+   "id": "p1",
+   "emoji": "✝️",
+   "niche": "bible",
+   "badge": "Most Popular",
+   "title": "Scripture Memory System",
+   "price": "$18.99",
+   "summary": "A spaced repetition Bible memorization tracker with a memory verse heatmap — built as an analytics dashboard for serious Christian study in Google Sheets.",
+   "features": [
+    "Memory verse heatmap & progress tracker",
+    "Spaced repetition review schedule",
+    "Analytics dashboard layout",
+    "Google Sheets — no account required"
+   ],
+   "payhip_url": "https://payhip.com/b/cSXU6",
+   "shopify_url": "https://jrip3r-qz.myshopify.com/",
+   "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoi984s1e8no5ckladlpbjm1n.png",
+   "format": "Excel & Google Sheets"
+  },
+  {
+   "id": "p2",
+   "emoji": "📜",
+   "niche": "bible",
+   "badge": "",
+   "title": "Bible Timeline Spreadsheet",
+   "price": "$14.99",
+   "summary": "A chronological reference tool tracking the Kings and Prophets of the Old Testament — with prophecy tracking and an interactive timeline built in Google Sheets.",
+   "features": [
+    "Kings & Prophets chronological chart",
+    "Old Testament prophecy tracking",
+    "Interactive Google Sheets format",
+    "Perfect for personal study & homeschool"
+   ],
+   "payhip_url": "https://payhip.com/b/StUTf",
+   "shopify_url": "https://jrip3r-qz.myshopify.com/",
+   "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpohvvj0bb0181slkv01139m1n.png",
+   "format": "Excel & Google Sheets"
+  },
+  {
+   "id": "p3",
+   "emoji": "💼",
+   "niche": "data",
+   "badge": "",
+   "title": "Career Pivot Suite Guide",
+   "price": "$19.99",
+   "summary": "A complete career-change toolkit — ATS-friendly resume template, job search tracker, and career change planner. Everything you need to pivot with confidence and a clear plan.",
+   "features": [
+    "ATS-optimized resume template",
+    "Job search tracker & interview pipeline",
+    "Step-by-step career change planner",
+    "Excel & Google Sheets compatible"
+   ],
+   "payhip_url": "https://payhip.com/b/XTBgt",
+   "shopify_url": "https://jrip3r-qz.myshopify.com/",
+   "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpqa3ilk10g3i0q19r61lb31juu15.png",
+   "format": "Excel & PDF"
+  },
+  {
+   "id": "p4",
+   "emoji": "📅",
+   "niche": "accounting",
+   "badge": "",
+   "title": "ADHD Life Planner Bundle 2026–2028",
+   "price": "$14.99",
+   "summary": "A multi-year planning system for neurodivergent thinkers — daily calendar, habit tracker, and an educational guide bundled together in both printable and digital formats.",
+   "features": [
+    "Daily calendar with priority & energy tracking",
+    "Habit tracker with visual accountability grid",
+    "Neurodivergent Productivity guide included",
+    "Printable PDF & digital formats"
+   ],
+   "payhip_url": "https://payhip.com/b/rbaPI",
+   "shopify_url": "https://jrip3r-qz.myshopify.com/",
+   "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoug2aj5n8100d169mhke16uf1k.png",
+   "format": "Printable PDF"
+  }
+ ],
+ "free_resources": [
+  {
+   "id": "f1",
+   "emoji": "💰",
+   "title": "Faith-Based Budget Tracker",
+   "summary": "A monthly income + expense tracker with faith-based savings goals and scripture prompts built in.",
+   "url": "https://analyticsbyshanikwa.com/free-resources.html#budget-tracker"
+  },
+  {
+   "id": "f2",
+   "emoji": "📖",
+   "title": "Bible Study Analytics Template",
+   "summary": "Track chapters, themes, and patterns across scripture with a structured spreadsheet built for deep study.",
+   "url": "https://analyticsbyshanikwa.com/free-resources.html#bible-study"
+  },
+  {
+   "id": "f3",
+   "emoji": "🧭",
+   "title": "Career Pivot Action Checklist",
+   "summary": "A step-by-step checklist for professionals making a career change, with journal prompts for each stage.",
+   "url": "https://analyticsbyshanikwa.com/free-resources.html#career-pivot"
+  },
+  {
+   "id": "f4",
+   "emoji": "🗓️",
+   "title": "30-Day Scripture Memory Tracker",
+   "summary": "A printable daily tracker and accountability grid for memorizing 30 scriptures in 30 days.",
+   "url": "https://analyticsbyshanikwa.com/free-resources.html#scripture-memory"
+  }
+ ],
+ "courses": [
+  {
+   "code": "D596",
+   "tag": "Foundation",
+   "title": "The Data Analytics Journey",
+   "summary": "Foundation course on the data analytics lifecycle, career planning, and problem-framing methodology.",
+   "skills": [
+    "Analytics Lifecycle",
+    "Career Strategy"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D596"
+  },
+  {
+   "code": "D597",
+   "tag": "SQL / NoSQL",
+   "title": "Data Management",
+   "summary": "Advanced database design covering relational (SQL) and non-relational (NoSQL) systems, ERDs, and query optimization.",
+   "skills": [
+    "SQL",
+    "NoSQL",
+    "ERD Design"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D597"
+  },
+  {
+   "code": "D598",
+   "tag": "Python",
+   "title": "Analytics Programming",
+   "summary": "Python programming for data analytics — data structures, pandas, NumPy, and scripting for data pipelines.",
+   "skills": [
+    "Python",
+    "Pandas",
+    "NumPy"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D598"
+  },
+  {
+   "code": "D599",
+   "tag": "Exploration",
+   "title": "Data Preparation & Exploration",
+   "summary": "Data wrangling, cleaning, EDA, and feature engineering using Python — from raw ingestion to analysis-ready datasets.",
+   "skills": [
+    "Python",
+    "EDA",
+    "Data Cleaning"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D599"
+  },
+  {
+   "code": "D600",
+   "tag": "Statistical Mining",
+   "title": "Statistical Data Mining",
+   "summary": "Statistical modeling and data mining techniques — regression, clustering, decision trees, and model evaluation in Python.",
+   "skills": [
+    "Python",
+    "Regression",
+    "Clustering"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D600"
+  },
+  {
+   "code": "D601",
+   "tag": "Tableau",
+   "title": "Data Storytelling",
+   "summary": "Designing and building Tableau dashboards that communicate insights clearly to non-technical stakeholders.",
+   "skills": [
+    "Tableau",
+    "Data Viz",
+    "Dashboards"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D601"
+  },
+  {
+   "code": "D602",
+   "tag": "Deployment",
+   "title": "Deployment",
+   "summary": "Deploying machine learning models and data applications — REST APIs, containerization concepts, and production-readiness.",
+   "skills": [
+    "Python",
+    "ML Deployment",
+    "APIs"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D602"
+  },
+  {
+   "code": "D603",
+   "tag": "ML",
+   "title": "Machine Learning",
+   "summary": "Supervised and unsupervised machine learning — model selection, training, evaluation, and bias-variance tradeoff in Python.",
+   "skills": [
+    "Python",
+    "Scikit-learn",
+    "Model Eval"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D603"
+  },
+  {
+   "code": "D604",
+   "tag": "Advanced",
+   "title": "Advanced Analytics",
+   "summary": "Deep learning fundamentals, time-series forecasting, and neural network architectures applied to real business datasets.",
+   "skills": [
+    "Python",
+    "Deep Learning",
+    "Forecasting"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D604"
+  },
+  {
+   "code": "D605",
+   "tag": "Optimization",
+   "title": "Optimization",
+   "summary": "Linear programming, constraint-based optimization, and simulation — modeling and solving real-world resource allocation problems.",
+   "skills": [
+    "Python",
+    "Linear Programming",
+    "Simulation"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D605"
+  },
+  {
+   "code": "D606",
+   "tag": "Capstone",
+   "title": "Data Science Capstone",
+   "summary": "Full-cycle data science capstone in R — problem framing, data collection, analysis, modeling, and final report with stakeholder presentation.",
+   "skills": [
+    "R",
+    "Full Pipeline",
+    "Capstone"
+   ],
+   "url": "https://github.com/ShanikwaH/WGU_Portfolio/tree/main/D606"
+  }
+ ],
+ "tech_skills": [
+  {
+   "name": "SQL",
+   "level": "Advanced",
+   "pct": 95
+  },
+  {
+   "name": "Excel / Power Query",
+   "level": "Advanced",
+   "pct": 92
+  },
+  {
+   "name": "Python (pandas, NumPy)",
+   "level": "Proficient",
+   "pct": 90
+  },
+  {
+   "name": "R (tidyverse, ggplot2)",
+   "level": "Proficient",
+   "pct": 88
+  },
+  {
+   "name": "Statistical Modeling",
+   "level": "Proficient",
+   "pct": 87
+  },
+  {
+   "name": "Tableau",
+   "level": "Proficient",
+   "pct": 85
+  },
+  {
+   "name": "Machine Learning (scikit-learn)",
+   "level": "Intermediate",
+   "pct": 80
+  },
+  {
+   "name": "Streamlit",
+   "level": "Intermediate",
+   "pct": 78
+  }
+ ],
+ "verses": [
+  {
+   "id": "v1",
+   "reference": "Luke 16:10",
+   "text": "He that is faithful in that which is least is faithful also in much"
+  },
+  {
+   "id": "v2",
+   "reference": "Proverbs 27:23",
+   "text": "Be thou diligent to know the state of thy flocks and look well to thy herds"
+  },
+  {
+   "id": "v3",
+   "reference": "Luke 12:48",
+   "text": "For unto whomsoever much is given of him shall be much required"
+  },
+  {
+   "id": "v4",
+   "reference": "Colossians 3:23",
+   "text": "And whatsoever ye do do it heartily as to the Lord and not unto men"
+  },
+  {
+   "id": "v5",
+   "reference": "Proverbs 21:5",
+   "text": "The thoughts of the diligent tend only to plenteousness"
+  },
+  {
+   "id": "v6",
+   "reference": "Micah 6:8",
+   "text": "Do justly and love mercy and walk humbly with thy God"
+  },
+  {
+   "id": "v7",
+   "reference": "Proverbs 3:5",
+   "text": "Trust in the Lord with all thine heart and lean not unto thine own understanding"
+  },
+  {
+   "id": "v8",
+   "reference": "Matthew 25:21",
+   "text": "Well done thou good and faithful servant thou hast been faithful over a few things"
+  },
+  {
+   "id": "v9",
+   "reference": "Psalm 90:17",
+   "text": "And establish thou the work of our hands upon us yea the work of our hands establish thou it"
+  },
+  {
+   "id": "v10",
+   "reference": "Philippians 4:13",
+   "text": "I can do all things through Christ which strengtheneth me"
+  }
+ ],
+ "quizzes": {
+  "bible": [
+   {
+    "q": "Jael defeated the general Sisera using what unlikely tool?",
+    "options": [
+     "A sword",
+     "A tent peg",
+     "A sling",
+     "A spear"
+    ],
+    "answer": 1,
+    "story_id": "s01"
+   },
+   {
+    "q": "Jonah's deepest struggle in the book was really about…",
+    "options": [
+     "Surviving the whale",
+     "God showing mercy to Nineveh",
+     "Losing his ship",
+     "Finding food"
+    ],
+    "answer": 1,
+    "story_id": "s02"
+   },
+   {
+    "q": "King Nebuchadnezzar was humbled by spending seven years…",
+    "options": [
+     "In prison",
+     "In exile in Egypt",
+     "Living like an animal eating grass",
+     "As a servant"
+    ],
+    "answer": 2,
+    "story_id": "s03"
+   },
+   {
+    "q": "Who brought Elijah food at the brook Cherith?",
+    "options": [
+     "Angels",
+     "Ravens",
+     "A widow",
+     "Doves"
+    ],
+    "answer": 1,
+    "story_id": "s04"
+   },
+   {
+    "q": "Shamgar struck down 600 Philistines with what?",
+    "options": [
+     "An ox goad",
+     "A jawbone",
+     "A staff",
+     "A bow"
+    ],
+    "answer": 0,
+    "story_id": "s06"
+   },
+   {
+    "q": "Shiphrah and Puah were midwives who defied…",
+    "options": [
+     "King Herod",
+     "Pharaoh",
+     "Nebuchadnezzar",
+     "Caesar"
+    ],
+    "answer": 1,
+    "story_id": "s11"
+   },
+   {
+    "q": "After her prayer was answered, Hannah dedicated her son Samuel to serve…",
+    "options": [
+     "In the king's court",
+     "At the temple with Eli",
+     "In the army",
+     "As a shepherd"
+    ],
+    "answer": 1,
+    "story_id": "s12"
+   },
+   {
+    "q": "The little servant girl pointed Naaman toward healing through…",
+    "options": [
+     "The prophet Elisha",
+     "The king of Israel",
+     "A physician",
+     "The Jordan priests"
+    ],
+    "answer": 0,
+    "story_id": "s13"
+   },
+   {
+    "q": "Jesus told the parable of the persistent widow to teach…",
+    "options": [
+     "Generous giving",
+     "Not to give up in prayer",
+     "Honest judging",
+     "Patience with children"
+    ],
+    "answer": 1,
+    "story_id": "s14"
+   },
+   {
+    "q": "The boy's lunch that fed the five thousand contained…",
+    "options": [
+     "Seven loaves and figs",
+     "Bread and wine",
+     "Five loaves and two fish",
+     "Three fish and honey"
+    ],
+    "answer": 2,
+    "story_id": "s22"
+   },
+   {
+    "q": "Jesus said the widow's two coins outweighed the large gifts because God measures giving by…",
+    "options": [
+     "Total amount",
+     "Public visibility",
+     "Proportion and love",
+     "Frequency"
+    ],
+    "answer": 2,
+    "story_id": "s28"
+   },
+   {
+    "q": "In the parable of the talents, the third servant's failure was that he…",
+    "options": [
+     "Lost the money trading",
+     "Spent it on himself",
+     "Buried it instead of putting it to work",
+     "Gave it away"
+    ],
+    "answer": 2,
+    "story_id": "s30"
+   }
+  ],
+  "accounting": [
+   {
+    "q": "The accounting equation is…",
+    "options": [
+     "Assets = Liabilities + Equity",
+     "Assets = Revenue − Expenses",
+     "Equity = Assets + Liabilities",
+     "Cash = Debits − Credits"
+    ],
+    "answer": 0
+   },
+   {
+    "q": "A debit increases which of these accounts?",
+    "options": [
+     "Revenue",
+     "Liabilities",
+     "Assets",
+     "Equity"
+    ],
+    "answer": 2
+   },
+   {
+    "q": "Current ratio is calculated as…",
+    "options": [
+     "Current assets ÷ current liabilities",
+     "Net income ÷ sales",
+     "Debt ÷ equity",
+     "Cash ÷ total assets"
+    ],
+    "answer": 0
+   },
+   {
+    "q": "Under accrual accounting, revenue is recognized when…",
+    "options": [
+     "Cash is received",
+     "It is earned",
+     "The invoice is printed",
+     "The bank clears the deposit"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "Gross margin equals…",
+    "options": [
+     "(Revenue − COGS) ÷ Revenue",
+     "Net income ÷ equity",
+     "Revenue ÷ assets",
+     "COGS ÷ revenue"
+    ],
+    "answer": 0
+   },
+   {
+    "q": "Depreciation exists to…",
+    "options": [
+     "Track an asset's market value",
+     "Spread an asset's cost over its useful life",
+     "Reduce cash",
+     "Record inflation"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "Working capital equals…",
+    "options": [
+     "Total assets − total liabilities",
+     "Current assets − current liabilities",
+     "Cash + inventory",
+     "Equity − debt"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "Double-entry bookkeeping means every transaction…",
+    "options": [
+     "Is recorded twice for backup",
+     "Hits at least two accounts, debits equaling credits",
+     "Needs two approvals",
+     "Is posted in two ledgers"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "VITA stands for…",
+    "options": [
+     "Verified Income Tax Audit",
+     "Volunteer Income Tax Assistance",
+     "Value-Indexed Tax Accounting",
+     "Vocational Institute of Tax Advisors"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "The balance sheet reports a company's position…",
+    "options": [
+     "Over a period of time",
+     "At a single point in time",
+     "Only at year-end",
+     "Only in audited years"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "An expense paid in advance is recorded first as…",
+    "options": [
+     "A liability",
+     "Revenue",
+     "A prepaid asset",
+     "Equity"
+    ],
+    "answer": 2
+   },
+   {
+    "q": "Retained earnings grow when a company…",
+    "options": [
+     "Issues new stock",
+     "Earns net income and doesn't distribute it",
+     "Borrows money",
+     "Buys equipment"
+    ],
+    "answer": 1
+   }
+  ],
+  "data": [
+   {
+    "q": "In SQL, which clause filters rows BEFORE grouping?",
+    "options": [
+     "HAVING",
+     "WHERE",
+     "ORDER BY",
+     "LIMIT"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "A primary key must be…",
+    "options": [
+     "A number",
+     "Unique and not null",
+     "Indexed manually",
+     "Alphabetical"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "In pandas, the main two-dimensional data structure is the…",
+    "options": [
+     "Array",
+     "Series",
+     "DataFrame",
+     "Matrix"
+    ],
+    "answer": 2
+   },
+   {
+    "q": "Which measure is most resistant to outliers?",
+    "options": [
+     "Mean",
+     "Median",
+     "Range",
+     "Sum"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "A LEFT JOIN returns…",
+    "options": [
+     "Only matching rows",
+     "All rows from the left table plus matches from the right",
+     "All rows from both tables always",
+     "Only right-table rows"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "Overfitting means a model…",
+    "options": [
+     "Trains too slowly",
+     "Memorizes training data and generalizes poorly",
+     "Has too few features",
+     "Underestimates variance"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "GROUP BY is used to…",
+    "options": [
+     "Sort results",
+     "Aggregate rows that share values",
+     "Join tables",
+     "Remove duplicates only"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "ETL stands for…",
+    "options": [
+     "Extract, Transform, Load",
+     "Evaluate, Test, Launch",
+     "Export, Tabulate, Link",
+     "Extract, Total, List"
+    ],
+    "answer": 0
+   },
+   {
+    "q": "Correlation between two variables proves…",
+    "options": [
+     "Causation",
+     "Nothing about causation by itself",
+     "A linear model is correct",
+     "The data is clean"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "NumPy is primarily used for…",
+    "options": [
+     "Web scraping",
+     "Fast numerical arrays and math",
+     "Building dashboards",
+     "Writing SQL"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "Tableau is best described as a…",
+    "options": [
+     "Database engine",
+     "Data visualization tool",
+     "Programming language",
+     "Spreadsheet"
+    ],
+    "answer": 1
+   },
+   {
+    "q": "In an ERD, a diamond/crow's-foot notation describes…",
+    "options": [
+     "Data types",
+     "Relationships between entities",
+     "Index size",
+     "Query speed"
+    ],
+    "answer": 1
+   }
+  ]
+ },
+ "tf_decks": {
+  "accounting": [
+   {
+    "s": "A debit increases an asset account.",
+    "a": true,
+    "why": "Assets carry a normal debit balance — debits increase them."
+   },
+   {
+    "s": "A credit increases revenue.",
+    "a": true,
+    "why": "Revenue carries a normal credit balance."
+   },
+   {
+    "s": "A debit increases a liability account.",
+    "a": false,
+    "why": "Liabilities carry a credit balance — debits decrease them."
+   },
+   {
+    "s": "Accumulated depreciation is a contra-asset account.",
+    "a": true,
+    "why": "It offsets the related asset with a credit balance."
+   },
+   {
+    "s": "Prepaid expenses are recorded as liabilities.",
+    "a": false,
+    "why": "Prepaids are assets — future benefit already paid for."
+   },
+   {
+    "s": "Under accrual accounting, revenue is recognized when cash is received.",
+    "a": false,
+    "why": "Revenue is recognized when earned, not when cash arrives."
+   },
+   {
+    "s": "Retained earnings normally carries a credit balance.",
+    "a": true,
+    "why": "It's an equity account — normal credit balance."
+   },
+   {
+    "s": "The accounting equation is Assets = Liabilities + Equity.",
+    "a": true,
+    "why": "The foundation of double-entry bookkeeping."
+   },
+   {
+    "s": "A trial balance that balances proves the ledger has no errors.",
+    "a": false,
+    "why": "Offsetting or omitted entries can still balance."
+   },
+   {
+    "s": "Dividends declared reduce retained earnings.",
+    "a": true,
+    "why": "Dividends are a distribution of equity."
+   },
+   {
+    "s": "Unearned revenue is a liability until it is earned.",
+    "a": true,
+    "why": "You owe the customer performance — that's a liability."
+   },
+   {
+    "s": "Expenses normally carry a credit balance.",
+    "a": false,
+    "why": "Expenses carry a normal debit balance."
+   }
+  ],
+  "data": [
+   {
+    "s": "The median is more resistant to outliers than the mean.",
+    "a": true,
+    "why": "Extreme values pull the mean, not the median."
+   },
+   {
+    "s": "Correlation implies causation.",
+    "a": false,
+    "why": "Correlated variables can share a hidden common cause."
+   },
+   {
+    "s": "In SQL, WHERE filters rows before GROUP BY aggregates them.",
+    "a": true,
+    "why": "WHERE runs pre-aggregation; HAVING runs after."
+   },
+   {
+    "s": "A LEFT JOIN returns only rows that match in both tables.",
+    "a": false,
+    "why": "That's an INNER JOIN — LEFT keeps all left-side rows."
+   },
+   {
+    "s": "Standard deviation is the square root of variance.",
+    "a": true,
+    "why": "By definition — same units as the data."
+   },
+   {
+    "s": "In SQL, HAVING filters aggregated results.",
+    "a": true,
+    "why": "HAVING applies conditions after GROUP BY."
+   },
+   {
+    "s": "A p-value below 0.05 proves the null hypothesis is false.",
+    "a": false,
+    "why": "It suggests evidence against it — never proof."
+   },
+   {
+    "s": "Normalization reduces data redundancy in relational databases.",
+    "a": true,
+    "why": "That's its core purpose (1NF → 3NF)."
+   },
+   {
+    "s": "A histogram shows the distribution of one numeric variable.",
+    "a": true,
+    "why": "Bars represent frequency across value bins."
+   },
+   {
+    "s": "Overfitting means a model performs better on new data than training data.",
+    "a": false,
+    "why": "It's the opposite — great on training, poor on new data."
+   },
+   {
+    "s": "In a boxplot, the box spans the interquartile range.",
+    "a": true,
+    "why": "Q1 to Q3, with the median line inside."
+   },
+   {
+    "s": "COUNT(*) in SQL skips rows containing NULL values.",
+    "a": false,
+    "why": "COUNT(*) counts every row; COUNT(col) skips NULLs."
+   }
+  ]
+ },
+ "story_order": [
+  "s11",
+  "s15",
+  "s10",
+  "s06",
+  "s01",
+  "s12",
+  "s17",
+  "s07",
+  "s08",
+  "s18",
+  "s04",
+  "s05",
+  "s13",
+  "s02",
+  "s09",
+  "s03"
+ ],
+ "bundled_files": [
+  {
+   "file": "Accounting_Analytics_Freebie_StarterKit.html",
+   "emoji": "🚀",
+   "title": "Accounting Analytics Starter Kit",
+   "format": "Interactive HTML guide",
+   "niche": "accounting",
+   "summary": "The 90-day accounting analytics path — 3 tools, $0 to start, real skills in 30 days."
+  },
+  {
+   "file": "Accounting_Analytics_Skill_Checker_App.html",
+   "emoji": "🩺",
+   "title": "Accounting Analytics Skill Checker",
+   "format": "Interactive HTML app",
+   "niche": "accounting",
+   "summary": "Answer a short assessment and get your personal skill-gap report."
+  },
+  {
+   "file": "From_Numbers_to_Decisions_Ebook.html",
+   "emoji": "📘",
+   "title": "From Numbers to Decisions",
+   "format": "HTML ebook",
+   "niche": "data",
+   "summary": "The ebook on turning raw numbers into confident decisions — with every tool referenced linked in the shop."
+  },
+  {
+   "file": "PersonalLifeOS_FreeTemplate_AnalyticsByShanikwa.xlsx",
+   "emoji": "🗂️",
+   "title": "Personal Life OS — Free Template",
+   "format": "Excel / Google Sheets",
+   "niche": "all",
+   "summary": "8-tab life system: weekly planner, money snapshot, goals dashboard, gratitude log, debt tracker with payoff timeline and method comparison."
+  }
+ ],
+ "who_am_i": [
+  {
+   "answer": "Jael",
+   "story": "s01",
+   "options": [
+    "Jael",
+    "Deborah",
+    "Ruth",
+    "Abigail"
+   ],
+   "clues": [
+    "I welcomed a fleeing general into my tent.",
+    "I gave him milk when he asked for water.",
+    "My weapon was a tent peg."
+   ],
+   "reference": "Judges 4:17–22"
+  },
+  {
+   "answer": "Jonah",
+   "story": "s02",
+   "options": [
+    "Elisha",
+    "Jonah",
+    "Amos",
+    "Hosea"
+   ],
+   "clues": [
+    "I ran from an assignment to Nineveh.",
+    "I slept through a storm that terrified sailors.",
+    "A great fish gave me three days to reconsider."
+   ],
+   "reference": "Jonah 1–4"
+  },
+  {
+   "answer": "Nebuchadnezzar",
+   "story": "s03",
+   "options": [
+    "Belshazzar",
+    "Cyrus",
+    "Nebuchadnezzar",
+    "Darius"
+   ],
+   "clues": [
+    "I ruled the greatest empire of my day.",
+    "A dream about a chopped-down tree troubled me.",
+    "I ate grass until I acknowledged heaven rules."
+   ],
+   "reference": "Daniel 4:1–37"
+  },
+  {
+   "answer": "Elijah",
+   "story": "s04",
+   "options": [
+    "Elijah",
+    "Elisha",
+    "Jeremiah",
+    "Isaiah"
+   ],
+   "clues": [
+    "I told a king there would be no rain.",
+    "I hid by a brook east of the Jordan.",
+    "Ravens brought me bread and meat."
+   ],
+   "reference": "1 Kings 17:1–6"
+  },
+  {
+   "answer": "Samuel",
+   "story": "s17",
+   "options": [
+    "Eli",
+    "Samuel",
+    "Saul",
+    "Nathan"
+   ],
+   "clues": [
+    "My mother dedicated me before I was born.",
+    "I served under an old priest in the temple.",
+    "I ran to old Eli three times in the night before we realized Who was calling."
+   ],
+   "reference": "1 Samuel 3:1–21"
+  },
+  {
+   "answer": "Hannah",
+   "story": "s12",
+   "options": [
+    "Hannah",
+    "Peninnah",
+    "Naomi",
+    "Sarah"
+   ],
+   "clues": [
+    "I wept and prayed until a priest thought I was drunk.",
+    "I promised my son to the Lord.",
+    "I brought him a little robe every year."
+   ],
+   "reference": "1 Samuel 1:1–2:11"
+  },
+  {
+   "answer": "Solomon",
+   "story": "s18",
+   "options": [
+    "David",
+    "Solomon",
+    "Rehoboam",
+    "Hezekiah"
+   ],
+   "clues": [
+    "Two women brought me one living baby.",
+    "I called for a sword to settle it.",
+    "My verdict revealed the true mother."
+   ],
+   "reference": "1 Kings 3:16–28"
+  },
+  {
+   "answer": "The servant girl",
+   "story": "s13",
+   "options": [
+    "The servant girl",
+    "Miriam",
+    "Esther",
+    "Rahab"
+   ],
+   "clues": [
+    "I was taken captive from Israel.",
+    "I served the wife of an army commander.",
+    "I pointed my master toward the prophet who could heal his leprosy."
+   ],
+   "reference": "2 Kings 5:1–4"
+  },
+  {
+   "answer": "Zacchaeus",
+   "story": "s27",
+   "options": [
+    "Matthew",
+    "Zacchaeus",
+    "Nicodemus",
+    "Bartimaeus"
+   ],
+   "clues": [
+    "I collected taxes in Jericho.",
+    "I was too short to see over the crowd.",
+    "I climbed a sycamore tree — and dinner changed my life."
+   ],
+   "reference": "Luke 19:1–10"
+  },
+  {
+   "answer": "The Samaritan woman",
+   "story": "s26",
+   "options": [
+    "Mary Magdalene",
+    "Martha",
+    "The Samaritan woman",
+    "Lydia"
+   ],
+   "clues": [
+    "I came to draw water at noon, alone.",
+    "A stranger asked me for a drink.",
+    "He told me everything I ever did."
+   ],
+   "reference": "John 4:1–42"
+  }
+ ],
+ "template_trivia": [
+  {
+   "q": "Which template includes a memory verse heatmap and progress tracker?",
+   "pid": "p1",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which product runs on a spaced repetition review schedule?",
+   "pid": "p1",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which spreadsheet ships a Kings & Prophets chronological chart?",
+   "pid": "p2",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which product tracks Old Testament prophecy?",
+   "pid": "p2",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which guide includes an ATS-optimized resume template?",
+   "pid": "p3",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which product includes a job search tracker and interview pipeline?",
+   "pid": "p3",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which bundle tracks priority AND energy on its daily calendar?",
+   "pid": "p4",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  },
+  {
+   "q": "Which product includes a habit tracker with a visual accountability grid?",
+   "pid": "p4",
+   "options": [
+    "Scripture Memory System",
+    "Bible Timeline Spreadsheet",
+    "Career Pivot Suite Guide",
+    "ADHD Life Planner Bundle 2026–2028"
+   ]
+  }
+ ],
+ "game_words": {
+  "bible": [
+   "JAEL",
+   "JONAH",
+   "ELIJAH",
+   "SAMUEL",
+   "HANNAH",
+   "SOLOMON"
+  ],
+  "accounting": [
+   "DEBIT",
+   "CREDIT",
+   "ASSET",
+   "EQUITY",
+   "LEDGER",
+   "ACCRUAL"
+  ],
+  "data": [
+   "MEAN",
+   "MEDIAN",
+   "QUERY",
+   "PIVOT",
+   "CHART",
+   "OUTLIER"
+  ]
+ }
+}

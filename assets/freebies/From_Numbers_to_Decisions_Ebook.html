@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>From Numbers to Decisions — Analytics by Shanikwa</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0D1117;
+  --navy: #1E3A5F;
+  --blue: #2563EB;
+  --sky: #DBEAFE;
+  --green: #14532D;
+  --sage: #16A34A;
+  --mint: #DCFCE7;
+  --amber: #D97706;
+  --sand: #FEF3C7;
+  --coral: #F56400;
+  --cream: #FAFAF7;
+  --paper: #F5F4EF;
+  --stone: #E8E6DF;
+  --mist: #94A3B8;
+  --white: #FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  line-height: 1.75;
+}
+
+/* ── PRINT BUTTON ─────────────────── */
+.print-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: var(--navy); color: #fff;
+  padding: 10px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .82rem; font-weight: 500;
+}
+.print-bar .brand { font-weight: 700; opacity: .9; }
+.print-btn {
+  background: var(--amber); color: #fff; border: none;
+  padding: 7px 20px; border-radius: 6px;
+  font-size: .8rem; font-weight: 700; cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+}
+.print-btn:hover { opacity: .9; }
+
+/* ── COVER ────────────────────────── */
+.cover {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--navy) 0%, #1a3a6b 40%, #0f2040 100%);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px 48px 60px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cover::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.cover-eyebrow {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .75rem; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 28px;
+}
+.cover h1 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(3rem, 8vw, 5.5rem);
+  color: #fff; line-height: 1.05;
+  margin-bottom: 12px;
+}
+.cover h1 em { color: #FBBF24; font-style: italic; }
+.cover-subtitle {
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: rgba(255,255,255,.65);
+  max-width: 540px; margin: 0 auto 48px;
+  font-style: italic; font-family: 'DM Serif Display', serif;
+}
+.cover-divider {
+  width: 60px; height: 2px;
+  background: var(--amber);
+  margin: 0 auto 48px;
+}
+.author-card {
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 16px; padding: 28px 40px;
+  max-width: 520px;
+}
+.author-name {
+  font-size: 1.1rem; font-weight: 700; color: #fff;
+  margin-bottom: 10px;
+}
+.author-creds {
+  font-size: .8rem; color: rgba(255,255,255,.55);
+  line-height: 2; letter-spacing: .3px;
+}
+.cover-toc {
+  margin-top: 48px;
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px; max-width: 680px; width: 100%;
+}
+.toc-pill {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 8px; padding: 10px 14px;
+  font-size: .75rem; color: rgba(255,255,255,.7);
+  font-weight: 500;
+}
+.toc-pill span { color: var(--amber); font-weight: 700; margin-right: 6px; }
+
+/* ── CHAPTER WRAPPER ──────────────── */
+.chapter {
+  max-width: 760px; margin: 0 auto;
+  padding: 80px 40px;
+  border-bottom: 1px solid var(--stone);
+}
+.chapter:last-child { border-bottom: none; }
+
+/* ── CHAPTER OPENER ───────────────── */
+.ch-opener {
+  display: flex; gap: 20px;
+  align-items: flex-start; margin-bottom: 40px;
+}
+.ch-num {
+  flex-shrink: 0;
+  width: 56px; height: 56px;
+  background: var(--navy);
+  color: #fff;
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ch-meta { flex: 1; }
+.ch-label {
+  font-size: .7rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mist); margin-bottom: 6px;
+}
+.ch-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  color: var(--navy); line-height: 1.2;
+}
+.ch-lead {
+  font-size: 1.05rem; font-style: italic;
+  color: var(--mist);
+  border-left: 3px solid var(--amber);
+  padding-left: 20px; margin-bottom: 36px;
+  line-height: 1.7;
+  font-family: 'DM Serif Display', serif;
+}
+
+/* ── BODY TEXT ────────────────────── */
+.chapter p { margin-bottom: 1.4rem; font-size: 1rem; }
+.chapter h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.35rem; color: var(--navy);
+  margin: 2.4rem 0 .8rem;
+}
+.chapter h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: .9rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--mist); margin: 1.8rem 0 .6rem;
+}
+strong { color: var(--navy); }
+
+/* ── CALLOUTS ─────────────────────── */
+.callout {
+  border-radius: 12px; padding: 24px 28px;
+  margin: 2rem 0;
+}
+.callout-nikki {
+  background: var(--navy);
+  position: relative; overflow: hidden;
+}
+.callout-nikki::before {
+  content: '\201C';
+  position: absolute; top: -10px; left: 16px;
+  font-size: 6rem; color: rgba(255,255,255,.08);
+  font-family: 'DM Serif Display', serif; line-height: 1;
+}
+.callout-nikki p { color: rgba(255,255,255,.88); margin: 0; font-style: italic; font-size: .97rem; }
+.callout-nikki .src {
+  margin-top: 14px; font-size: .75rem;
+  color: rgba(255,255,255,.4); font-weight: 600;
+  font-style: normal; letter-spacing: .5px;
+}
+.callout-tip {
+  background: var(--sand);
+  border-left: 4px solid var(--amber);
+}
+.callout-tip .tip-label {
+  font-size: .7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--amber); margin-bottom: 8px;
+}
+.callout-tip p { color: var(--ink); margin: 0; font-size: .95rem; }
+.callout-action {
+  background: var(--mint);
+  border-left: 4px solid var(--sage);
+}
+.callout-action .act-label {
+  font-size: .7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--sage); margin-bottom: 8px;
+}
+.callout-action p { color: var(--green); margin: 0; font-size: .95rem; font-weight: 600; }
+
+/* ── NUMBERED STEPS ───────────────── */
+.step-list { list-style: none; margin: 1.5rem 0; }
+.step-list li {
+  display: flex; gap: 16px;
+  margin-bottom: 1.2rem;
+  align-items: flex-start;
+}
+.step-n {
+  width: 32px; height: 32px; flex-shrink: 0;
+  background: var(--navy); color: #fff;
+  border-radius: 50%; font-size: .85rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 2px;
+}
+.step-body h4 {
+  font-size: .95rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 4px; margin-top: 0;
+  text-transform: none; letter-spacing: 0;
+}
+.step-body p { font-size: .9rem; color: #374151; margin: 0; }
+
+/* ── TABLES ───────────────────────── */
+.data-table { width: 100%; border-collapse: collapse; margin: 1.8rem 0; font-size: .9rem; }
+.data-table th {
+  background: var(--navy); color: #fff;
+  padding: 11px 16px; text-align: left;
+  font-weight: 600; font-size: .82rem;
+}
+.data-table td { padding: 10px 16px; border-bottom: 1px solid var(--stone); }
+.data-table tr:nth-child(even) td { background: var(--paper); }
+
+/* ── CODE BLOCKS ──────────────────── */
+.code-block {
+  background: #0D1117; border-radius: 10px;
+  padding: 20px 24px; margin: 1.5rem 0;
+  overflow-x: auto;
+}
+.code-block code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: .83rem; color: #e2e8f0; line-height: 2;
+}
+.code-kw { color: #93c5fd; }
+.code-str { color: #86efac; }
+.code-cm { color: #64748b; font-style: italic; }
+.code-fn { color: #fde68a; }
+.code-num { color: #c4b5fd; }
+
+/* ── CHAPTER CTA ──────────────────── */
+.chapter-cta {
+  background: linear-gradient(135deg, var(--coral), #ea580c);
+  border-radius: 14px; padding: 24px 28px;
+  margin: 2.5rem 0; color: #fff;
+}
+.cta-label {
+  font-size: .7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: rgba(255,255,255,.6); margin-bottom: 8px;
+}
+.cta-title { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.cta-sub { font-size: .85rem; opacity: .8; font-style: italic; }
+
+/* ── SKILL ASSESSMENT ─────────────── */
+.quiz-box {
+  background: var(--paper);
+  border: 2px solid var(--stone);
+  border-radius: 14px; padding: 28px;
+  margin: 2rem 0;
+}
+.quiz-box h3 { font-size: 1rem; color: var(--navy); margin-bottom: 20px; }
+.quiz-q {
+  display: flex; align-items: flex-start;
+  gap: 14px; padding: 12px 0;
+  border-bottom: 1px solid var(--stone);
+}
+.quiz-q:last-child { border-bottom: none; }
+.qnum {
+  width: 26px; height: 26px; flex-shrink: 0;
+  background: var(--sky); color: var(--navy);
+  border-radius: 50%; font-size: .75rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+}
+.q-text { font-size: .9rem; flex: 1; padding-top: 3px; }
+.q-yn { display: flex; gap: 8px; margin-top: 6px; }
+.q-yn span {
+  padding: 3px 12px; border-radius: 20px;
+  font-size: .7rem; font-weight: 800;
+  border: 1.5px solid var(--stone);
+  color: var(--mist); cursor: default;
+}
+
+/* ── PLAN SECTION ─────────────────── */
+.plan-card {
+  border-left: 3px solid var(--blue);
+  padding-left: 20px; margin-bottom: 24px;
+}
+.plan-card .week {
+  font-size: .7rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--blue); margin-bottom: 8px;
+}
+.plan-card h4 { font-size: .95rem; color: var(--navy); margin-bottom: 8px; font-size: .95rem; font-weight: 700; text-transform: none; letter-spacing: 0; }
+.plan-card ul { list-style: none; padding: 0; }
+.plan-card ul li {
+  font-size: .88rem; padding: 4px 0;
+  padding-left: 16px; position: relative; color: #374151;
+}
+.plan-card ul li::before {
+  content: '→'; position: absolute; left: 0;
+  color: var(--blue); font-weight: 700;
+}
+
+/* ── FINAL CTA ────────────────────── */
+.final-cta {
+  background: linear-gradient(160deg, var(--navy), #1d4ed8);
+  color: #fff; text-align: center;
+  padding: 80px 40px;
+}
+.final-cta h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 5vw, 3rem);
+  margin-bottom: 16px;
+}
+.final-cta p { opacity: .75; font-size: 1.05rem; max-width: 480px; margin: 0 auto 32px; }
+.final-url {
+  font-size: 1.3rem; font-weight: 800;
+  color: #FBBF24; margin-bottom: 12px;
+}
+.final-social { font-size: .85rem; opacity: .5; }
+
+/* ── PRINT STYLES ─────────────────── */
+@media print {
+  .print-bar { display: none; }
+  body { padding-top: 0; }
+  .cover { min-height: auto; page-break-after: always; }
+  .chapter { page-break-before: always; }
+}
+body { padding-top: 44px; }
+@media (max-width: 600px) {
+  .chapter { padding: 48px 20px; }
+  .cover { padding: 80px 24px 48px; }
+  .author-card { padding: 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- PRINT BAR -->
+<div class="print-bar">
+  <div class="brand">Analytics by Shanikwa · analyticsbyshanikwa.com</div>
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- COVER -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="cover">
+  <div class="cover-eyebrow">Analytics by Shanikwa · Free E-Book</div>
+  <h1>From Numbers<br>to <em>Decisions</em></h1>
+  <p class="cover-subtitle">The Beginner's Complete Guide to Data Analytics in Accounting — What It Is, Why It Matters, and Exactly Where to Start</p>
+  <div class="cover-divider"></div>
+  <div class="author-card">
+    <div class="author-name">Shanikwa "Nikki" Haynes</div>
+    <div class="author-creds">
+      MS Data Analytics · Western Governors University<br>
+      BS Accounting · University of Maine at Presque Isle<br>
+      AICPA & GSCPA Student Member · VITA Certified<br>
+      CPA Track, Georgia · analyticsbyshanikwa.com
+    </div>
+  </div>
+  <div class="cover-toc">
+    <div class="toc-pill"><span>INTRO</span>Who This Is For</div>
+    <div class="toc-pill"><span>CH 1</span>The Gap Nobody Talks About</div>
+    <div class="toc-pill"><span>CH 2</span>Excel as Analysis Engine</div>
+    <div class="toc-pill"><span>CH 3</span>Reading Financial Data</div>
+    <div class="toc-pill"><span>CH 4</span>SQL for Accountants</div>
+    <div class="toc-pill"><span>CH 5</span>Dashboards Without Drama</div>
+    <div class="toc-pill"><span>CH 6</span>Building Your Portfolio</div>
+    <div class="toc-pill"><span>CH 7</span>Month-End Automation</div>
+    <div class="toc-pill"><span>CH 8</span>Getting Hired</div>
+    <div class="toc-pill"><span>CLOSE</span>Your 90-Day Plan</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- INTRODUCTION -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num" style="background:#94A3B8; font-size:1rem; font-weight:800;">INTRO</div>
+    <div class="ch-meta">
+      <div class="ch-label">Introduction</div>
+      <h1 class="ch-title">Who This Book Is For — And What It Won't Waste Your Time On</h1>
+    </div>
+  </div>
+  <p class="ch-lead">This guide exists because nobody told me the truth about what firms actually want from accounting graduates — until I was already in the gap between what school teaches and what work requires.</p>
+
+  <div class="callout callout-nikki">
+    <p>I started in juvenile justice, tracking academic outcomes for at-risk youth. Then logistics at Amazon. Then security operations at Allied Universal, where I was querying access control databases before I even knew the formal name for what I was doing. When I went back to school, I chose the WGU MS in Data Analytics because I realized the work I'd always been doing had a name — and that name was on every job posting in accounting and finance. I finished the MSDA in six months while working full time. Everything in the tools I build came from that gap: what school teaches versus what the job actually requires.</p>
+    <div class="src">— Nikki Haynes, MS Data Analytics (WGU) · BS Accounting (UMPI)</div>
+  </div>
+
+  <h3>What This Book Does for You</h3>
+  <ul class="step-list">
+    <li>
+      <div class="step-n">1</div>
+      <div class="step-body"><h4>Clarifies what "accounting analytics" actually means</h4><p>Not data science. Not software engineering. The specific intersection of tools and accounting work that makes you more valuable in any finance role.</p></div>
+    </li>
+    <li>
+      <div class="step-n">2</div>
+      <div class="step-body"><h4>Shows you exactly where you already are on the path</h4><p>A built-in 5-question self-assessment reveals which skills you already have and which one gap is costing you the most right now.</p></div>
+    </li>
+    <li>
+      <div class="step-n">3</div>
+      <div class="step-body"><h4>Gives you three tools to start with today — all free</h4><p>Excel, a free SQL editor, and GitHub can get you your first portfolio project this week. No paid software required to begin.</p></div>
+    </li>
+    <li>
+      <div class="step-n">4</div>
+      <div class="step-body"><h4>Connects every concept to a real accounting scenario</h4><p>Every technique is illustrated with a general ledger, a trial balance, an accounts receivable file, or a tax return — the actual data accountants work with, not abstract datasets.</p></div>
+    </li>
+    <li>
+      <div class="step-n">5</div>
+      <div class="step-body"><h4>Gives you a concrete 90-day action plan</h4><p>Week-by-week, with specific daily time commitments and measurable milestones. Done is better than perfect.</p></div>
+    </li>
+  </ul>
+
+  <div class="callout callout-tip">
+    <div class="tip-label">💡 How to Read This Book</div>
+    <p>Read it once straight through for the full picture. Then use individual chapters as references when you need them. Every chapter ends with a call to action — a specific tool, resource, or free step you can take immediately.</p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 1 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">1</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter One</div>
+      <h1 class="ch-title">The Gap Nobody Talks About</h1>
+    </div>
+  </div>
+  <p class="ch-lead">Why schools teach accounting and firms want analysts — and what you can do about the distance between those two things.</p>
+
+  <p>When I started looking at accounting job descriptions — staff accountant, financial analyst, audit associate — I noticed something missing from my coursework. <strong>Nearly every posting mentioned SQL, Power BI, Excel data modeling, Python, Tableau, or data analytics.</strong> My accounting program covered none of them in any meaningful depth.</p>
+
+  <p>This is not a criticism of accounting education. The CPA exam tests real, foundational knowledge — GAAP, IFRS, tax law, auditing standards. But the daily tools firms expect are not on the exam, not in most curricula, and not in most textbooks.</p>
+
+  <h3>What School Teaches vs. What Firms Use Day One</h3>
+  <table class="data-table">
+    <thead>
+      <tr><th>What Your Program Covered</th><th>What Firms Actually Need on Day One</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Manual journal entry recording</td><td>ERP data extraction and structured reconciliation</td></tr>
+      <tr><td>Ratio calculation by hand</td><td>Excel dashboards showing 25+ ratios live from one input</td></tr>
+      <tr><td>Textbook financial statement prep</td><td>SQL queries pulling actual GL data for analysis</td></tr>
+      <tr><td>Handwritten audit workpapers</td><td>Data analytics tools testing entire transaction populations</td></tr>
+      <tr><td>Budget variance in a homework problem</td><td>Python or pivot-driven variance analysis on real, messy data</td></tr>
+    </tbody>
+  </table>
+
+  <h3>The 5 Skills That Separate Promoted Accountants from Stagnant Ones</h3>
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body"><h4>They analyze, not just calculate</h4><p>They don't just compute a ratio — they explain what it means, why it changed, and what to do about it. In plain English.</p></div></li>
+    <li><div class="step-n">2</div><div class="step-body"><h4>They build tools, not just use them</h4><p>They create the reconciliation template, the dashboard, the close checklist — not just fill them in.</p></div></li>
+    <li><div class="step-n">3</div><div class="step-body"><h4>They can query data directly</h4><p>SQL lets them pull exactly what they need without waiting for IT or another department to run a report.</p></div></li>
+    <li><div class="step-n">4</div><div class="step-body"><h4>They communicate to non-finance people</h4><p>Charts, summaries, and narratives that a department head can act on — not tables full of numbers with no context.</p></div></li>
+    <li><div class="step-n">5</div><div class="step-body"><h4>They automate their own repetitive work</h4><p>Even basic Excel automation and one Python script can save 4+ hours every single close cycle. That compounds.</p></div></li>
+  </ul>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Want the full role-by-role breakdown?</div>
+    <div class="cta-title">The Accounting-to-Analytics Career Bridge — 5 day-in-the-life scenarios, tools matrix, self-assessment, and 90-day plan</div>
+    <div class="cta-sub">Coming soon at analyticsbyshanikwa.com · @AnalyticsByShaniwa</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 2 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">2</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Two</div>
+      <h1 class="ch-title">Excel Is Not a Spreadsheet. It's an Analysis Engine.</h1>
+    </div>
+  </div>
+  <p class="ch-lead">Most accountants use Excel to store and format numbers. Accounting analysts use it to find patterns, answer questions, and tell stories. Same tool. Entirely different mindset.</p>
+
+  <p>Here is the mindset shift that changes everything: <strong>a spreadsheet is a place to put data. An analysis engine is a place to ask questions of data.</strong></p>
+  <p>When most accountants open Excel, they're thinking: "Where do I type this number?" When accounting analysts open Excel, they're thinking: "What does this data tell me that I couldn't see before?" The tool is identical. The question is completely different. And that question is everything.</p>
+
+  <h3>The Analytical Excel Stack: 5 Functions That Do 80% of Financial Analysis</h3>
+
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body">
+      <h4>Pivot Tables — Your Data Question Machine</h4>
+      <p>Take 10,000 rows of GL transactions. Summarize by account, department, month, or any combination in 30 seconds. Every financial analysis starts here. If you can build a pivot table and explain what it shows, you can do financial data analysis.</p>
+    </div></li>
+    <li><div class="step-n">2</div><div class="step-body">
+      <h4>XLOOKUP / VLOOKUP — Your Data Connector</h4>
+      <p>Link accounts to descriptions, transactions to departments, employees to pay rates. This is how you bring two separate data sources together without SQL. Essential for reconciliation work at every level.</p>
+    </div></li>
+    <li><div class="step-n">3</div><div class="step-body">
+      <h4>IF / IFS — Your Decision Engine</h4>
+      <p>Flag transactions over a threshold. Categorize expenses automatically. Mark variances as favorable or unfavorable. Every automated classification in accounting uses this logic. Master it.</p>
+    </div></li>
+    <li><div class="step-n">4</div><div class="step-body">
+      <h4>SUMIFS / COUNTIFS — Your Filtered Aggregator</h4>
+      <p>Sum all expenses in department X during quarter Y where the amount is over Z. This IS budget vs. actual analysis. These two functions are the engine behind most financial dashboards in Excel.</p>
+    </div></li>
+    <li><div class="step-n">5</div><div class="step-body">
+      <h4>Structured Tables (Ctrl+T) — Your Data Foundation</h4>
+      <p>Converting a flat range to a structured table makes every formula dynamic, every pivot auto-refreshing, and every analysis repeatable. This single change — 2 seconds to do — is the most impactful upgrade most accountants can make.</p>
+    </div></li>
+  </ul>
+
+  <div class="callout callout-action">
+    <div class="act-label">✅ Try This Today — 20 Minutes</div>
+    <p>Find any company's income statement online (SEC EDGAR — free). Paste it into Excel. Press Ctrl+T. Build one pivot table summarizing revenue by year. You have just done financial data analysis. That's it. That's the beginning.</p>
+  </div>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Build your complete Excel analytics system</div>
+    <div class="cta-title">The Accountant's Excel Analytics Playbook — 5 modules, 4 templates, 150-row practice GL dataset</div>
+    <div class="cta-sub">$19 · analyticsbyshanikwa.com · Instant download</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 3 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">3</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Three</div>
+      <h1 class="ch-title">Reading Financial Data: What the Numbers Are Actually Saying</h1>
+    </div>
+  </div>
+  <p class="ch-lead">The most undervalued skill in accounting is not calculating a ratio. It's explaining what the ratio means to someone who doesn't read financial data every day.</p>
+
+  <p>There is a real difference between <strong>reporting a number</strong> and <strong>explaining a number.</strong> Accounting programs teach reporting. Accounting careers require explanation. The gap between those two skills is where most early-career accountants get stuck — and where the ones who get promoted break free.</p>
+
+  <h3>The 3-Question Framework for Any Financial Number</h3>
+  <p>Before presenting any financial result, answer these three questions in this order. Every time.</p>
+
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body">
+      <h4>What happened?</h4>
+      <p>State the fact plainly. <em>"Revenue in Q3 was $2.4M, down $180K from Q2."</em> No interpretation yet. Just the fact with the number.</p>
+    </div></li>
+    <li><div class="step-n">2</div><div class="step-body">
+      <h4>Why does it matter?</h4>
+      <p>Context. <em>"This is a 7% decline — the largest single-quarter drop in 18 months. At this trajectory, we will miss the annual target by approximately $320K."</em></p>
+    </div></li>
+    <li><div class="step-n">3</div><div class="step-body">
+      <h4>What should happen next?</h4>
+      <p>Recommend an action. <em>"The decline concentrates in the Northeast region (80% of the gap). A targeted pipeline review before Q4 planning is recommended."</em></p>
+    </div></li>
+  </ul>
+
+  <div class="callout callout-nikki">
+    <p>At the Georgia Department of Juvenile Justice, I presented performance data to leadership monthly. The shift that changed how my work was received: I stopped presenting tables and started presenting findings. "Eighteen students improved literacy scores by more than one grade level. The common factor is the morning intervention block, which serves 23% of the population but accounts for 71% of all improvements." That sentence changed the resource allocation conversation. A table of scores never would have.</p>
+    <div class="src">— GDJJ Academic Outcomes Study, 2020–2022</div>
+  </div>
+
+  <h3>6 Ratios Every Accountant Should Read Fluently</h3>
+  <table class="data-table">
+    <thead><tr><th>Ratio</th><th>What It Actually Tells You</th><th>Healthy Range</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Current Ratio</strong></td><td>Can this company pay its bills in the next 12 months?</td><td>1.5 – 2.0×</td></tr>
+      <tr><td><strong>Gross Margin %</strong></td><td>How efficiently does this company make its product or deliver its service?</td><td>Industry-specific</td></tr>
+      <tr><td><strong>Net Profit Margin</strong></td><td>After everything — taxes, interest, overhead — how much of each dollar is kept?</td><td>S&P avg ~10%</td></tr>
+      <tr><td><strong>Debt-to-Equity</strong></td><td>How much has this company borrowed relative to owner investment?</td><td>Below 2.0</td></tr>
+      <tr><td><strong>Days Sales Outstanding</strong></td><td>On average, how long does it take to collect a receivable?</td><td>30–45 days</td></tr>
+      <tr><td><strong>Interest Coverage</strong></td><td>Can this company afford its interest payments from operating earnings?</td><td>Danger below 1.5×</td></tr>
+    </tbody>
+  </table>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Auto-calculate all 25+ ratios from any financial statement</div>
+    <div class="cta-title">Financial Ratio Calculator — enter numbers once, every ratio calculates instantly + Industry Benchmarks + Red Flags Dashboard</div>
+    <div class="cta-sub">$9 · analyticsbyshanikwa.com · Instant download</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 4 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">4</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Four</div>
+      <h1 class="ch-title">SQL for Accountants: Your First 10 Queries</h1>
+    </div>
+  </div>
+  <p class="ch-lead">SQL is not a programming language. It is a question language. You are asking a database a question, and it gives you an answer. Every query follows the same pattern — and that pattern is one you will learn in the next few pages.</p>
+
+  <p>SQL stands for Structured Query Language. The word "query" means question. You are asking a database: <em>show me the data that meets these conditions.</em> The database answers with a table of results. That's it.</p>
+
+  <h3>The Pattern Behind Every SQL Query You Will Ever Write</h3>
+  <div class="code-block">
+    <code>
+<span class="code-kw">SELECT</span>   <span class="code-fn">column1</span>, <span class="code-fn">column2</span>    <span class="code-cm">-- which columns to show</span>
+<span class="code-kw">FROM</span>     <span class="code-str">table_name</span>           <span class="code-cm">-- which table to look in</span>
+<span class="code-kw">WHERE</span>    condition            <span class="code-cm">-- which rows to include</span>
+<span class="code-kw">GROUP BY</span> <span class="code-fn">column1</span>             <span class="code-cm">-- how to summarize</span>
+<span class="code-kw">ORDER BY</span> <span class="code-fn">column1</span> <span class="code-kw">DESC</span><span class="code-cm">;</span>       <span class="code-cm">-- how to sort the results</span>
+    </code>
+  </div>
+
+  <p>That is the entire grammar. Every SQL query in existence is a variation of this structure.</p>
+
+  <h3>Your First 10 Queries — Built for Accounting Work</h3>
+
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body">
+      <h4>See what's in a table</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> * <span class="code-kw">FROM</span> <span class="code-str">general_ledger</span> <span class="code-kw">LIMIT</span> <span class="code-num">100</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">2</div><div class="step-body">
+      <h4>Filter by account type</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> * <span class="code-kw">FROM</span> <span class="code-str">general_ledger</span> <span class="code-kw">WHERE</span> account_type = <span class="code-str">'Expense'</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">3</div><div class="step-body">
+      <h4>Total expenses by department</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> department, <span class="code-fn">SUM</span>(amount) <span class="code-kw">AS</span> total
+<span class="code-kw">FROM</span>   <span class="code-str">general_ledger</span>
+<span class="code-kw">WHERE</span>  account_type = <span class="code-str">'Expense'</span>
+<span class="code-kw">GROUP BY</span> department
+<span class="code-kw">ORDER BY</span> total <span class="code-kw">DESC</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">4</div><div class="step-body">
+      <h4>Flag large transactions (audit procedure)</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> * <span class="code-kw">FROM</span> <span class="code-str">general_ledger</span>
+<span class="code-kw">WHERE</span> amount > <span class="code-num">10000</span> <span class="code-kw">AND</span> account_type = <span class="code-str">'Expense'</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">5</div><div class="step-body">
+      <h4>Monthly revenue trend</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> <span class="code-fn">DATE_TRUNC</span>(<span class="code-str">'month'</span>, post_date) <span class="code-kw">AS</span> month,
+       <span class="code-fn">SUM</span>(amount) <span class="code-kw">AS</span> revenue
+<span class="code-kw">FROM</span>   <span class="code-str">general_ledger</span>
+<span class="code-kw">WHERE</span>  account_type = <span class="code-str">'Revenue'</span>
+<span class="code-kw">GROUP BY</span> <span class="code-num">1</span> <span class="code-kw">ORDER BY</span> <span class="code-num">1</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">6</div><div class="step-body">
+      <h4>Find duplicate payments</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> vendor_id, amount, invoice_date, <span class="code-fn">COUNT</span>(*) <span class="code-kw">AS</span> cnt
+<span class="code-kw">FROM</span>   <span class="code-str">general_ledger</span>
+<span class="code-kw">WHERE</span>  account_type = <span class="code-str">'AP'</span>
+<span class="code-kw">GROUP BY</span> vendor_id, amount, invoice_date
+<span class="code-kw">HAVING</span> <span class="code-fn">COUNT</span>(*) > <span class="code-num">1</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">7</div><div class="step-body">
+      <h4>AR aging with buckets</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> customer_id, amount,
+       <span class="code-fn">CURRENT_DATE</span> - invoice_date <span class="code-kw">AS</span> days_out,
+       <span class="code-kw">CASE WHEN</span> <span class="code-fn">CURRENT_DATE</span>-invoice_date&lt;=<span class="code-num">30</span> <span class="code-kw">THEN</span> <span class="code-str">'0-30'</span>
+            <span class="code-kw">WHEN</span> <span class="code-fn">CURRENT_DATE</span>-invoice_date&lt;=<span class="code-num">60</span> <span class="code-kw">THEN</span> <span class="code-str">'31-60'</span>
+            <span class="code-kw">ELSE</span> <span class="code-str">'Over 60'</span> <span class="code-kw">END</span> <span class="code-kw">AS</span> bucket
+<span class="code-kw">FROM</span>   <span class="code-str">invoices</span> <span class="code-kw">WHERE</span> status=<span class="code-str">'open'</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">8</div><div class="step-body">
+      <h4>Budget vs actual variance</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> a.department, a.actual, b.budget,
+       a.actual - b.budget <span class="code-kw">AS</span> variance
+<span class="code-kw">FROM</span>   actuals a
+<span class="code-kw">JOIN</span>   budget  b <span class="code-kw">ON</span> a.department = b.department;</code></div>
+    </div></li>
+    <li><div class="step-n">9</div><div class="step-body">
+      <h4>Top 10 vendors by spend</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> vendor_name, <span class="code-fn">SUM</span>(amount) <span class="code-kw">AS</span> total
+<span class="code-kw">FROM</span>   <span class="code-str">accounts_payable</span>
+<span class="code-kw">GROUP BY</span> vendor_name
+<span class="code-kw">ORDER BY</span> total <span class="code-kw">DESC</span> <span class="code-kw">LIMIT</span> <span class="code-num">10</span>;</code></div>
+    </div></li>
+    <li><div class="step-n">10</div><div class="step-body">
+      <h4>Round-number transaction test (audit analytics)</h4>
+      <div class="code-block"><code><span class="code-kw">SELECT</span> * <span class="code-kw">FROM</span> <span class="code-str">general_ledger</span>
+<span class="code-kw">WHERE</span> amount % <span class="code-num">1000</span> = <span class="code-num">0</span>
+  <span class="code-kw">AND</span> amount > <span class="code-num">5000</span>;</code></div>
+    </div></li>
+  </ul>
+
+  <div class="callout callout-action">
+    <div class="act-label">✅ Start Today — Free</div>
+    <p>Download DBeaver (free at dbeaver.io). Connect to the sample accounting database at github.com/ShanikwaH. Type Query 1. Run it. You have now written SQL against real financial data. Total time: 25 minutes.</p>
+  </div>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Get 50+ accounting SQL queries organized by topic</div>
+    <div class="cta-title">SQL Query Library (Enhanced) — 10 tabs including a GL Analytics Queries tab with real audit procedures</div>
+    <div class="cta-sub">$9 · analyticsbyshanikwa.com · Also: SQL for Accountants 30-day program ($24)</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 5 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">5</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Five</div>
+      <h1 class="ch-title">Dashboards Without the Drama</h1>
+    </div>
+  </div>
+  <p class="ch-lead">A good dashboard answers one question per chart. If you need a legend to understand it, it's doing too much. Here's how to build the kind that actually gets used.</p>
+
+  <h3>The Rule That Makes Dashboards Work</h3>
+  <p><strong>Every chart answers exactly one business question.</strong> Before you build a chart, write the question at the top of a blank page. <em>"Which departments are over budget in Q3?"</em> If your chart cannot answer that question in under five seconds, rebuild it with a different structure. The question drives the chart type. Never the other way around.</p>
+
+  <h3>The 4 Charts Every Financial Dashboard Needs</h3>
+  <table class="data-table">
+    <thead><tr><th>Chart Type</th><th>The Business Question It Answers</th><th>When to Use It</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Line Chart</strong></td><td>How is this metric trending over time?</td><td>Revenue by month, expense trend, cash balance over 12 months</td></tr>
+      <tr><td><strong>Bar Chart (sorted)</strong></td><td>Which category is largest / smallest?</td><td>Revenue by department, expenses by vendor, variance by account</td></tr>
+      <tr><td><strong>Waterfall Chart</strong></td><td>How did we get from A to B?</td><td>Budget to actual bridge, cash flow reconciliation</td></tr>
+      <tr><td><strong>KPI Card (single number)</strong></td><td>What is the current status of this one metric?</td><td>Current ratio, gross margin %, days outstanding — any single metric with a target</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout callout-nikki">
+    <p>In my WGU D601 Tableau project, I analyzed telecom churn data and found that customers on month-to-month contracts churned at 40%+ versus 11% for two-year plan customers. That one finding, on one bar chart with the right annotation, became a retention policy recommendation. One chart. One question. One decision. That is what dashboards are for.</p>
+    <div class="src">— WGU D601 Data Storytelling, Tableau</div>
+  </div>
+
+  <h3>The Build Order That Prevents 90% of Dashboard Mistakes</h3>
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body"><h4>Data structure first</h4><p>Convert raw data to a structured table (Ctrl+T). Build your summary calculations — SUMIFS for revenue, expenses, gross margin by period. These feed everything.</p></div></li>
+    <li><div class="step-n">2</div><div class="step-body"><h4>KPI calculations second</h4><p>Build each KPI as a single cell formula before building any chart. If the number is wrong, fix it now — not after you've built 4 charts on top of it.</p></div></li>
+    <li><div class="step-n">3</div><div class="step-body"><h4>Charts last</h4><p>Select the summary table, not raw data. Each chart reads from the summary. Add titles that ARE the business question. Remove gridlines, legends where unnecessary, chart borders.</p></div></li>
+    <li><div class="step-n">4</div><div class="step-body"><h4>Assemble on a blank sheet</h4><p>New sheet called "Dashboard." Zoom to 75%. KPI cards across the top. Line chart left. Bar chart right. Company name, period, prepared-by in the header. Remove gridlines: View → uncheck Gridlines.</p></div></li>
+  </ul>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Build your first CFO-ready dashboard from a real trial balance</div>
+    <div class="cta-title">Financial Dashboard Starter Kit — 10-step build guide, 21-row sample trial balance, pre-built template</div>
+    <div class="cta-sub">$22 · analyticsbyshanikwa.com · Portfolio-ready output included</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 6 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">6</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Six</div>
+      <h1 class="ch-title">Your Portfolio: Showing Work You've Never Been Paid to Do</h1>
+    </div>
+  </div>
+  <p class="ch-lead">You do not need an internship to have a portfolio. You need a dataset, a business question, and a documented answer. Here is the exact system — free to start.</p>
+
+  <p>A portfolio is not a collection of internship screenshots. <strong>A portfolio is: here is a messy dataset, here is the business question I asked, here is how I answered it, here is what it means.</strong> That's it. You can build one this week using publicly available financial data and the free tools in Chapter 4.</p>
+
+  <h3>The 3-Project Minimum</h3>
+  <p>Every accounting analytics portfolio needs at least three projects to be taken seriously in an interview. Each project must show three things:</p>
+
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body"><h4>A real (or realistic) dataset</h4><p>SEC EDGAR has free public financial data. Kaggle has thousands of accounting and finance datasets. Or use the sample files in the tools at analyticsbyshanikwa.com.</p></div></li>
+    <li><div class="step-n">2</div><div class="step-body"><h4>A clear business question</h4><p><em>"Which departments are driving the expense variance?"</em> is a business question. "I cleaned the data and made a chart" is not. The question comes first.</p></div></li>
+    <li><div class="step-n">3</div><div class="step-body"><h4>A documented answer in plain English</h4><p>One paragraph. What you found, why it matters, what someone should do about it. No jargon. No tables. This is what separates portfolio projects from homework assignments.</p></div></li>
+  </ul>
+
+  <h3>Turning VITA Work Into a Portfolio Item</h3>
+  <p>If you prepared real tax returns through VITA, you already have real accounting work experience. Here is the framing that makes recruiters notice it:</p>
+
+  <div class="callout callout-tip">
+    <div class="tip-label">📄 VITA Portfolio Item Template</div>
+    <p><strong>Project: Federal Tax Compliance Analysis — Individual Returns, VITA Program [Year]</strong><br><br>
+    Prepared [N] federal income tax returns for low-to-moderate income taxpayers under IRS guidelines. Return types: [W-2, Schedule C, education credits, etc.]. Applied EITC eligibility rules, AOTC phase-out thresholds, and Schedule C deduction classification. Maintained 100% quality reviewer acceptance rate. Total credits identified and applied: $[X]. Directly maps to REG exam content — individual income tax, credits, and deductions.</p>
+  </div>
+
+  <div class="chapter-cta">
+    <div class="cta-label">5 complete portfolio projects — with datasets, guides, README templates, and resume bullets</div>
+    <div class="cta-title">The No-Internship Portfolio Builder — from zero to GitHub portfolio in 30 days</div>
+    <div class="cta-sub">$27 · analyticsbyshanikwa.com · Includes VITA Portfolio Converter tab</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 7 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">7</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Seven</div>
+      <h1 class="ch-title">The Month-End Close You Don't Dread</h1>
+    </div>
+  </div>
+  <p class="ch-lead">The close doesn't have to take as long as it does. Most of the hours spent in a manual close are spent on things a structured Excel workbook or a 10-line Python script could handle in seconds.</p>
+
+  <h3>Where the Hours Actually Go</h3>
+  <table class="data-table">
+    <thead><tr><th>Manual Task</th><th>Avg Time</th><th>Automatable?</th></tr></thead>
+    <tbody>
+      <tr><td>Copying data between files</td><td>2–4 hours</td><td>Yes — structured tables + XLOOKUP</td></tr>
+      <tr><td>Reformatting the same report template</td><td>1–2 hours</td><td>Yes — Excel template with auto-refresh</td></tr>
+      <tr><td>Hunting reconciling items</td><td>1–3 hours</td><td>Partially — SUMIFS + exception flags</td></tr>
+      <tr><td>Pulling data from accounting system</td><td>30–90 min</td><td>Yes — Python CSV automation</td></tr>
+      <tr><td>Chasing approvals and sign-offs</td><td>30–60 min</td><td>No — this is people work</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Your First Python Script for Accounting (Fully Explained)</h3>
+  <div class="code-block">
+    <code>
+<span class="code-kw">import</span> pandas <span class="code-kw">as</span> pd   <span class="code-cm"># pandas is the spreadsheet library for Python</span>
+
+<span class="code-cm"># ── Load your GL export ──────────────────────────────────────</span>
+df = pd.<span class="code-fn">read_csv</span>(<span class="code-str">'general_ledger.csv'</span>)
+
+<span class="code-cm"># ── Clean column names (lowercase, no spaces) ────────────────</span>
+df.columns = df.columns.<span class="code-fn">str.lower</span>().<span class="code-fn">str.replace</span>(<span class="code-str">' '</span>, <span class="code-str">'_'</span>)
+
+<span class="code-cm"># ── Quick profile ────────────────────────────────────────────</span>
+<span class="code-fn">print</span>(<span class="code-str">f'Rows: {len(df):,}  |  Accounts: {df.account_name.nunique()}'</span>)
+
+<span class="code-cm"># ── Total expenses by department ─────────────────────────────</span>
+summary = df[df[<span class="code-str">'account_type'</span>] == <span class="code-str">'Expense'</span>] \
+           .<span class="code-fn">groupby</span>(<span class="code-str">'department'</span>)[<span class="code-str">'amount'</span>].<span class="code-fn">sum</span>() \
+           .<span class="code-fn">sort_values</span>(ascending=<span class="code-kw">False</span>)
+
+<span class="code-cm"># ── Export to Excel ──────────────────────────────────────────</span>
+summary.<span class="code-fn">to_excel</span>(<span class="code-str">'close_summary.xlsx'</span>)
+<span class="code-fn">print</span>(<span class="code-str">'✓ Saved to close_summary.xlsx'</span>)
+    </code>
+  </div>
+
+  <p>That script reads your GL, summarizes expenses by department, and exports a clean Excel file. It takes 2 seconds to run and produces output that would take 20 minutes manually. Every month, it runs the same way on new data without any changes.</p>
+
+  <div class="chapter-cta">
+    <div class="cta-label">Excel automation + Python scripts — cut your close time in half</div>
+    <div class="cta-title">Month-End Close Automation Kit — 7 Excel formulas, 3 Python scripts, dynamic checklist</div>
+    <div class="cta-sub">$22 · analyticsbyshanikwa.com · No IT department required</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CHAPTER 8 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num">8</div>
+    <div class="ch-meta">
+      <div class="ch-label">Chapter Eight</div>
+      <h1 class="ch-title">Getting Hired: Resume, Interview, and LinkedIn</h1>
+    </div>
+  </div>
+  <p class="ch-lead">The gap between getting interviews and not getting interviews is almost never your qualifications. It's how you describe them.</p>
+
+  <h3>The Bullet Formula That Gets Interviews</h3>
+  <div class="callout callout-tip">
+    <div class="tip-label">📌 The Formula</div>
+    <p><strong>[Action Verb] + [What You Did] + [Tool or Method] + [Quantified Result]</strong><br><br>
+    ✗ WEAK: "Helped with financial reporting"<br>
+    ✓ STRONG: "Analyzed 18-month revenue trend using Excel pivot tables, identifying a 12% seasonal variance that informed Q4 budget allocation"<br><br>
+    ✗ WEAK: "Did VITA tax preparation"<br>
+    ✓ STRONG: "Prepared 47 federal income tax returns under IRS guidelines through VITA, maintaining 100% reviewer acceptance rate across W-2, Schedule C, and education credit returns"</p>
+  </div>
+
+  <h3>5 Interview Questions Every Accounting Analytics Role Asks</h3>
+  <ul class="step-list">
+    <li><div class="step-n">1</div><div class="step-body"><h4>"Walk me through how you used data to solve an accounting problem."</h4><p>Use STAR format. One specific story from coursework, VITA, or a personal project. The story does not need to come from a paid job to be credible.</p></div></li>
+    <li><div class="step-n">2</div><div class="step-body"><h4>"How comfortable are you with Excel? What's the most advanced thing you've done?"</h4><p>Be specific. "I built a pivot-driven budget vs. actual dashboard from a structured GL table" beats "Yes, I use Excel a lot" by a mile.</p></div></li>
+    <li><div class="step-n">3</div><div class="step-body"><h4>"Have you worked with SQL?"</h4><p>If yes: give a specific example. If no: "I'm actively building that skill — I can show you 10 accounting-specific queries I've written." Then show them in your portfolio.</p></div></li>
+    <li><div class="step-n">4</div><div class="step-body"><h4>"Tell me about a time you found an error in financial data."</h4><p>VITA experience, coursework reconciliations, and personal finance analysis all count. The skill is analytical judgment — not job title.</p></div></li>
+    <li><div class="step-n">5</div><div class="step-body"><h4>"How do you communicate financial findings to non-finance stakeholders?"</h4><p>Reference your ability to lead with the so-what, use visuals over tables, and translate statistics into plain-English business language. Point to a portfolio example.</p></div></li>
+  </ul>
+
+  <div class="chapter-cta">
+    <div class="cta-label">50 Q&As with model answers + salary negotiation scripts</div>
+    <div class="cta-title">Accounting Interview Prep (Enhanced) — Technical, Tax, Audit, STAR Stories, Technical Demo Scripts, Salary Negotiation</div>
+    <div class="cta-sub">$12 · Also: Data Analyst Interview Prep with Take-Home Assessment Prep ($12) · analyticsbyshanikwa.com</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- CONCLUSION — 90-DAY PLAN -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="chapter">
+  <div class="ch-opener">
+    <div class="ch-num" style="background:var(--sage);">✓</div>
+    <div class="ch-meta">
+      <div class="ch-label">Conclusion</div>
+      <h1 class="ch-title">Your 90-Day Plan: Act on What You've Just Read</h1>
+    </div>
+  </div>
+  <p class="ch-lead">Consistency beats perfection. Done beats perfect. Thirty minutes a day compounds into something real in ninety days. Here is exactly what to do with that time.</p>
+
+  <div class="plan-card">
+    <div class="week">Weeks 1–2 · Foundation · 30 min/day</div>
+    <h4>Excel + SQL Basics</h4>
+    <ul>
+      <li>Days 1–3: Excel — convert one real dataset to a structured table, build one pivot table</li>
+      <li>Days 4–7: Excel — build your first financial chart (revenue trend or expense breakdown)</li>
+      <li>Days 8–10: SQL — download DBeaver, connect to sample database, run Queries 1–5 from Chapter 4</li>
+      <li>Days 11–14: SQL — write Queries 6–10, document each with a one-sentence business context</li>
+    </ul>
+  </div>
+
+  <div class="plan-card" style="border-left-color: var(--sage)">
+    <div class="week" style="color:var(--sage)">Weeks 3–4 · First Project · 45 min/day</div>
+    <h4>Build Portfolio Project 1</h4>
+    <ul>
+      <li>Find a public dataset: SEC EDGAR income statement or free Kaggle accounting data</li>
+      <li>Define your business question before you open Excel</li>
+      <li>Analyze with pivot tables, SUMIFS, and one chart</li>
+      <li>Write the one-paragraph business summary using the 3-question framework from Chapter 3</li>
+      <li>Create a GitHub repository and upload your project with a clear README</li>
+    </ul>
+  </div>
+
+  <div class="plan-card" style="border-left-color: var(--amber)">
+    <div class="week" style="color:var(--amber)">Weeks 5–8 · Two More Projects · 45 min/day</div>
+    <h4>Build Projects 2 & 3</h4>
+    <ul>
+      <li>Project 2: SQL analysis — 5 queries answering a real accounting business question</li>
+      <li>Project 3: Dashboard — revenue + expense dashboard using Chapter 5 principles</li>
+      <li>Document all three projects in GitHub with write-ups</li>
+      <li>Rewrite your resume with 4–6 quantified bullets using the Chapter 8 formula</li>
+    </ul>
+  </div>
+
+  <div class="plan-card" style="border-left-color: var(--coral)">
+    <div class="week" style="color:var(--coral)">Weeks 9–12 · Apply · 30 min/day</div>
+    <h4>Job Search with Proof</h4>
+    <ul>
+      <li>Update LinkedIn with your new skills and portfolio URL</li>
+      <li>Apply to 3–5 roles per week with analytics + accounting keywords</li>
+      <li>Prepare your STAR stories for the 5 interview questions in Chapter 8</li>
+      <li>Follow up on every application at day 10. Repeat.</li>
+    </ul>
+  </div>
+
+  <div class="callout callout-nikki">
+    <p>Every tool I reference in this book exists because I built it for myself first. I needed a SQL library I could use in accounting contexts. An interview prep guide built around real accounting scenarios. A CPA tracker that connected my coursework to actual exam sections. If any of these tools would help you move faster through your own ninety days, they're all available at analyticsbyshanikwa.com. And if you have a question, message me — I answer every one personally.</p>
+    <div class="src">— Nikki · analyticsbyshanikwa.com · @AnalyticsByShaniwa</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- FINAL CTA -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="final-cta">
+  <h2>Shop All Tools Referenced in This Book</h2>
+  <p>Every product is built from real WGU MSDA graduate work and UMPI accounting coursework. Instant download. Works in Excel and Google Sheets.</p>
+  <div class="final-url">analyticsbyshanikwa.com</div>
+  <div class="final-social">@AnalyticsByShaniwa on TikTok · YouTube · Instagram · Pinterest</div>
+  <div style="margin-top: 20px; opacity: .4; font-size: .78rem; line-height: 1.8;">
+    MS Data Analytics (WGU) · BS Accounting (UMPI)<br>
+    AICPA & GSCPA Student Member · VITA Certified · CPA Track, Georgia
+  </div>
+</div>
+
+</body>
+</html>
