@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_config.dart';
+import '../main.dart';
 import '../widgets/common.dart';
 import 'play_screen.dart';
 import 'resources_screen.dart';
@@ -42,7 +43,17 @@ class _HomeShellState extends State<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
-    final sections = AppConfig.sections;
+    // Drop the Shop where store rules forbid linking out to buy. Doing it here
+    // rather than restricting the app to the US storefront means the app can be
+    // listed in the UK, Canada, Australia and everywhere else — those users get
+    // the full free app, and buy on the website instead.
+    final allowShop =
+        AppConfig.canLinkOut(AppScope.of(context).content.linkOutRegions);
+    final sections = [
+      for (final s in AppConfig.sections)
+        if (s != 'shop' || allowShop) s,
+    ];
+    if (_index >= sections.length) _index = 0;
     final wide = MediaQuery.of(context).size.width >= 840;
     final body = _screenFor(sections[_index]);
 

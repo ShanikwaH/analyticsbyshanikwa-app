@@ -174,6 +174,10 @@ class AppContent {
   final List<BundledFile> bundledFiles;
   final Map<String, List<String>> gameWords;
 
+  /// Storefronts where linking out of the app to buy is permitted.
+  /// Empty means "no restriction configured" — see AppConfig.canLinkOut.
+  final List<String> linkOutRegions;
+
   AppContent.fromJson(Map<String, dynamic> j)
       : version = _i(j['version']),
         urls = (j['urls'] is Map)
@@ -212,7 +216,13 @@ class AppContent {
             ? (j['game_words'] as Map).map((k, v) => MapEntry(
                 k.toString(),
                 (v is List) ? v.map((e) => _s(e)).toList() : <String>[]))
-            : {};
+            : {},
+        linkOutRegions = (j['commerce'] is Map &&
+                (j['commerce'] as Map)['link_out_regions'] is List)
+            ? ((j['commerce'] as Map)['link_out_regions'] as List)
+                .map((e) => _s(e).toUpperCase())
+                .toList()
+            : const [];
 
   String url(String key) => urls[key] ?? 'https://analyticsbyshanikwa.com';
 }

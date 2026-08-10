@@ -40,9 +40,14 @@ Both changed, in the US, because of the Epic lawsuits:
   9 December 2025. A revised settlement was still moving through court in 2026,
   so the fee structure may shift.
 
-**The catch, and it is a big one: this is the US only.** The same external-link
-button in an app distributed to the UK, Canada, Australia, Japan and most other
-countries is still a 3.1.1 violation. §6 covers what to do about that.
+**Japan too, since 18 December 2025.** The Mobile Software Competition Act
+forces Apple and Google to allow third-party payments and outbound links there —
+but Apple charges a **15% steering commission** on external purchases in Japan,
+so it is permitted, not free.
+
+**Everywhere else it is still banned.** The same external-link button shipped to
+the UK, Canada, Australia or the EU is still a 3.1.1 violation. The app now
+handles this automatically — see §6c.
 
 **Before you submit, verify this yourself.** It changed in 2024, again in
 May 2025, and the Google settlement was still in front of a judge in 2026. Read
@@ -55,13 +60,14 @@ submit. Do not take this document's word for it.
 
 | Model | You get | You give up | Good for you? |
 |---|---|---|---|
-| **1. Free app → web checkout** *(what you built)* | 100% of product revenue | US-only distribution, or region gating | **Yes — start here** |
+| **1. Free app → web checkout** *(what you built)* | 100% of product revenue in the US | Shop hidden outside US/JP | **Yes — start here** |
 | **2. Paid app** (one price to download) | Simple, zero rule risk, works worldwide | 15–30%, and a paywall before anyone sees value | Maybe later |
 | **3. Free + IAP** (unlock or subscription) | Works worldwide, no 3.1.1 issue | 15–30%, plus real dev work to wire in | Only if you go worldwide |
 | **4. Web only** (PWA + Payhip) | 0% platform fees, live today, $0 | No store listing, no discovery | **Already done** |
 
 **Recommended sequence:** Web now (done, free) → Android ($25) → iOS ($99/yr),
-US storefront first. Add IAP only if non-US demand justifies it.
+listed worldwide with the region gate on. Add IAP only if non-US demand
+justifies it.
 
 **Apple Small Business Program:** if you earn under $1M/year you pay **15%,
 not 30%** — you must apply, it is not automatic. Google has the same 15% rate on
@@ -83,10 +89,13 @@ To make it earn:
 3. **Prompt the install.** On the live https URL, Chrome and Edge offer "Install"
    and it runs like a native app. Say so in the app: *"Install this — it works
    offline."*
-4. **Track it.** Add a `?ref=app` parameter to the Payhip/Shopify URLs in
-   `content.json` so you can see how much revenue the app actually drives. One
-   content edit, no rebuild — bump `version` and upload to
-   `analyticsbyshanikwa.com/app/content.json`.
+4. **Track it — done.** Every product and store URL in `content.json` now
+   carries `?ref=app&utm_source=app&utm_medium=app&utm_content=<product id>`.
+   `utm_source` is what Shopify Analytics actually groups by, so app-driven
+   sales show up under a source named `app`; `utm_content` tells you which
+   product card was tapped. `ref=app` is kept for anything reading a plain
+   `ref`. To change it later: edit `content.json`, bump `version`, upload — no
+   rebuild, no release.
 
 **Why Payhip over raw Stripe:** Payhip acts as merchant of record and handles
 EU/UK VAT for you. With bare Stripe, cross-border digital VAT is your problem.
@@ -122,7 +131,7 @@ Recruit those 12 people before you need them — it is the single biggest delay.
 
 ---
 
-## 6. iOS — $99/year, US storefront first
+## 6. iOS — $99/year, listed worldwide
 
 ### 6a. Money setup
 1. **Apple Developer Program** — $99/year. Individual enrolment needs ID; a
@@ -138,14 +147,25 @@ Recruit those 12 people before you need them — it is the single biggest delay.
 You cannot build iOS on Windows. Use **Codemagic's free tier** (500 build-min/
 month) as in `SHIP.md` §4. You still need the $99 account for signing.
 
-### 6c. Set availability to the United States only — at first
-This is the decision that makes your current design legal.
+### 6c. Availability — you can list worldwide
+The app now **region-gates itself**, so you do not have to restrict the
+storefront. `content.json → commerce.link_out_regions` lists where external
+purchase links are permitted; it currently reads `["US", "JP"]`:
 
-App Store Connect → your app → **Pricing and Availability** → **Availability** →
-deselect all, select **United States**.
+- **US** — permitted, no Apple commission (Epic injunction).
+- **Japan** — permitted since 18 December 2025 under the Mobile Software
+  Competition Act, but Apple takes a **15% steering commission**.
+- **Everywhere else** (UK, Canada, Australia, EU, …) — the Shop tab is hidden,
+  so the app contains no external purchase links and does not violate 3.1.1.
+  Those users still get the entire free app.
 
-Now your external Shop links are within Apple's US rules. Expand to other
-countries only when you have handled §6e.
+**That list is remote.** It lives in the content file the app fetches on launch,
+so when a country's rules change you edit one JSON file and bump `version` — no
+app update, no review. Add `"GB"` the day the UK allows it.
+
+Caveat: the gate reads the **device region**, which is not strictly the App
+Store storefront. It fails closed — an unknown region hides the Shop rather than
+risking a violation.
 
 ### 6d. Review notes — write these, they prevent rejections
 In App Store Connect → **App Review Information → Notes**, say plainly:
@@ -160,19 +180,25 @@ In App Store Connect → **App Review Information → Notes**, say plainly:
 That last sentence pre-empts **Guideline 4.2 (Minimum Functionality)**, the other
 likely rejection.
 
-### 6e. Going worldwide later — two options
-1. **Region-gate the Shop tab.** Hide external purchase links outside the US.
-   Sketch:
-   ```dart
-   // Rough shape — verify against current rules before shipping.
-   final region = WidgetsBinding.instance.platformDispatcher.locale.countryCode;
-   final canLinkOut = region == 'US';
-   ```
-   Locale is *not* the same as the App Store storefront, so this is approximate;
-   Apple may still object. Treat it as a starting point, not a guarantee.
-2. **Add real IAP** with the `in_app_purchase` package, sell the templates as
-   non-consumable products, accept 15–30%. Compliant everywhere, but it is real
-   work: products defined in both consoles, restore-purchases, receipt handling.
+### 6e. Selling **inside** the app in the UK, Canada and Australia
+The region gate lets you *list* everywhere. It does not let you *sell in-app*
+where link-outs are banned. To do that you have exactly one compliant route:
+
+**Add in-app purchase** with the `in_app_purchase` package — sell the templates
+as non-consumable products, accept 15–30%. Compliant in every country. It is
+real work: products defined in both consoles, restore-purchases, receipt
+validation, and the app must then deliver the file itself rather than handing
+off to Payhip.
+
+**But you can already sell to those customers today** — through the web. A buyer
+in London or Toronto can open `analyticsbyshanikwa.com` or your Payhip store in
+a browser and buy at 0% platform fee. Nothing blocks that; the restriction is
+only on purchase links *inside the app*. Push those countries to the Sunday
+letter and the website, and let the app be a free funnel there.
+
+**Recommendation:** ship the region gate now, watch where installs actually come
+from, and only build IAP if non-US demand proves it is worth 15–30% plus the
+engineering.
 
 ---
 

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../app_config.dart';
@@ -11,6 +12,22 @@ import '../widgets/common.dart';
 /// (Bible names from the story catalog, accounting terms, or data terms).
 /// Tap the first letter, then the last letter of a word to claim it.
 /// +15 on a cleared board (first win each day).
+/// A pan recognizer that claims the gesture the instant the pointer lands.
+///
+/// The board sits inside the page's ListView. A normal GestureDetector's pan
+/// recognizer has to win a gesture-arena contest against that ListView's
+/// vertical-drag recognizer, and on a vertical swipe the ListView wins — so the
+/// page scrolled instead of selecting, and vertical words could not be dragged
+/// at all. Resolving as accepted up front takes the pointer before the
+/// ListView can claim it, in every direction.
+class _BoardPanRecognizer extends PanGestureRecognizer {
+  @override
+  void addAllowedPointer(PointerDownEvent event) {
+    super.addAllowedPointer(event);
+    resolve(GestureDisposition.accepted);
+  }
+}
+
 class WordSearchScreen extends StatefulWidget {
   final String nicheKey; // 'bible' | 'accounting' | 'data'
   final String title;
@@ -203,14 +220,28 @@ class _WordSearchScreenState extends State<WordSearchScreen> {
           AspectRatio(
             aspectRatio: 1,
             child: LayoutBuilder(
-              builder: (context, box) => GestureDetector(
-                onPanStart: (d) => _dragBegin(
-                    _cellFromOffset(d.localPosition, box.maxWidth)),
-                onPanUpdate: (d) => _dragMove(
-                    _cellFromOffset(d.localPosition, box.maxWidth)),
-                onPanEnd: (_) => _dragEnd(),
-                onTapUp: (d) =>
-                    _tap(_cellFromOffset(d.localPosition, box.maxWidth)),
+              builder: (context, box) => RawGestureDetector(
+                behavior: HitTestBehavior.opaque,
+                gestures: {
+                  // A press with no movement ends as a 1-cell run, which
+                  // _dragEnd routes to _tap — so tap-first/tap-last still
+                  // works and no separate tap recognizer is needed.
+                  _BoardPanRecognizer:
+                      GestureRecognizerFactoryWithHandlers<
+                          _BoardPanRecognizer>(
+                    () => _BoardPanRecognizer(),
+                    // Block body, not a cascade: after an arrow lambda, `..`
+                    // cascades onto the lambda's (void) result, not onto `r`.
+                    (r) {
+                      r.onStart = (d) => _dragBegin(
+                          _cellFromOffset(d.localPosition, box.maxWidth));
+                      r.onUpdate = (d) => _dragMove(
+                          _cellFromOffset(d.localPosition, box.maxWidth));
+                      r.onEnd = (_) => _dragEnd();
+                      r.onCancel = _dragEnd;
+                    },
+                  ),
+                },
                 child: GridView.builder(
                   physics: const NeverScrollableScrollPhysics(),
                   gridDelegate:

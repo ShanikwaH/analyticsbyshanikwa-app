@@ -4,8 +4,8 @@
   "urls": {
     "site": "https://analyticsbyshanikwa.com",
     "newsletter": "https://analyticsbyshanikwa.com/bible-stories.html#signup",
-    "payhip_store": "https://payhip.com/AnalyticsByShanikwa",
-    "shopify_store": "https://jrip3r-qz.myshopify.com/",
+    "payhip_store": "https://payhip.com/AnalyticsByShanikwa?ref=app&utm_source=app&utm_medium=app&utm_content=store",
+    "shopify_store": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=store",
     "free_resources": "https://analyticsbyshanikwa.com/free-resources.html",
     "streamlit_dashboard": "https://ai-bi-dashboard-yajxi5tkqxsrpguy7yh8zu.streamlit.app/",
     "github_portfolio": "https://github.com/ShanikwaH/WGU_Portfolio",
@@ -357,8 +357,8 @@
         "Analytics dashboard layout",
         "Google Sheets — no account required"
       ],
-      "payhip_url": "https://payhip.com/b/cSXU6",
-      "shopify_url": "https://jrip3r-qz.myshopify.com/",
+      "payhip_url": "https://payhip.com/b/cSXU6?ref=app&utm_source=app&utm_medium=app&utm_content=p1",
+      "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p1",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoi984s1e8no5ckladlpbjm1n.png",
       "format": "Excel & Google Sheets"
     },
@@ -376,8 +376,8 @@
         "Interactive Google Sheets format",
         "Perfect for personal study & homeschool"
       ],
-      "payhip_url": "https://payhip.com/b/StUTf",
-      "shopify_url": "https://jrip3r-qz.myshopify.com/",
+      "payhip_url": "https://payhip.com/b/StUTf?ref=app&utm_source=app&utm_medium=app&utm_content=p2",
+      "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p2",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpohvvj0bb0181slkv01139m1n.png",
       "format": "Excel & Google Sheets"
     },
@@ -395,8 +395,8 @@
         "Step-by-step career change planner",
         "Excel & Google Sheets compatible"
       ],
-      "payhip_url": "https://payhip.com/b/XTBgt",
-      "shopify_url": "https://jrip3r-qz.myshopify.com/",
+      "payhip_url": "https://payhip.com/b/XTBgt?ref=app&utm_source=app&utm_medium=app&utm_content=p3",
+      "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p3",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpqa3ilk10g3i0q19r61lb31juu15.png",
       "format": "Excel & PDF"
     },
@@ -414,8 +414,8 @@
         "Neurodivergent Productivity guide included",
         "Printable PDF & digital formats"
       ],
-      "payhip_url": "https://payhip.com/b/rbaPI",
-      "shopify_url": "https://jrip3r-qz.myshopify.com/",
+      "payhip_url": "https://payhip.com/b/rbaPI?ref=app&utm_source=app&utm_medium=app&utm_content=p4",
+      "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p4",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoug2aj5n8100d169mhke16uf1k.png",
       "format": "Printable PDF"
     }
@@ -426,28 +426,28 @@
       "emoji": "💰",
       "title": "Faith-Based Budget Tracker",
       "summary": "A monthly income + expense tracker with faith-based savings goals and scripture prompts built in.",
-      "url": "https://analyticsbyshanikwa.com/free-resources.html#budget-tracker"
+      "url": "https://analyticsbyshanikwa.com/free-resources.html#budget-tracker?ref=app&utm_source=app&utm_medium=app&utm_content=f1"
     },
     {
       "id": "f2",
       "emoji": "📖",
       "title": "Bible Study Analytics Template",
       "summary": "Track chapters, themes, and patterns across scripture with a structured spreadsheet built for deep study.",
-      "url": "https://analyticsbyshanikwa.com/free-resources.html#bible-study"
+      "url": "https://analyticsbyshanikwa.com/free-resources.html#bible-study?ref=app&utm_source=app&utm_medium=app&utm_content=f2"
     },
     {
       "id": "f3",
       "emoji": "🧭",
       "title": "Career Pivot Action Checklist",
       "summary": "A step-by-step checklist for professionals making a career change, with journal prompts for each stage.",
-      "url": "https://analyticsbyshanikwa.com/free-resources.html#career-pivot"
+      "url": "https://analyticsbyshanikwa.com/free-resources.html#career-pivot?ref=app&utm_source=app&utm_medium=app&utm_content=f3"
     },
     {
       "id": "f4",
       "emoji": "🗓️",
       "title": "30-Day Scripture Memory Tracker",
       "summary": "A printable daily tracker and accountability grid for memorizing 30 scriptures in 30 days.",
-      "url": "https://analyticsbyshanikwa.com/free-resources.html#scripture-memory"
+      "url": "https://analyticsbyshanikwa.com/free-resources.html#scripture-memory?ref=app&utm_source=app&utm_medium=app&utm_content=f4"
     }
   ],
   "courses": [
@@ -1504,5 +1504,12 @@
       "CHART",
       "OUTLIER"
     ]
+  },
+  "commerce": {
+    "link_out_regions": [
+      "US",
+      "JP"
+    ],
+    "_note": "Storefronts where linking out of the app to buy digital goods is permitted. US: allowed with no commission after the Epic injunction. JP: allowed since 2025-12-18 under the Mobile Software Competition Act, but Apple charges a 15% steering commission. Everywhere else it is still a Guideline 3.1.1 violation, so the Shop is hidden there. Web builds ignore this entirely. Edit this list and bump version to change behaviour with no app release."
   }
 }

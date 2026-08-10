@@ -1,3 +1,5 @@
+import 'dart:ui' show PlatformDispatcher;
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 
 /// Which niche this build targets. Set at build time:
@@ -86,6 +88,29 @@ class AppConfig {
 
   /// The brand orb — the same circular logo the website shows in its header.
   static const String logoOrb = 'assets/brand/logo_orb.png';
+
+  /// May this build show links that leave the app to buy digital goods?
+  ///
+  /// App Store Guideline 3.1.1 and Google Play's equivalent still forbid this
+  /// in most countries. It is permitted on the US storefront (Epic injunction,
+  /// no commission) and in Japan (Mobile Software Competition Act, 15% steering
+  /// commission). Elsewhere the Shop is hidden so the app can still be listed
+  /// there without breaking the rules.
+  ///
+  /// The allowed list lives in content.json, so it can be changed remotely when
+  /// the rules move again — no app release, no store review.
+  ///
+  /// Caveat: this reads the DEVICE region, which is not strictly the App Store
+  /// storefront. It fails closed — an unknown region hides the Shop rather than
+  /// risking a violation.
+  static bool canLinkOut(List<String> allowedRegions) {
+    if (kIsWeb) return true; // store rules do not apply to the web build
+    if (allowedRegions.isEmpty) return true; // nothing configured
+    final region =
+        PlatformDispatcher.instance.locale.countryCode?.toUpperCase();
+    if (region == null || region.isEmpty) return false; // fail closed
+    return allowedRegions.contains(region);
+  }
 
   static bool get isSocialTrack => niche == AppNiche.bible;
 
