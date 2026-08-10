@@ -130,6 +130,21 @@ class _AbsAppState extends State<AbsApp> {
         title: AppConfig.appName,
         debugShowCheckedModeBanner: false,
         theme: _theme(),
+        // The game boards use fixed column counts with square cells, which is
+        // right on a phone and absurd on a desktop browser — a 3x3 board became
+        // 400px per cell at 1700px wide. Capping the content column keeps every
+        // screen phone-shaped on the web without touching 20 game layouts.
+        // Applied in `builder` so it covers pushed routes too.
+        builder: (context, child) {
+          if (child == null) return const SizedBox.shrink();
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 900),
+              child: child,
+            ),
+          );
+        },
         home: const HomeShell(),
       ),
     );

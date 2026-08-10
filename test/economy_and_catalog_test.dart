@@ -164,13 +164,18 @@ void main() {
       expect(t.finishSimon(7), 0); // same day
       expect(t.simonBest, 7);
     });
-    test('speed presets: three per game, standard default, setters guard', () {
+    test('speed presets: four per game, standard default, setters guard', () {
       final t = TalentsState();
       expect(t.simonSpeed, 'standard');
       expect(t.coinSpeed, 'standard');
-      expect(TalentsState.simonTimings.length, 3);
-      expect(TalentsState.coinTimings.length, 3);
-      // relaxed slower than standard slower than quick
+      // Four tiers since the gentle tier was added: gentle/relaxed/standard/quick.
+      // This test still asserted the original three and was the only failure in
+      // the suite; the code and the four-tier test below were already correct.
+      expect(TalentsState.simonTimings.length, 4);
+      expect(TalentsState.coinTimings.length, 4);
+      // gentle slower than relaxed slower than standard slower than quick
+      expect(TalentsState.coinTimings['gentle']!,
+          greaterThan(TalentsState.coinTimings['relaxed']!));
       expect(TalentsState.coinTimings['relaxed']!,
           greaterThan(TalentsState.coinTimings['standard']!));
       expect(TalentsState.coinTimings['standard']!,
