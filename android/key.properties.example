@@ -1,0 +1,11 @@
+# Copy to android/key.properties and fill in your own values.
+# android/key.properties is gitignored — never commit it, never paste it into a chat.
+#
+# Keep the .jks file OUTSIDE this repo. It is gitignored, but a stray `git add -f`
+# or a zip of the folder would leak your signing key, and that is unrecoverable.
+# An absolute path is deliberate here.
+
+storePassword=THE_KEYSTORE_PASSWORD_YOU_CHOSE
+keyPassword=THE_KEY_PASSWORD_YOU_CHOSE
+keyAlias=upload
+storeFile=C:/Users/nikki/keystores/upload-keystore.jks

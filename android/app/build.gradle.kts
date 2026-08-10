@@ -1,8 +1,24 @@
+import java.io.FileInputStream
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
+
+// Release signing credentials live in android/key.properties, which is gitignored and
+// never committed. If it is absent (a fresh clone, CI, another machine) the release build
+// falls back to debug signing so the build still works — but such a bundle CANNOT be
+// uploaded to Play. Verify the signer before every upload: bash tools/check_signing.sh
+val keystorePropertiesFile = rootProject.file("key.properties")
+val keystoreProperties = Properties().apply {
+    if (keystorePropertiesFile.exists()) {
+        FileInputStream(keystorePropertiesFile).use { load(it) }
+    }
+}
+val hasReleaseSigning = keystorePropertiesFile.exists() &&
+    keystoreProperties.getProperty("storeFile") != null
 
 android {
     namespace = "com.analyticsbyshanikwa.analyticsbyshanikwa_app"
@@ -25,11 +41,28 @@ android {
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        if (hasReleaseSigning) {
+            create("release") {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = file(keystoreProperties.getProperty("storeFile"))
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = if (hasReleaseSigning) {
+                signingConfigs.getByName("release")
+            } else {
+                logger.warn(
+                    "WARNING: android/key.properties not found - signing the release build " +
+                    "with DEBUG keys. Google Play will reject this bundle."
+                )
+                signingConfigs.getByName("debug")
+            }
         }
     }
 }
