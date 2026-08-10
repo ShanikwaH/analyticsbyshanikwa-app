@@ -12,3 +12,9 @@ ios/Pods/
 icon_src/legibility_check.png
 icon_src/maskable_check.png
 icon_src/compare.png
+
+# Packaged paid products staged for R2 upload. 39 MB of paid inventory —
+# this repo's `main` branch is PUBLIC, so these must never be committed.
+worker/.staging/
+worker/node_modules/
+.wrangler/

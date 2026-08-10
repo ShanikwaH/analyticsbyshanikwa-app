@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "abs-downloads",
+  "main": "src/index.js",
+  "compatibility_date": "2026-08-01",
+
+  // Private bucket. Objects are never publicly addressable — the only way out
+  // is a signed, expiring /download link from this Worker.
+  "r2_buckets": [
+    { "binding": "FILES", "bucket_name": "abs-fulfilment" }
+  ],
+
+  "vars": {
+    // "disabled" -> /grant returns 501 and nothing downloads. Fail closed.
+    // "shared-secret" -> sandbox testing only, needs TEST_GRANT_SECRET.
+    // "stores" -> real Apple/Google receipt validation (not yet implemented).
+    "ENTITLEMENT_MODE": "disabled",
+    // productId -> R2 object key. Filled by tools/upload_fulfilment.py.
+    "PRODUCT_FILES": "{\"com.analyticsbyshanikwa.bundle.data_analyst_dashboards_bundle\":\"products/O01.zip\",\"com.analyticsbyshanikwa.bundle.career_pivot_starter_bundle\":\"products/O02.zip\",\"com.analyticsbyshanikwa.bundle.the_complete_vault\":\"products/O03.zip\",\"com.analyticsbyshanikwa.bundle.faith_and_homeschool_bundle\":\"products/O04.zip\",\"com.analyticsbyshanikwa.bundle.faith_scripture_bundle\":\"products/O05.zip\",\"com.analyticsbyshanikwa.bundle.faith_finance_bundle\":\"products/O06.zip\",\"com.analyticsbyshanikwa.bundle.bible_story_curriculum_bundle\":\"products/O07.zip\",\"com.analyticsbyshanikwa.bundle.data_analytics_career_bundle\":\"products/O08.zip\",\"com.analyticsbyshanikwa.bundle.cpa_exam_prep_bundle\":\"products/O09.zip\",\"com.analyticsbyshanikwa.bundle.christian_homeschool_command_center\":\"products/O10.zip\",\"com.analyticsbyshanikwa.bundle.career_blueprint_job_search_bundle\":\"products/O11.zip\"}"
+  }
+
+  // Secrets, set with `wrangler secret put` — never in this file:
+  //   SIGNING_SECRET     32+ random chars
+  //   TEST_GRANT_SECRET  only if ENTITLEMENT_MODE=shared-secret
+}
