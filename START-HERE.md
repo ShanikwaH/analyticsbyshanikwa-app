@@ -46,14 +46,22 @@ which is the only honest basis for paying Apple $99.
 
 The $25 is one payment, forever, all your apps.
 
-- [ ] **Install Android Studio**, add SDK Platform 35 + command-line tools,
-      run `flutter doctor --android-licenses`. *(`SHIP.md` §3)*
+- [x] **Install Android Studio + SDK — done.** Studio Quail 3 at
+      `C:\Users\nikki\AndroidStudio`, SDK (platform 36, build-tools 36.1.0,
+      platform-tools 37.0.1) at `%LOCALAPPDATA%\Android\Sdk`, all licenses
+      accepted, `flutter doctor` clean. *(`SHIP.md` §3)*
+- [x] **The app really builds:** `flutter build appbundle` produced
+      `app-release.aab` (50.6 MB) in ~12 min. No NDK was needed.
 - [x] **Java version — already handled.** JDK 17.0.20 is installed at
       `C:\Users\nikki\jdk-17` and Flutter is pointed at it
       (`flutter config --jdk-dir "C:\Users\nikki\jdk-17"`). JDK 22 is still on
       the system PATH for everything else; only Flutter/Gradle use 17.
       Verified: Gradle 9.1.0 launches on `17.0.20 (Microsoft 17.0.20+8-LTS)`.
-- [ ] **Create the upload keystore** and back it up somewhere permanent.
+- [ ] **Create the upload keystore — the next blocker.** The `.aab` built today
+      is signed `CN=Android Debug` (see the `TODO` in
+      `android/app/build.gradle.kts` line 30). **Play rejects debug-signed
+      bundles.** You must create this yourself — it needs a password you choose
+      and nobody else should ever hold. Back it up somewhere permanent.
       **Lose it and you can never update your own app again** — you would have
       to publish a new listing and lose your reviews.
 - [ ] **Pay the $25**, complete ID verification (allow several days).

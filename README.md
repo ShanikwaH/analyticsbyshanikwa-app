@@ -19,7 +19,7 @@ Each build shows only its niche's sections and leads with its niche's products.
 | | State |
 |---|---|
 | **Web** | **Live and selling.** Deployed to GitHub Pages, custom domain, PWA-installable |
-| **Android** | Not started. $25 one-off |
+| **Android** | **Toolchain ready and the app builds** (`app-release.aab`, 50.6 MB). Needs an upload keystore + the $25 account |
 | **iOS** | Not started. $99/yr |
 | **In-app purchase** | Built and tested, deliberately **off** (`iap_enabled: false`) |
 | **Fulfilment worker** | Built and tested, **not deployed**. Refuses everything by default |
@@ -137,17 +137,30 @@ flutter run -d chrome                          # web
 flutter run --dart-define=APP_NICHE=bible      # Faithful Tales build
 ```
 
-### Java / Gradle
+### Android toolchain — already installed on this machine
 
-Android Gradle needs **JDK 17**, not 22. JDK 17.0.20 LTS is installed at `C:\Users\nikki\jdk-17` and
-Flutter is already pointed at it:
+| Piece | Where | Note |
+|---|---|---|
+| JDK 17.0.20 LTS | `C:\Users\nikki\jdk-17` | Side-by-side; JDK 22 stays the system default |
+| Android SDK | `C:\Users\nikki\AppData\Local\Android\Sdk` | platform 36, build-tools 36.1.0, platform-tools 37.0.1 |
+| Android Studio Quail 3 | `C:\Users\nikki\AndroidStudio` | `AI-261.26222.65`, Start Menu shortcut created |
+
+All three are registered with Flutter (`flutter config --list` shows `jdk-dir`, `android-sdk`,
+`android-studio-dir`). `flutter doctor` reports **No issues found**.
+
+**Gradle needs JDK 17** — not the system's 22, and not Android Studio's bundled JBR (Java 25).
+Both would fail. Flutter is pinned:
 
 ```bash
 flutter config --jdk-dir "C:\Users\nikki\jdk-17"   # already done
 ```
 
-JDK 22 remains the system default for everything else — only Flutter/Gradle use 17. Verified: Gradle
-9.1.0 launches on `17.0.20 (Microsoft 17.0.20+8-LTS)`.
+Android Studio was installed from Google's **no-installer zip** (`ide-zips/…-windows.zip`), because
+the `.exe` installer demands UAC elevation. The zip needs no admin rights. Launch it from the Start
+Menu or `C:\Users\nikki\AndroidStudio\bin\studio64.exe`.
+
+`flutter doctor` shows no "Android Studio" line — that is expected: Flutter 3.44 removed that
+validator. It is not a detection failure.
 
 ## Building releases
 
