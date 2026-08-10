@@ -20,6 +20,31 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.14.0
+
+# Regenerate every platform icon with:
+#   dart run flutter_launcher_icons
+flutter_launcher_icons:
+  # Square, opaque, corners filled with brand navy. The original PNG had pure
+  # black corners which would show as a black frame inside Apple's rounded mask.
+  image_path: "icon_src/icon_master.png"
+
+  android: true
+  min_sdk_android: 21
+  # Adaptive icons are masked to a circle/squircle and crop the outer third,
+  # so the artwork sits inside a 66% safe zone on a solid navy plate.
+  adaptive_icon_background: "#0F172A"
+  adaptive_icon_foreground: "icon_src/adaptive_foreground.png"
+
+  ios: true
+  # The App Store rejects icons containing an alpha channel.
+  remove_alpha_ios: true
+
+  web:
+    generate: true
+    image_path: "icon_src/icon_master.png"
+    background_color: "#0F172A"
+    theme_color: "#0F172A"
 
 flutter:
   uses-material-design: true

@@ -9,3 +9,6 @@ android/key.properties
 *.keystore
 ios/Pods/
 .DS_Store
+icon_src/legibility_check.png
+icon_src/maskable_check.png
+icon_src/compare.png
