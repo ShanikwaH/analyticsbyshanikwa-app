@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "com.analyticsbyshanikwa" "\0"
-            VALUE "FileDescription", "analyticsbyshanikwa_app" "\0"
+            VALUE "CompanyName", "Analytics by Shanikwa" "\0"
+            VALUE "FileDescription", "Analytics by Shanikwa" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
             VALUE "InternalName", "analyticsbyshanikwa_app" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 com.analyticsbyshanikwa. All rights reserved." "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 Analytics by Shanikwa. All rights reserved." "\0"
             VALUE "OriginalFilename", "analyticsbyshanikwa_app.exe" "\0"
-            VALUE "ProductName", "analyticsbyshanikwa_app" "\0"
+            VALUE "ProductName", "Analytics by Shanikwa" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

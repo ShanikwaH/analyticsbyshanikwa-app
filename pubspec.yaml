@@ -25,6 +25,26 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^4.0.0
   flutter_launcher_icons: ^0.14.0
+  msix: ^3.18.0
+
+# Microsoft Store packaging.  Build first, then package:
+#   flutter build windows --dart-define=APP_NICHE=full
+#   dart run msix:create                 # test-signed, for local install only
+#   dart run msix:create --store         # the .msix you upload to Partner Center
+#
+# BEFORE SUBMITTING: replace publisher_display_name / identity_name / publisher
+# with the exact values Partner Center shows under Product > Product identity.
+# They must match character for character or the upload is rejected. Microsoft
+# signs the Store package, so no purchased certificate is needed.
+msix_config:
+  display_name: Analytics by Shanikwa
+  publisher_display_name: Analytics by Shanikwa
+  identity_name: REPLACE.WithPartnerCenterIdentityName
+  publisher: CN=REPLACE-WITH-PARTNER-CENTER-PUBLISHER-ID
+  msix_version: 1.0.0.0
+  logo_path: icon_src/icon_master.png
+  capabilities: internetClient
+  store: false
 
 # Regenerate every platform icon with:
 #   dart run flutter_launcher_icons
@@ -49,6 +69,14 @@ flutter_launcher_icons:
     image_path: "icon_src/icon_master.png"
     background_color: "#0F172A"
     theme_color: "#0F172A"
+
+  # windows/ was scaffolded after the icons were first generated, so it shipped
+  # with Flutter's default logo. 256 is the largest size Windows uses in the
+  # .ico and what shows in the Store listing and taskbar.
+  windows:
+    generate: true
+    image_path: "icon_src/icon_master.png"
+    icon_size: 256
 
 flutter:
   uses-material-design: true

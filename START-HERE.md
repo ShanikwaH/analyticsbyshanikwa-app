@@ -61,11 +61,14 @@ fastest way to have a real store listing.
 - [ ] **Open a Microsoft Partner Center account.** Individual registration fees were
       dropped — it is $0, with identity verification (government ID + selfie) instead of a
       credit card.
-- [ ] **Package as MSIX.** Add `msix` to `dev_dependencies`, configure
-      `msix_config` in `pubspec.yaml` with the Publisher ID Partner Center gives you, then:
-      `dart run msix:create`.
-- [ ] **Microsoft signs the Store package for you** — you do **not** need to buy a
-      certificate for Store distribution.
+- [x] **MSIX packaging configured and proven.** `msix_config` is in `pubspec.yaml` and
+      `dart run msix:create --store` produces a **23 MB** `.msix` in
+      `build/windows/x64/runner/Release/`. Confirmed: **Store mode needs no certificate** —
+      Microsoft signs it.
+- [ ] **Fill in the three identity fields** in `pubspec.yaml → msix_config` from
+      Partner Center (Product → Product identity): `identity_name`,
+      `publisher` (`CN=…`), `publisher_display_name`. They must match **exactly** or the
+      upload is rejected. Then re-run `dart run msix:create --store` and upload.
 - [ ] Submit. Review is typically days, not weeks.
 
 **If you also want a plain downloadable `.exe`** from your own site: that is the one case
