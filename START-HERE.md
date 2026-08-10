@@ -49,7 +49,9 @@ whether the app converts at all, which is the only honest basis for paying Apple
       runs like a native app, offline. Most visitors never notice unless you say so.
 - [ ] Watch it in Shopify Analytics — every product link carries `utm_source=app`, and
       `utm_content` tells you which card was tapped.
-- [ ] Click a few product links and confirm they land on the right listing.
+- [x] **Product links verified 2026-08-10** — all 20 live Payhip/Shopify links
+      from `content.json` return 200. Re-check with the snippet in
+      `tools/` whenever you change the catalog.
 
 ---
 
@@ -105,9 +107,14 @@ The $25 is one payment, forever, all your apps.
       - Since **April 2026** Google also rejects for weak *engagement* — testers must actually
         open and use the app, not just install it. Ask them for a couple of minutes every day or two.
       - Real devices, real Google accounts. Emulators and duplicates don't count.
-- [ ] Upload the `.aab`, then the listing: screenshots, privacy policy URL,
-      **data safety: no data collected** (true, and a selling point), content rating,
-      category **Education** — not Games.
+- [x] **Listing assets are done and waiting** in `store/`:
+      copy for all three stores (`store/LISTING.md`), 4 phone screenshots at
+      1080×1920, 4 desktop at 1366×768, the required 1024×500 feature graphic and
+      512×512 icon. Data-safety and content-rating answers are written out too.
+- [ ] Upload the `.aab`, then paste the listing from `store/LISTING.md`.
+      **Read the ⚠ note at the bottom of that file first** — Google's billing
+      policy for link-out digital goods is not Apple's, and it has not been
+      verified for you.
 
 ---
 
