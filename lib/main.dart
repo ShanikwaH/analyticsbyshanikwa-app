@@ -109,17 +109,28 @@ class _AbsAppState extends State<AbsApp> {
   @override
   Widget build(BuildContext context) {
     final content = _content;
-    return MaterialApp(
-      title: AppConfig.appName,
-      debugShowCheckedModeBanner: false,
-      theme: _theme(),
-      home: content == null
-          ? const _SplashScreen()
-          : AppScope(
-              content: content,
-              talents: _talents,
-              child: const HomeShell(),
-            ),
+    if (content == null) {
+      return MaterialApp(
+        title: AppConfig.appName,
+        debugShowCheckedModeBanner: false,
+        theme: _theme(),
+        home: const _SplashScreen(),
+      );
+    }
+    // AppScope MUST sit ABOVE MaterialApp. Inside `home:` it lives below the
+    // Navigator, so every route pushed with Navigator.push is a sibling rather
+    // than a descendant — AppScope.of() returns null, the `!` throws, and the
+    // screen renders blank. That broke all 24 pushed screens (every game, the
+    // audit, story details, the vault, free resources).
+    return AppScope(
+      content: content,
+      talents: _talents,
+      child: MaterialApp(
+        title: AppConfig.appName,
+        debugShowCheckedModeBanner: false,
+        theme: _theme(),
+        home: const HomeShell(),
+      ),
     );
   }
 }

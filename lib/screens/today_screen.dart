@@ -59,7 +59,7 @@ class TodayScreen extends StatelessWidget {
                       backgroundColor: Colors.white,
                       foregroundColor: AppConfig.anchor),
                   onPressed: () => openLink(context, week.url),
-                  child: const Text('Read this week\'s letter'),
+                  child: const Text('Read this week\'s stories'),
                 ),
               ],
             ),
