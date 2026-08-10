@@ -1,6 +1,7 @@
 # Analytics by Shanikwa — Cross-Platform App
 
-One Flutter codebase → **Web, iOS, Android, Windows, macOS**, in four brand builds.
+One Flutter codebase → **Web, Android, iOS, Windows**, in four brand builds.
+(`macos/` and `linux/` are not scaffolded — add with `flutter create --platforms=macos .`)
 
 **Live now: [app.analyticsbyshanikwa.com](https://app.analyticsbyshanikwa.com)** — installable, works
 offline, sells today via link-out checkout at 0% platform fee.
@@ -166,10 +167,9 @@ validator. It is not a detection failure.
 
 ```bash
 flutter build web --base-href /                       # web (what's deployed today)
-flutter build appbundle --dart-define=APP_NICHE=full  # Android (Play Store)
+flutter build appbundle --dart-define=APP_NICHE=full  # Android — verify: bash tools/check_signing.sh
+flutter build windows --dart-define=APP_NICHE=full    # Windows (30 MB .exe, ~76s)
 flutter build ipa --dart-define=APP_NICHE=full        # iOS — needs a Mac; use Codemagic's free tier
-flutter build windows --dart-define=APP_NICHE=full
-flutter build macos --dart-define=APP_NICHE=full
 ```
 
 Repeat with `APP_NICHE=accounting`, `data`, or `bible`. **If you ship multiple niche builds to the

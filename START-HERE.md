@@ -1,167 +1,196 @@
-# Making this app sellable — the whole path, in order
+# Selling this app everywhere — the whole path, in order
 
-One page. Everything else (`SHIP.md`, `SELLING.md`, `worker/GO-LIVE.md`) is
-detail you only need when you reach that step.
+One page. `SHIP.md`, `SELLING.md` and `worker/GO-LIVE.md` are detail you only need
+when you reach that step.
 
 ---
 
-## Where you actually are, verified today
+## First: there is no "keystore" for iOS or desktop
+
+A keystore is an Android-only thing. Each platform proves who you are differently, and
+only one of them is something you can generate yourself:
+
+| Platform | What signs it | Where it comes from | Cost |
+|---|---|---|---|
+| **Android** | Keystore (`.jks`) you generate | `keytool`, on your machine | free |
+| **iOS** | Certificate + provisioning profile | **Apple issues it** — needs the paid account | $99/yr |
+| **macOS** | Developer ID certificate | **Apple issues it** — same account | (same $99) |
+| **Windows Store** | Microsoft signs your package for you | Partner Center, at submission | **free** |
+| **Windows direct `.exe`** | Authenticode certificate | **Bought from a CA** (DigiCert, Sectigo…) | ~$200–400/yr |
+
+So: you generate exactly one signing asset yourself (the Android keystore). Everything else
+is issued or purchased once you have the account. Nothing is blocked on "making a key".
+
+---
+
+## Where you actually are — verified 2026-08-10
 
 | | State |
 |---|---|
-| **The app** | Live at **app.analyticsbyshanikwa.com** — 115 products, 20+ games, works offline, installable |
-| **Selling on the web** | **Working now.** Buy buttons open Payhip/Shopify, 0% platform fee |
-| **Android** | Not started. $25 |
-| **iOS** | Not started. $99/yr |
-| **In-app purchase** | Built and tested, switched **off**. Needs developer accounts |
-| **Fulfilment** | 11 bundles uploaded to private R2, verified byte-for-byte |
-| **Privacy policy** | Live at `/privacy-policy.html`, mentions the app |
-| **App icon** | Done, all platforms |
-
-**You can already sell to anyone in the world today**, through the web app and
-your site. Everything below is about reach, not capability.
+| **Web** | **Live and selling** at app.analyticsbyshanikwa.com, 0% platform fee |
+| **Windows** | **Builds** — `analyticsbyshanikwa_app.exe`, 30 MB. Not packaged or submitted |
+| **Android** | Toolchain complete, `.aab` builds (50.6 MB). **Blocked: no keystore yet** |
+| **iOS** | Project scaffolded, bundle id `com.analyticsbyshanikwa.analyticsbyshanikwaApp`. Needs a Mac/CI + $99 |
+| **macOS / Linux** | Not scaffolded. Add later with `flutter create --platforms=macos .` |
+| **In-app purchase** | Built and tested, deliberately **off** |
+| **Fulfilment worker** | Built, 40 tests pass, **not deployed** |
+| **Tests** | 33 Flutter + 40 worker, all green |
 
 ---
 
 ## Phase 0 — earn from what is already live · $0 · this week
 
-Nothing to install, nothing to approve.
+Nothing to install, nothing to approve. **Do this before spending a cent** — it tells you
+whether the app converts at all, which is the only honest basis for paying Apple $99.
 
-- [ ] **Put the link everywhere.** `app.analyticsbyshanikwa.com` in your site
-      nav, TikTok bio, Pinterest, the Sunday letter, your Shopify store.
-- [ ] **Tell people to install it.** On the live URL, Chrome and Edge offer
-      "Install" and it then runs like a native app, offline. Most visitors do
-      not know that unless you say so.
-- [ ] **Watch what it earns.** Every product link already carries
-      `utm_source=app`, so app-driven sales show up as their own source in
-      Shopify Analytics, and `utm_content` tells you which card was tapped.
-- [ ] **Check a few product links** actually land on the right listing.
-
-Do this before spending anything. It tells you whether the app converts at all,
-which is the only honest basis for paying Apple $99.
+- [ ] Put `app.analyticsbyshanikwa.com` in your site nav, TikTok bio, Pinterest, the Sunday
+      letter, Medium, and your Shopify store.
+- [ ] **Tell people to install it.** Chrome and Edge offer "Install" on that URL and it then
+      runs like a native app, offline. Most visitors never notice unless you say so.
+- [ ] Watch it in Shopify Analytics — every product link carries `utm_source=app`, and
+      `utm_content` tells you which card was tapped.
+- [ ] Click a few product links and confirm they land on the right listing.
 
 ---
 
-## Phase 1 — Android · $25 once · 3–5 weeks
+## Phase 1 — Windows · **$0** · ~1 week
+
+Do this before Android. It is now **free**, there is no tester requirement, and it is the
+fastest way to have a real store listing.
+
+- [ ] **Open a Microsoft Partner Center account.** Individual registration fees were
+      dropped — it is $0, with identity verification (government ID + selfie) instead of a
+      credit card.
+- [ ] **Package as MSIX.** Add `msix` to `dev_dependencies`, configure
+      `msix_config` in `pubspec.yaml` with the Publisher ID Partner Center gives you, then:
+      `dart run msix:create`.
+- [ ] **Microsoft signs the Store package for you** — you do **not** need to buy a
+      certificate for Store distribution.
+- [ ] Submit. Review is typically days, not weeks.
+
+**If you also want a plain downloadable `.exe`** from your own site: that is the one case
+where you'd buy an Authenticode certificate (~$200–400/yr). Without it Windows SmartScreen
+warns users off. My honest read: skip it. The web app already covers "use it on a PC".
+
+---
+
+## Phase 2 — Android · $25 once · 3–5 weeks
 
 The $25 is one payment, forever, all your apps.
 
-- [x] **Install Android Studio + SDK — done.** Studio Quail 3 at
-      `C:\Users\nikki\AndroidStudio`, SDK (platform 36, build-tools 36.1.0,
-      platform-tools 37.0.1) at `%LOCALAPPDATA%\Android\Sdk`, all licenses
-      accepted, `flutter doctor` clean. *(`SHIP.md` §3)*
-- [x] **The app really builds:** `flutter build appbundle` produced
-      `app-release.aab` (50.6 MB) in ~12 min. No NDK was needed.
-- [x] **Java version — already handled.** JDK 17.0.20 is installed at
-      `C:\Users\nikki\jdk-17` and Flutter is pointed at it
-      (`flutter config --jdk-dir "C:\Users\nikki\jdk-17"`). JDK 22 is still on
-      the system PATH for everything else; only Flutter/Gradle use 17.
-      Verified: Gradle 9.1.0 launches on `17.0.20 (Microsoft 17.0.20+8-LTS)`.
-- [ ] **Create the upload keystore — the next blocker.** The `.aab` built today
-      is signed `CN=Android Debug` (see the `TODO` in
-      `android/app/build.gradle.kts` line 30). **Play rejects debug-signed
-      bundles.** You must create this yourself — it needs a password you choose
-      and nobody else should ever hold. Back it up somewhere permanent.
-      **Lose it and you can never update your own app again** — you would have
-      to publish a new listing and lose your reviews.
+- [ ] **Create the upload keystore — still outstanding, and it blocks everything else here.**
+      Run this yourself so you choose the password:
+      ```
+      "C:\Users\nikki\jdk-17\bin\keytool" -genkeypair -v ^
+        -keystore C:\Users\nikki\keystores\upload-keystore.jks ^
+        -keyalg RSA -keysize 4096 -validity 10000 -alias upload
+      ```
+      Then copy `android/key.properties.example` to `android/key.properties` and fill it in.
+      **Back the `.jks` up the same day** — password manager plus somewhere off this laptop.
+      **Lose it and you can never update your own listing again.**
+- [ ] Rebuild and **verify the signer**:
+      `flutter build appbundle` then `bash tools/check_signing.sh`
+      It must print your own `Owner:` line, not `CN=Android Debug`.
 - [ ] **Pay the $25**, complete ID verification (allow several days).
-- [ ] **Recruit 12 testers now.** A new personal developer account must run a
-      closed test with **12 testers for 14 continuous days** before production.
-      This is the single biggest delay and it cannot be rushed.
-- [ ] `flutter build appbundle --release` → upload the `.aab`.
-- [ ] Store listing: screenshots, the privacy policy URL, **data safety: no
-      data collected** (true — everything is on-device, and it is a real
-      selling point), content rating, category **Education** (not Games).
+- [ ] **Recruit 12 testers now — this is the long pole.** A personal account created after
+      13 Nov 2023 must run a closed test with **12 testers opted in for 14 continuous days**.
+      Three traps:
+      - All 12 must overlap in the *same* window. One drops out on day 7 → **counter resets**.
+      - Since **April 2026** Google also rejects for weak *engagement* — testers must actually
+        open and use the app, not just install it. Ask them for a couple of minutes every day or two.
+      - Real devices, real Google accounts. Emulators and duplicates don't count.
+- [ ] Upload the `.aab`, then the listing: screenshots, privacy policy URL,
+      **data safety: no data collected** (true, and a selling point), content rating,
+      category **Education** — not Games.
 
 ---
 
-## Phase 2 — iOS · $99/year · 2–4 weeks
+## Phase 3 — iOS · $99/year · 2–4 weeks
 
-- [ ] **Enrol in the Apple Developer Program.** Individual needs ID; business
-      needs a D-U-N-S number.
-- [ ] **Sign the Paid Applications Agreement** in App Store Connect →
-      Business. **Nothing sells until this is signed** — required even for a
-      free app with external links. This blocks more first-time sellers than
-      anything else.
-- [ ] **Apply to the Small Business Program** — 15% instead of 30%. It is
-      **not automatic**; you must apply.
-- [ ] **You cannot build iOS on Windows.** Use **Codemagic's free tier**
-      (500 build-minutes/month) — it builds on their Macs. You still need the
-      $99 account for signing. *(`SHIP.md` §4)*
-- [ ] **List worldwide.** The app region-gates itself: the Shop shows link-out
-      buttons in the US and Japan, and hides them elsewhere, so it is
-      compliant everywhere. No need to restrict the storefront.
-- [ ] **Paste the review notes** from `SELLING.md` §6d. They pre-empt the two
-      likely rejections: external links (3.1.1) and "minimum functionality"
-      (4.2).
+- [ ] **Enrol in the Apple Developer Program** ($99/yr). Individual needs ID; a business
+      entity needs a D-U-N-S number.
+- [ ] **Sign the Paid Applications Agreement** in App Store Connect → Business.
+      **Nothing sells until this is signed** — required even for a free app with external
+      links. This blocks more first-time sellers than anything else.
+- [ ] **Apply to the Small Business Program** — 15% instead of 30%. It is **not automatic**.
+- [ ] **Certificates and provisioning profiles come from Apple**, not from you. Xcode or
+      Codemagic will create them once the account exists.
+- [ ] **You cannot build iOS on Windows.** Use **Codemagic's free tier** (500 build-minutes/
+      month) — it builds on their Macs. You still need the $99 account for signing.
+- [ ] **List worldwide.** The app region-gates itself: link-out buttons show only where they
+      are legal, and hide elsewhere. No need to restrict the storefront.
+- [ ] Paste the review notes from `SELLING.md` §6d — they pre-empt the two likely rejections,
+      external links (3.1.1) and minimum functionality (4.2).
 
 ---
 
-## Phase 3 — sell *inside* the app in the UK, Canada, Australia · after Phase 2
+## Phase 4 — in-app purchase outside the US/Japan · after Phase 3
 
-Only worth doing if Phase 1–2 show real demand outside the US.
+Only worth doing if Phases 2–3 show real demand elsewhere. Full commands, with a
+verification after each: **`worker/GO-LIVE.md`**.
 
-- [ ] Deploy the download worker — safe, it refuses everything by default.
+- [ ] Deploy the worker (safe — it refuses everything by default).
 - [ ] `wrangler secret put SIGNING_SECRET`
 - [ ] Sandbox-prove grant → download, then switch back to `disabled`.
 - [ ] Get the Apple `.p8` key and the Google service account.
 - [ ] `ENTITLEMENT_MODE = "stores"`, then `iap_enabled: true` in `content.json`.
-- [ ] **Run the three sandbox checks**, then refund a sandbox purchase and
-      confirm the download stops working.
-
-Full commands, in order, with a verification after each: **`worker/GO-LIVE.md`**.
+- [ ] Run the three sandbox checks, then **refund a sandbox purchase and confirm the download
+      stops working**. That is the part that stops refund fraud.
 
 ---
 
 ## What blocks what
 
 ```
-Phase 0  (web)          ── nothing blocks it. Do it now.
-   │
-Phase 1  (Android $25)  ── ID check · 12 testers × 14 days
-   │
-Phase 2  (iOS $99)      ── enrolment · Paid Apps Agreement · Mac/Codemagic
-   │
-Phase 3  (IAP)          ── needs BOTH accounts, for the store credentials
+Phase 0  web        ── nothing blocks it. Do it now.
+Phase 1  Windows $0 ── identity check only. No testers. Fastest real listing.
+Phase 2  Android $25 ── KEYSTORE → ID check → 12 testers × 14 continuous days
+Phase 3  iOS $99    ── enrolment → Paid Apps Agreement → Mac/Codemagic
+Phase 4  IAP        ── needs BOTH mobile accounts, for the store credentials
 ```
 
-Phases 1 and 2 are independent — do Android first because it is cheaper and
-teaches you the process, or iOS first if that is where your audience is.
+Phases 1–3 are independent. Order given is cheapest-and-fastest first.
 
 ---
 
 ## Money
 
-| | Cost | You keep on a $18.99 sale |
+| Channel | Cost | You keep on a $18.99 sale |
 |---|---|---|
 | Web / link-out | $0 | **~$17.60** |
+| Microsoft Store | $0 | ~$17.60 (link-out; no IAP) |
 | iOS IAP, Small Business 15% | $99/yr | $16.14 |
 | iOS IAP, standard 30% | $99/yr | $13.29 |
 
-**First year on all three: $124.** Then $99/year.
+**First year, all channels: $124.** Then $99/year.
 
-Link-out is worth ~$4.31 more per sale than IAP, which is why the app links out
-wherever the rules allow and only falls back to IAP where they do not.
+Link-out is worth ~$4.31 more per sale than IAP, which is why the app links out wherever the
+rules allow and only falls back to IAP where they don't.
 
 ---
 
-## Two things to check yourself, not take from me
+## Three things to verify yourself on the day, not take from me
 
-1. **App Store Guideline 3.1.1 changed twice in 18 months**, and the Google
-   settlement was still in front of a judge in 2026. Re-read the current rule
-   on the day you submit. *(`SELLING.md` §2 has the sources.)*
-2. **No real store purchase has ever been tested** — no developer account
-   exists yet. The IAP code and the worker are thoroughly tested against mocks
-   and real crypto, but the first live receipt is the first live receipt.
-   Sandbox testing is required, not optional.
+1. **The US external-link rule is genuinely unsettled.** After the 2025 Epic contempt ruling,
+   US apps may link out with **no entitlement required**, and the commission is **0% right
+   now** — but that is pending the district court approving a rate. Apple has asserted a
+   "Link Entitlement" commission of up to **27%** with a 7-day attribution window. If that
+   gets approved, the economics above change. **Re-read Guideline 3.1.1 the day you submit.**
+2. **Small Business Program terms** — confirm the current rate and eligibility on Apple's own
+   page before relying on 15%.
+3. **No real store purchase has ever been tested**, because no developer account exists yet.
+   The IAP code and worker are tested against mocks and real crypto; the first live receipt
+   is the first live receipt. Sandbox testing is required, not optional.
 
 ---
 
 ## The short version
 
-**This week:** put the link everywhere and see if anyone uses it. That costs
-nothing and answers the only question that matters.
+**This week:** put the link everywhere. Free, and it answers the only question that matters.
 
-**If they do:** $25 for Android, then $99 for iOS.
+**Then:** Windows, because it is now free and has no tester gate.
 
-**If people outside the US start asking:** Phase 3.
+**Then:** $25 Android — but create the keystore *today*, since the 14-day tester clock cannot
+start until the build is properly signed.
+
+**Then:** $99 iOS, if the numbers justify it.
