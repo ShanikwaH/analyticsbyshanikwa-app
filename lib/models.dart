@@ -48,6 +48,34 @@ class Product {
         fulfillmentUrl = _s(j['fulfillment_url']);
 }
 
+/// One item from the full Shopify/Payhip catalog (115 of them). Deliberately
+/// leaner than Product: this is a browse-and-buy row, not a hero card.
+class CatalogItem {
+  final String id, title, price, format, category, summary;
+  final String shopifyUrl, payhipUrl, iapId, fulfillmentUrl;
+  final bool bundle;
+  CatalogItem.fromJson(Map<String, dynamic> j)
+      : id = _s(j['id']),
+        title = _s(j['title']),
+        price = _s(j['price']),
+        format = _s(j['format']),
+        category = _s(j['category']),
+        summary = _s(j['summary']),
+        shopifyUrl = _s(j['shopify_url']),
+        payhipUrl = _s(j['payhip_url']),
+        iapId = _s(j['iap_id']),
+        fulfillmentUrl = _s(j['fulfillment_url']),
+        bundle = j['bundle'] == true;
+
+  bool matches(String q) {
+    if (q.isEmpty) return true;
+    final n = q.toLowerCase();
+    return title.toLowerCase().contains(n) ||
+        summary.toLowerCase().contains(n) ||
+        category.toLowerCase().contains(n);
+  }
+}
+
 class FreeResource {
   final String id, emoji, title, summary, url;
   FreeResource.fromJson(Map<String, dynamic> j)
@@ -167,6 +195,9 @@ class AppContent {
   final List<AuditQuestion> audit;
   final List<Story> stories;
   final List<Product> products;
+
+  /// The full catalog — every product live on Shopify and Payhip.
+  final List<CatalogItem> catalog;
   final List<FreeResource> freeResources;
   final List<Course> courses;
   final List<TechSkill> techSkills;
@@ -198,6 +229,7 @@ class AppContent {
         audit = _list(j['stewardship_audit'], AuditQuestion.fromJson),
         stories = _list(j['stories'], Story.fromJson),
         products = _list(j['products'], Product.fromJson),
+        catalog = _list(j['catalog'], CatalogItem.fromJson),
         freeResources = _list(j['free_resources'], FreeResource.fromJson),
         courses = _list(j['courses'], Course.fromJson),
         techSkills = _list(j['tech_skills'], TechSkill.fromJson),

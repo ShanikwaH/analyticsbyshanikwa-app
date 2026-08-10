@@ -5,6 +5,7 @@ import '../main.dart';
 import '../models.dart';
 import '../commerce/purchases.dart';
 import '../widgets/common.dart';
+import 'catalog_screen.dart';
 import 'resources_screen.dart';
 
 class ShopScreen extends StatelessWidget {
@@ -24,9 +25,26 @@ class ShopScreen extends StatelessWidget {
           (b.niche == key ? 1 : 0).compareTo(a.niche == key ? 1 : 0));
     }
 
-    return Scaffold(
-      appBar: AppBar(title: const Text('Shop'), actions: const [TalentsChip()]),
-      body: ListView(
+    // Two tabs: a few hand-picked hero cards, then the full 115-item catalog
+    // with search and category chips. 115 hero cards would be unusable.
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Shop'),
+          actions: const [TalentsChip()],
+          bottom: TabBar(
+            labelColor: AppConfig.primary,
+            unselectedLabelColor: AppConfig.slate500,
+            indicatorColor: AppConfig.primary,
+            tabs: [
+              const Tab(text: 'Featured'),
+              Tab(text: 'All ${c.catalog.length}'),
+            ],
+          ),
+        ),
+        body: TabBarView(children: [
+          ListView(
         padding: const EdgeInsets.all(16),
         children: [
           const Eyebrow('Templates built for the work, not the theory'),
@@ -112,7 +130,10 @@ class ShopScreen extends StatelessWidget {
               ),
             ),
           ],
-        ],
+          ],
+          ),
+          const CatalogScreen(),
+        ]),
       ),
     );
   }
