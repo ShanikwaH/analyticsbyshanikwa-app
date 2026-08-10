@@ -1,4 +1,5 @@
 import { sign, verify } from './sign.js';
+import { verifyStores } from './entitlement.js';
 
 /**
  * Download worker for paid fulfilment.
@@ -10,11 +11,10 @@ import { sign, verify } from './sign.js';
  * unlike a folder on GitHub Pages there is no link to leak — a download URL
  * stops working after TTL_SECONDS.
  *
- * STATUS: the signing half is complete and tested (test/sign.test.js, 11 cases).
- * The entitlement half — proving the caller actually bought the thing — is
- * stubbed and FAILS CLOSED. Until ENTITLEMENT_MODE is set to a real verifier,
- * /grant returns 501 and nothing can be downloaded. That is deliberate: a
- * permissive stub would be worse than the public URLs it replaces.
+ * ENTITLEMENT_MODE controls who may be granted a link:
+ *   disabled       (default) /grant returns 501. Fails closed.
+ *   shared-secret  sandbox testing only; needs TEST_GRANT_SECRET.
+ *   stores         real Apple / Google receipt validation (entitlement.js).
  */
 
 const TTL_SECONDS = 300; // 5 minutes: long enough to download, short enough to be useless if shared
@@ -27,21 +27,7 @@ const json = (obj, status = 200) =>
 
 /**
  * Decide whether this caller is entitled to this product.
- *
- * TO FINISH THIS, pick one per platform:
- *
- *  iOS — App Store Server API. Send the signed transaction JWS from
- *    StoreKit 2 to  /inApps/v1/transactions/{transactionId}  with a JWT signed
- *    by your App Store Connect key (issuer id, key id, .p8). Check that
- *    `bundleId` is yours, `productId` matches, and there is no `revocationDate`.
- *
- *  Android — Google Play Developer API. Call
- *    purchases.products.get(packageName, productId, purchaseToken) with a
- *    service-account token. Require purchaseState == 0 (purchased) and
- *    acknowledgementState handled.
- *
- * Both need credentials that only exist once the developer accounts do, which
- * is why this is a seam and not an implementation.
+ * Real implementations live in entitlement.js; this only picks the mode.
  */
 async function verifyEntitlement(env, { productId, platform, receipt }) {
   const mode = env.ENTITLEMENT_MODE || 'disabled';
@@ -63,8 +49,7 @@ async function verifyEntitlement(env, { productId, platform, receipt }) {
   }
 
   if (mode === 'stores') {
-    // TODO: implement per the notes above. Fail closed until then.
-    return { ok: false, status: 501, reason: 'store verification not implemented' };
+    return verifyStores(env, { productId, platform, receipt });
   }
 
   return { ok: false, status: 500, reason: `unknown ENTITLEMENT_MODE: ${mode}` };

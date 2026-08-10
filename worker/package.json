@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test test/",
+    "test": "node --test test/sign.test.js test/worker.test.js test/entitlement.test.js",
     "dev": "wrangler dev",
     "deploy": "wrangler deploy"
   }
