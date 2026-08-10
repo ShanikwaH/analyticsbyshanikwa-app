@@ -6,6 +6,7 @@ import 'app_state.dart';
 import 'content_repository.dart';
 import 'models.dart';
 import 'screens/home_shell.dart';
+import 'widgets/common.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -144,14 +145,7 @@ class _SplashScreen extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Container(
-              width: 72,
-              height: 72,
-              decoration: BoxDecoration(
-                gradient: AppConfig.heroGradient,
-                shape: BoxShape.circle,
-              ),
-            ),
+            const BrandOrb(size: 72),
             const SizedBox(height: 20),
             Text(AppConfig.appName,
                 style: const TextStyle(

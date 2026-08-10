@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../app_config.dart';
+import '../widgets/common.dart';
 import 'play_screen.dart';
 import 'resources_screen.dart';
 import 'shop_screen.dart';
@@ -56,14 +57,7 @@ class _HomeShellState extends State<HomeShell> {
               labelType: NavigationRailLabelType.all,
               leading: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16),
-                child: Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    gradient: AppConfig.heroGradient,
-                    shape: BoxShape.circle,
-                  ),
-                ),
+                child: const BrandOrb(size: 40),
               ),
               destinations: [
                 for (final s in sections)

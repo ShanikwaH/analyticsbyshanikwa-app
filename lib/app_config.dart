@@ -67,6 +67,26 @@ class AppConfig {
   static const Color royalPlum = Color(0xFF5B3A9E);
   static const Color goldAccent = Color(0xFFD4A845);
 
+  // Read from the live site's styles/tokens.css so the app and the website
+  // cannot drift apart. --electric-pink was the one brand token the app lacked.
+  static const Color electricPink = Color(0xFFE879C9);
+  // --grad-indigo-plum: the site's signature accent, used on "Faithful with
+  // truth." in the hero and on its plum buttons.
+  static const Color indigo = Color(0xFF667EEA);
+  static const Color plum = Color(0xFF764BA2);
+
+  /// The site's own gradients, matched exactly.
+  static const LinearGradient gradIndigoPlum = LinearGradient(
+      begin: Alignment.topLeft, end: Alignment.bottomRight,
+      colors: [indigo, plum]);
+  static const LinearGradient gradSocialPurple =
+      LinearGradient(colors: [signaturePurple, softLavender]);
+  static const LinearGradient gradPrimaryHero =
+      LinearGradient(colors: [signalBlue, insightGreen]);
+
+  /// The brand orb — the same circular logo the website shows in its header.
+  static const String logoOrb = 'assets/brand/logo_orb.png';
+
   static bool get isSocialTrack => niche == AppNiche.bible;
 
   static Color get primary => isSocialTrack ? signaturePurple : signalBlue;
@@ -75,9 +95,11 @@ class AppConfig {
 
   static LinearGradient get heroGradient => isSocialTrack
       // Approved gradient 5 — Social Purple.
-      ? const LinearGradient(colors: [signaturePurple, softLavender])
-      // Approved gradient 1 — Primary hero.
-      : const LinearGradient(colors: [signalBlue, insightGreen]);
+      ? gradSocialPurple
+      // The website's signature accent (--grad-indigo-plum). Previously
+      // blue->green, which appears nowhere on analyticsbyshanikwa.com and
+      // clashed with the purple brand orb.
+      : gradIndigoPlum;
 
   /// Which bottom-nav sections this build shows.
   /// full: Today, Stories, Play, Shop

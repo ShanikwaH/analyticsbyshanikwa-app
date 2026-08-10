@@ -49,6 +49,7 @@ flutter_launcher_icons:
 flutter:
   uses-material-design: true
   assets:
+    - assets/brand/
     - assets/content/
     # Was "assets/freebies/content.json" — that file does not exist, and a
     # declared-but-missing asset fails the build. The code loads freebies by

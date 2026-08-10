@@ -158,3 +158,32 @@ class PillTag extends StatelessWidget {
                 color: fg ?? AppConfig.primary)),
       );
 }
+
+/// The brand orb — the same circular logo the website shows in its header.
+/// The site styles it `border-radius: 50%; object-fit: cover`, so this clips
+/// the identical square asset to a circle and covers the box the same way.
+class BrandOrb extends StatelessWidget {
+  final double size;
+  const BrandOrb({super.key, this.size = 40});
+
+  @override
+  Widget build(BuildContext context) => ClipOval(
+        child: Image.asset(
+          AppConfig.logoOrb,
+          width: size,
+          height: size,
+          fit: BoxFit.cover,
+          filterQuality: FilterQuality.medium,
+          // If the asset ever goes missing, fall back to the brand gradient
+          // rather than showing a broken-image box.
+          errorBuilder: (_, __, ___) => Container(
+            width: size,
+            height: size,
+            decoration: BoxDecoration(
+              gradient: AppConfig.heroGradient,
+              shape: BoxShape.circle,
+            ),
+          ),
+        ),
+      );
+}
