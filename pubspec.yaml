@@ -15,6 +15,10 @@ dependencies:
   path_provider: ^2.1.4
   open_filex: ^4.5.0
   google_fonts: ^6.2.0
+  # In-app purchase, for storefronts where linking out to buy is still banned
+  # (UK, Canada, Australia, EU). No web implementation — every call is guarded
+  # by kIsWeb. See lib/commerce/purchases.dart.
+  in_app_purchase: ^3.2.0
 
 dev_dependencies:
   flutter_test:

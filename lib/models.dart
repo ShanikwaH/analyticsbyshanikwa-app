@@ -28,6 +28,9 @@ class Product {
   // Present in content.json and used by vault_screen; the model just never
   // read them, so `product.image` and `product.format` did not exist.
   final String image, format;
+  // In-app purchase: store product id, and where the buyer's file lives.
+  // Both must be non-empty before a buy button appears. See Purchases.sellable.
+  final String iapId, fulfillmentUrl;
   Product.fromJson(Map<String, dynamic> j)
       : id = _s(j['id']),
         emoji = _s(j['emoji']),
@@ -40,7 +43,9 @@ class Product {
         payhipUrl = _s(j['payhip_url']),
         shopifyUrl = _s(j['shopify_url']),
         image = _s(j['image']),
-        format = _s(j['format']);
+        format = _s(j['format']),
+        iapId = _s(j['iap_id']),
+        fulfillmentUrl = _s(j['fulfillment_url']);
 }
 
 class FreeResource {
@@ -178,6 +183,10 @@ class AppContent {
   /// Empty means "no restriction configured" — see AppConfig.canLinkOut.
   final List<String> linkOutRegions;
 
+  /// Master switch for in-app purchase, flipped remotely once store products
+  /// and fulfilment URLs exist.
+  final bool iapEnabled;
+
   AppContent.fromJson(Map<String, dynamic> j)
       : version = _i(j['version']),
         urls = (j['urls'] is Map)
@@ -222,7 +231,9 @@ class AppContent {
             ? ((j['commerce'] as Map)['link_out_regions'] as List)
                 .map((e) => _s(e).toUpperCase())
                 .toList()
-            : const [];
+            : const [],
+        iapEnabled = (j['commerce'] is Map) &&
+            (j['commerce'] as Map)['iap_enabled'] == true;
 
   String url(String key) => urls[key] ?? 'https://analyticsbyshanikwa.com';
 }

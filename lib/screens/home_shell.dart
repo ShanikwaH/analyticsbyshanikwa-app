@@ -47,8 +47,11 @@ class _HomeShellState extends State<HomeShell> {
     // rather than restricting the app to the US storefront means the app can be
     // listed in the UK, Canada, Australia and everywhere else — those users get
     // the full free app, and buy on the website instead.
-    final allowShop =
-        AppConfig.canLinkOut(AppScope.of(context).content.linkOutRegions);
+    // Keep the Shop when we can link out (US, Japan) OR when in-app purchase is
+    // configured — that is what makes the UK, Canada and Australia sellable.
+    final content = AppScope.of(context).content;
+    final allowShop = AppConfig.canLinkOut(content.linkOutRegions) ||
+        content.iapEnabled;
     final sections = [
       for (final s in AppConfig.sections)
         if (s != 'shop' || allowShop) s,

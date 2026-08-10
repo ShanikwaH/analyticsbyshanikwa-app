@@ -360,7 +360,9 @@
       "payhip_url": "https://payhip.com/b/cSXU6?ref=app&utm_source=app&utm_medium=app&utm_content=p1",
       "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p1",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoi984s1e8no5ckladlpbjm1n.png",
-      "format": "Excel & Google Sheets"
+      "format": "Excel & Google Sheets",
+      "iap_id": "",
+      "fulfillment_url": ""
     },
     {
       "id": "p2",
@@ -379,7 +381,9 @@
       "payhip_url": "https://payhip.com/b/StUTf?ref=app&utm_source=app&utm_medium=app&utm_content=p2",
       "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p2",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpohvvj0bb0181slkv01139m1n.png",
-      "format": "Excel & Google Sheets"
+      "format": "Excel & Google Sheets",
+      "iap_id": "",
+      "fulfillment_url": ""
     },
     {
       "id": "p3",
@@ -398,7 +402,9 @@
       "payhip_url": "https://payhip.com/b/XTBgt?ref=app&utm_source=app&utm_medium=app&utm_content=p3",
       "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p3",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpqa3ilk10g3i0q19r61lb31juu15.png",
-      "format": "Excel & PDF"
+      "format": "Excel & PDF",
+      "iap_id": "",
+      "fulfillment_url": ""
     },
     {
       "id": "p4",
@@ -417,7 +423,9 @@
       "payhip_url": "https://payhip.com/b/rbaPI?ref=app&utm_source=app&utm_medium=app&utm_content=p4",
       "shopify_url": "https://jrip3r-qz.myshopify.com/?ref=app&utm_source=app&utm_medium=app&utm_content=p4",
       "image": "https://payhip.com/cdn-cgi/image/format=auto,width=750/https://pe56d.s3.amazonaws.com/o_1jpoug2aj5n8100d169mhke16uf1k.png",
-      "format": "Printable PDF"
+      "format": "Printable PDF",
+      "iap_id": "",
+      "fulfillment_url": ""
     }
   ],
   "free_resources": [
@@ -1510,6 +1518,8 @@
       "US",
       "JP"
     ],
-    "_note": "Storefronts where linking out of the app to buy digital goods is permitted. US: allowed with no commission after the Epic injunction. JP: allowed since 2025-12-18 under the Mobile Software Competition Act, but Apple charges a 15% steering commission. Everywhere else it is still a Guideline 3.1.1 violation, so the Shop is hidden there. Web builds ignore this entirely. Edit this list and bump version to change behaviour with no app release."
+    "_note": "Storefronts where linking out of the app to buy digital goods is permitted. US: allowed with no commission after the Epic injunction. JP: allowed since 2025-12-18 under the Mobile Software Competition Act, but Apple charges a 15% steering commission. Everywhere else it is still a Guideline 3.1.1 violation, so the Shop is hidden there. Web builds ignore this entirely. Edit this list and bump version to change behaviour with no app release.",
+    "iap_enabled": false,
+    "_iap_note": "Turn this on ONLY after: (1) each product has a non-empty iap_id matching a non-consumable created in App Store Connect AND Google Play Console, and (2) each has a fulfillment_url the app can open after purchase. Until both are set per product, that product shows no buy button — the app will never take money it cannot fulfil. Flip this flag and bump version to go live; no app release needed."
   }
 }

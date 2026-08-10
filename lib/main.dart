@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'app_config.dart';
 import 'app_state.dart';
+import 'commerce/purchases.dart';
 import 'content_repository.dart';
 import 'models.dart';
 import 'screens/home_shell.dart';
@@ -30,6 +33,16 @@ class AppScope extends InheritedNotifier<TalentsState> {
   TalentsState get talents => notifier!;
 }
 
+/// Provides the in-app purchase state. Separate from AppScope so screens that
+/// never sell anything do not rebuild when a purchase completes.
+class PurchasesScope extends InheritedNotifier<Purchases> {
+  const PurchasesScope({super.key, required Purchases purchases, required super.child})
+      : super(notifier: purchases);
+
+  static Purchases of(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<PurchasesScope>()!.notifier!;
+}
+
 class AbsApp extends StatefulWidget {
   const AbsApp({super.key});
   @override
@@ -39,6 +52,7 @@ class AbsApp extends StatefulWidget {
 class _AbsAppState extends State<AbsApp> {
   final _repo = ContentRepository();
   final _talents = TalentsState();
+  final _purchases = Purchases();
   AppContent? _content;
 
   @override
@@ -51,6 +65,10 @@ class _AbsAppState extends State<AbsApp> {
     await _talents.load();
     final initial = await _repo.loadInitial();
     if (mounted) setState(() => _content = initial);
+    // Ask the store about our products. No-ops on web and wherever the app
+    // links out instead of selling in-app.
+    unawaited(_purchases
+        .init([for (final p in initial.products) p.iapId]));
     // Silent background check for a newer remote content file.
     final updated = await _repo.checkRemote(initial);
     if (updated != null && mounted) setState(() => _content = updated);
@@ -123,7 +141,9 @@ class _AbsAppState extends State<AbsApp> {
     // than a descendant — AppScope.of() returns null, the `!` throws, and the
     // screen renders blank. That broke all 24 pushed screens (every game, the
     // audit, story details, the vault, free resources).
-    return AppScope(
+    return PurchasesScope(
+      purchases: _purchases,
+      child: AppScope(
       content: content,
       talents: _talents,
       child: MaterialApp(
@@ -147,7 +167,14 @@ class _AbsAppState extends State<AbsApp> {
         },
         home: const HomeShell(),
       ),
+    ),
     );
+  }
+
+  @override
+  void dispose() {
+    _purchases.dispose();
+    super.dispose();
   }
 }
 

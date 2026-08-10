@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../app_config.dart';
 import '../main.dart';
 import '../models.dart';
+import '../commerce/purchases.dart';
 import '../widgets/common.dart';
 import 'resources_screen.dart';
 
@@ -74,12 +75,43 @@ class ShopScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 16),
-          Center(
-            child: TextButton(
-              onPressed: () => openLink(context, c.url('payhip_store')),
-              child: const Text('Browse the full storefront'),
+          if (AppConfig.canLinkOut(c.linkOutRegions))
+            Center(
+              child: TextButton(
+                onPressed: () => openLink(context, c.url('payhip_store')),
+                child: const Text('Browse the full storefront'),
+              ),
+            )
+          else if (c.iapEnabled) ...[
+            // Apple rejects apps that sell non-consumables without a visible
+            // way to restore them on a new device.
+            Center(
+              child: TextButton.icon(
+                icon: const Icon(Icons.restore, size: 18),
+                onPressed: () async {
+                  await PurchasesScope.of(context).restore();
+                  if (context.mounted) {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      content: Text(
+                          'Checked your account — anything you already bought is unlocked.'),
+                    ));
+                  }
+                },
+                label: const Text('Restore purchases'),
+              ),
             ),
-          ),
+            const Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 24),
+                child: Text(
+                  'Purchases are handled by the App Store or Google Play in your country.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 12, color: AppConfig.slate500),
+                ),
+              ),
+            ),
+          ],
         ],
       ),
     );
@@ -145,25 +177,79 @@ class _ProductCard extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 12),
-            Row(
-              children: [
-                Expanded(
-                  child: FilledButton(
-                    onPressed: () => openLink(context, product.payhipUrl),
-                    child: Text('Payhip — ${product.price}'),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () => openLink(context, product.shopifyUrl),
-                    child: const Text('Shopify'),
-                  ),
-                ),
-              ],
-            ),
+            _BuyControls(product: product),
           ],
         ),
+      ),
+    );
+  }
+}
+
+/// Buy controls that adapt to what the storefront actually allows.
+///
+///  * US / Japan  → link out to Payhip or Shopify (0% and 15% respectively).
+///  * Elsewhere   → in-app purchase, once configured, because linking out is
+///                  still a Guideline 3.1.1 violation there.
+///  * Neither     → nothing. Better a missing button than one that takes money
+///                  and delivers nothing.
+class _BuyControls extends StatelessWidget {
+  final Product product;
+  const _BuyControls({required this.product});
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = AppScope.of(context);
+    final content = scope.content;
+
+    if (AppConfig.canLinkOut(content.linkOutRegions)) {
+      return Row(
+        children: [
+          Expanded(
+            child: FilledButton(
+              onPressed: () => openLink(context, product.payhipUrl),
+              child: Text('Payhip — ${product.price}'),
+            ),
+          ),
+          const SizedBox(width: 10),
+          Expanded(
+            child: OutlinedButton(
+              onPressed: () => openLink(context, product.shopifyUrl),
+              child: const Text('Shopify'),
+            ),
+          ),
+        ],
+      );
+    }
+
+    final purchases = PurchasesScope.of(context);
+    final sellable = Purchases.sellable(
+      iapEnabled: content.iapEnabled,
+      iapId: product.iapId,
+      fulfillmentUrl: product.fulfillmentUrl,
+      storeReady: purchases.storeReady,
+    );
+    if (!sellable) return const SizedBox.shrink();
+
+    if (purchases.owns(product.iapId)) {
+      return SizedBox(
+        width: double.infinity,
+        child: FilledButton.icon(
+          icon: const Icon(Icons.download_outlined),
+          style: FilledButton.styleFrom(
+              backgroundColor: AppConfig.insightGreen),
+          onPressed: () => openLink(context, product.fulfillmentUrl),
+          label: const Text('Owned — open your download'),
+        ),
+      );
+    }
+
+    // Always show the STORE's localised price, never a hardcoded USD one.
+    final price = purchases.priceOf(product.iapId) ?? product.price;
+    return SizedBox(
+      width: double.infinity,
+      child: FilledButton(
+        onPressed: () => purchases.buy(product.iapId),
+        child: Text('Buy — $price'),
       ),
     );
   }

@@ -181,24 +181,72 @@ That last sentence pre-empts **Guideline 4.2 (Minimum Functionality)**, the othe
 likely rejection.
 
 ### 6e. Selling **inside** the app in the UK, Canada and Australia
-The region gate lets you *list* everywhere. It does not let you *sell in-app*
-where link-outs are banned. To do that you have exactly one compliant route:
 
-**Add in-app purchase** with the `in_app_purchase` package — sell the templates
-as non-consumable products, accept 15–30%. Compliant in every country. It is
-real work: products defined in both consoles, restore-purchases, receipt
-validation, and the app must then deliver the file itself rather than handing
-off to Payhip.
+In-app purchase is **built and wired**, sitting behind a switch that is off
+until you configure it. Nothing half-built can take a customer's money: a buy
+button only appears when all four are true — `iap_enabled` is on, the product
+has an `iap_id`, it has a `fulfillment_url`, and the store answered. That rule
+is unit-tested.
 
-**But you can already sell to those customers today** — through the web. A buyer
-in London or Toronto can open `analyticsbyshanikwa.com` or your Payhip store in
-a browser and buy at 0% platform fee. Nothing blocks that; the restriction is
-only on purchase links *inside the app*. Push those countries to the Sunday
-letter and the website, and let the app be a free funnel there.
+Turn it on in this order.
 
-**Recommendation:** ship the region gate now, watch where installs actually come
-from, and only build IAP if non-US demand proves it is worth 15–30% plus the
-engineering.
+**1. Host the four files somewhere the app can open.**
+This is the real prerequisite. Payhip download links are per-purchase, so they
+cannot be baked into the app. Put the four files at stable URLs — e.g.
+`analyticsbyshanikwa.com/app/files/scripture-memory-system.xlsx` — and paste
+each into `fulfillment_url` in `content.json`.
+
+*Honest caveat:* with no backend, those URLs are unlisted rather than secured.
+Anyone who has one can share it. For $15–20 templates that is the normal
+trade-off; if it ever matters, put them behind a signed-URL service.
+
+**2. Create the products in both consoles.** Use one id per product, identical
+on both platforms, reverse-DNS style:
+
+| Product | Suggested id |
+|---|---|
+| Scripture Memory System | `com.analyticsbyshanikwa.scripture_memory` |
+| Bible Timeline Spreadsheet | `com.analyticsbyshanikwa.bible_timeline` |
+| Career Pivot Suite Guide | `com.analyticsbyshanikwa.career_pivot` |
+| ADHD Life Planner Bundle | `com.analyticsbyshanikwa.adhd_planner` |
+
+- **App Store Connect** → your app → **In-App Purchases** → **+** →
+  **Non-Consumable**. Add a screenshot and a review note for each, or Apple
+  rejects the IAP itself, separately from the app.
+- **Play Console** → **Monetise** → **In-app products** → **Create**. Same ids.
+  Activate each one.
+
+Non-consumable is correct: a template is bought once and owned forever.
+
+**3. Put the ids in `content.json`** as `iap_id` on each product.
+
+**4. Flip `commerce.iap_enabled` to `true`, bump `version`, upload.**
+No app release — the switch is remote. The Shop tab reappears in the UK,
+Canada, Australia and the EU with native buy buttons, and everywhere prices are
+shown in the store's own localised currency, never a hardcoded USD figure.
+
+**5. Test before you trust it.** Sandbox on iOS (App Store Connect → Users and
+Access → Sandbox Testers) and a licence tester on Android. Buy, force-quit,
+reopen, and confirm the item still shows as owned; then delete the app,
+reinstall, and confirm **Restore purchases** brings it back.
+
+**What you keep:** 15% under the Small Business Program, so **$16.14** on a
+$18.99 sale versus $17.60 linking out in the US. Worth it to reach four
+countries you currently cannot sell to in-app.
+
+**And remember the free option:** a buyer in London or Toronto can already open
+`analyticsbyshanikwa.com` in a browser and buy at 0% fee today. The restriction
+is only on purchase links *inside* the app. IAP buys you conversion at the
+moment of interest; the web keeps the whole margin.
+
+---
+
+## 6f. What is not verified
+
+The IAP code compiles, passes its tests, and is inert on the web. It has **not**
+been exercised against a real store, because that needs a paid developer
+account, products created in both consoles, and a sandbox tester — none of which
+exist yet. Treat step 5 above as required, not optional.
 
 ---
 
