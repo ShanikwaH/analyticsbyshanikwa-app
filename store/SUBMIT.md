@@ -1,0 +1,195 @@
+# Submitting: the three things left, step by step
+
+Verified 2026-08-10. Everything technical is done — this is account work.
+
+**Do these in parallel, not in sequence.** Play's tester clock is the long pole,
+so start recruiting today even before you pay the $25.
+
+---
+
+# A · Microsoft Store — free, ~1 week
+
+### A1. Register (30 minutes, then a wait)
+
+1. Go to **storedeveloper.microsoft.com**. This is the **only** supported entry
+   point for the free individual flow — starting anywhere else can drop you into
+   the old company/paid path.
+2. Choose **Individual developer (free)**.
+3. Sign in with a **personal** Microsoft account (not a work/school account).
+   Use one you will still control in five years; the account owns the listing.
+4. **Identity verification:** government-issued ID + a selfie. Do this on your
+   phone, in good light, with the original document — not a photocopy or a photo
+   of a screen.
+5. Fill in profile details and check the auto-filled fields.
+6. **Wait up to 30 minutes** for verification to propagate. If app submission
+   isn't available yet, that's expected — wait and retry rather than redoing it.
+
+### A2. Reserve the name (5 minutes)
+
+7. In **Partner Center** → your app → **Product management → Manage app names**.
+8. Type `Analytics by Shanikwa` → **Check availability** → green tick →
+   **Reserve product name**.
+
+> The reserved name generates your package identity, and **that identity is
+> permanent once published.** If the exact name is taken, pick the variant you
+> can live with forever.
+
+### A3. Get the three identity values (5 minutes)
+
+9. **Product management → Product identity.** Copy these three:
+
+| Partner Center field | Goes into `pubspec.yaml → msix_config` |
+|---|---|
+| Package/Identity/Name | `identity_name` |
+| Package/Identity/Publisher (`CN=…`) | `publisher` |
+| Publisher display name | `publisher_display_name` |
+
+10. Paste them in, replacing the `REPLACE…` placeholders. **Character for
+    character, including case.** A mismatch is the most common MSIX rejection.
+
+### A4. Build and submit (20 minutes)
+
+```bash
+flutter build windows --dart-define=APP_NICHE=full
+dart run msix:create --store
+```
+
+11. Upload `build/windows/x64/runner/Release/analyticsbyshanikwa_app.msix`.
+12. Paste the listing from `store/LISTING.md` (Microsoft Store section).
+13. Add the **desktop** screenshots from `store/screenshots/desktop-*.png`.
+14. Category **Education → Reference**. Privacy policy URL. Submit.
+
+Review is usually days.
+
+**For every future update:** bump `msix_version` (it must increase, and the last
+digit must stay `0`), rebuild, re-upload. No certificate ever — Microsoft signs
+Store packages.
+
+---
+
+# B · Google Play — $25 once
+
+### B1. Register and verify (30 min, then hours to 2 business days)
+
+1. **play.google.com/console** → sign in.
+   **Choose this Google account carefully** — moving a Play listing between
+   accounts later is painful. Use one you will keep.
+2. Account type: **Personal**. No D-U-N-S number needed — that's organisations
+   only.
+3. Pay the **$25**. One-time, forever, all your apps, **non-refundable**.
+4. **Identity verification:** government ID, and possibly a selfie. Typically a
+   few hours, up to two business days.
+5. Complete the developer profile.
+
+> **Privacy point worth pausing on:** Play publishes a developer contact email on
+> your listing, and depending on account type may publish more. If you run this
+> from home, check exactly what becomes public before entering a home address.
+> A PO box or business address is worth setting up first if so.
+
+### B2. Create the app (20 minutes)
+
+6. **Create app** → name `Analytics by Shanikwa`, English (US), **App** (not
+   Game), **Free**.
+
+> "Free" is permanent — a free app can never be switched to paid. That's correct
+> here: the app is free and links out to your storefront.
+
+7. Work through **Dashboard → Set up your app**, using `store/LISTING.md`:
+   - Privacy policy: `https://analyticsbyshanikwa.com/privacy-policy.html`
+   - App access: **no login required** (true — there are no accounts)
+   - Ads: **No**
+   - Content rating questionnaire → expect **Everyone**
+   - Target audience: 13+ is the simple answer. Selecting under-13 pulls you
+     into Families policy and extra review — don't unless you mean it.
+   - **Data safety: no data collected.** Reasoning is in `store/LISTING.md`.
+   - Government app: No. Financial features: No.
+8. Store listing: short + full description, the four `phone-*.png` screenshots,
+   `play-feature-graphic-1024x500.png`, `play-icon-512.png`.
+
+### B3. Upload to CLOSED testing (15 minutes)
+
+9. **Testing → Closed testing → Create track.**
+10. Upload `build/app/outputs/bundle/release/app-release.aab`.
+11. **Accept Play App Signing** when prompted on the first upload. Google then
+    holds the distribution key and yours becomes an *upload* key — resettable
+    through support if it is ever lost. Do this.
+12. Verify the signer Google reports matches:
+    `BA:43:6E:2F:7E:EE:F6:DE:9B:B4:E0:78:26:D3:90:40:DF:2A:99:FB:C3:D4:6E:A3:6C:67:1E:D6:55:DA:2F:D2`
+
+> Do **not** upload straight to Production. A new personal account cannot get
+> production access without completing closed testing first.
+
+**Before you submit, read the ⚠ section at the end of `store/LISTING.md`** about
+Google's billing policy for the link-out shop. It is not the same rulebook as
+Apple's and it has not been verified for you.
+
+---
+
+# C · The 12 testers — start today, it gates everything
+
+### The actual rule
+
+- **12 testers minimum**, opted in and staying opted in for **14 continuous days**.
+- The clock starts only once the release is approved **and** 12 have opted in.
+- **All 12 must overlap.** One drops out on day 7 → **the counter resets to zero.**
+- Since **April 2026**, Google also rejects for weak *engagement*. Installing is
+  not enough — testers must actually open and use the app.
+- Real devices, real Google accounts. Emulators and duplicate accounts don't count.
+
+### C1. Recruit 16, not 12
+
+Two spare testers is the difference between 14 days and 28. Dropout is the
+single most common reason people redo this.
+
+Where yours realistically come from:
+- Family and friends with Android phones — the reliable core
+- Your church community — the natural fit for this app
+- TikTok and Pinterest followers — ask directly; "help me launch" converts well
+- The Sunday Letter list
+
+> Your Omnisend audience is very small right now, so don't plan around it.
+> Personal asks will do the work here.
+
+### C2. Set it up so it's manageable
+
+1. Create a **Google Group** (e.g. `abs-app-testers@googlegroups.com`) and add
+   testers to that, rather than pasting 16 addresses into Play. Then adding or
+   replacing someone doesn't mean editing the track.
+2. In Play: **Closed testing → Testers → add the group**.
+3. Copy the **opt-in link** Play generates. That link is the whole job for them.
+
+### C3. What to actually ask them
+
+Send this — short and specific beats enthusiastic and vague:
+
+> I'm launching an app and Google needs 12 testers for 14 days straight.
+> Three things:
+> 1. Tap this link on your Android phone and press **Become a tester**: [link]
+> 2. Install it from the Play link that appears.
+> 3. Open it for two minutes every day or two — play a game, read a story.
+>    Google checks that testers actually *use* it, not just install it.
+>
+> Please don't leave the test before [date]. If you drop out, my 14 days start
+> over. Thank you — genuinely.
+
+### C4. Track it
+
+- Play Console shows **opt-in count** but not engagement, so check in around day
+  3 and day 10 and ask people directly.
+- Put the end date in your calendar the day the twelfth person opts in.
+- On day 15: **Production → apply for production access.** Google asks how you
+  ran the test and what you learned — answer concretely, not with boilerplate.
+
+---
+
+# Realistic timeline
+
+| | Effort | Then waiting |
+|---|---|---|
+| Microsoft register → live | ~1 hour | days |
+| Play register → verified | ~30 min | hours – 2 days |
+| Play closed test | ~30 min | **14+ days**, plus recruiting |
+| Play production review | — | days |
+
+**Fastest path to a live store listing: Microsoft.** Fastest path to Android:
+start recruiting testers *today*, in parallel with everything else.
