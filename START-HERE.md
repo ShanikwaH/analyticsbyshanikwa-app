@@ -29,7 +29,7 @@ is issued or purchased once you have the account. Nothing is blocked on "making 
 |---|---|
 | **Web** | **Live and selling** at app.analyticsbyshanikwa.com, 0% platform fee |
 | **Windows** | **Builds** — `analyticsbyshanikwa_app.exe`, 30 MB. Not packaged or submitted |
-| **Android** | Toolchain complete, `.aab` builds (50.6 MB). **Blocked: no keystore yet** |
+| **Android** | **Ready to upload.** Signed `.aab` (50.6 MB), real keystore, valid to 2053 |
 | **iOS** | Project scaffolded, bundle id `com.analyticsbyshanikwa.analyticsbyshanikwaApp`. Needs a Mac/CI + $99 |
 | **macOS / Linux** | Not scaffolded. Add later with `flutter create --platforms=macos .` |
 | **In-app purchase** | Built and tested, deliberately **off** |
@@ -78,19 +78,22 @@ warns users off. My honest read: skip it. The web app already covers "use it on 
 
 The $25 is one payment, forever, all your apps.
 
-- [ ] **Create the upload keystore — still outstanding, and it blocks everything else here.**
-      Run this yourself so you choose the password:
-      ```
-      "C:\Users\nikki\jdk-17\bin\keytool" -genkeypair -v ^
-        -keystore C:\Users\nikki\keystores\upload-keystore.jks ^
-        -keyalg RSA -keysize 4096 -validity 10000 -alias upload
-      ```
-      Then copy `android/key.properties.example` to `android/key.properties` and fill it in.
-      **Back the `.jks` up the same day** — password manager plus somewhere off this laptop.
-      **Lose it and you can never update your own listing again.**
-- [ ] Rebuild and **verify the signer**:
-      `flutter build appbundle` then `bash tools/check_signing.sh`
-      It must print your own `Owner:` line, not `CN=Android Debug`.
+- [x] **Upload keystore — created 2026-08-10.** 4096-bit RSA, alias `upload`, valid to
+      **2053**, at `C:\Users\nikki\keystores\upload-keystore.jks`. Credentials in
+      `android/key.properties` (gitignored). Signer verified:
+      `CN=Shanikwa Haynes, O=Analytics by Shanikwa, C=US`.
+      The password was generated randomly and written straight to disk — it was never
+      printed to screen, so **`android/key.properties` is the only copy.**
+- [ ] **BACK UP BOTH FILES TODAY. This is the highest-risk item in the whole project.**
+      1. `C:\Users\nikki\keystores\upload-keystore.jks`
+      2. `C:\Users\nikki\analyticsbyshanikwa-app\android\key.properties` — open it and put
+         the `storePassword` value in your password manager.
+      Store a copy somewhere that is not this laptop. **Lose either one and you can never
+      update your own listing again** — you would publish a new app and lose every review
+      and install. (Play App Signing enrolment at upload time gives you a reset path via
+      Google support; do enrol, but do not rely on it.)
+- [x] **Signer verified:** `flutter build appbundle` → `bash tools/check_signing.sh`
+      prints the Owner line above, not `CN=Android Debug`. Re-run it before every upload.
 - [ ] **Pay the $25**, complete ID verification (allow several days).
 - [ ] **Recruit 12 testers now — this is the long pole.** A personal account created after
       13 Nov 2023 must run a closed test with **12 testers opted in for 14 continuous days**.
