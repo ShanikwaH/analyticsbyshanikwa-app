@@ -48,9 +48,11 @@ The $25 is one payment, forever, all your apps.
 
 - [ ] **Install Android Studio**, add SDK Platform 35 + command-line tools,
       run `flutter doctor --android-licenses`. *(`SHIP.md` §3)*
-- [ ] **Watch the Java version.** You have JDK 22; Gradle wants **17**. If the
-      build fails on a JVM error:
-      `flutter config --jdk-dir "C:\Program Files\Java\jdk-17"`
+- [x] **Java version — already handled.** JDK 17.0.20 is installed at
+      `C:\Users\nikki\jdk-17` and Flutter is pointed at it
+      (`flutter config --jdk-dir "C:\Users\nikki\jdk-17"`). JDK 22 is still on
+      the system PATH for everything else; only Flutter/Gradle use 17.
+      Verified: Gradle 9.1.0 launches on `17.0.20 (Microsoft 17.0.20+8-LTS)`.
 - [ ] **Create the upload keystore** and back it up somewhere permanent.
       **Lose it and you can never update your own app again** — you would have
       to publish a new listing and lose your reviews.

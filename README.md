@@ -1,6 +1,9 @@
 # Analytics by Shanikwa — Cross-Platform App
 
-One Flutter codebase → native **Windows, macOS, iOS, and Android** apps, in four brand builds:
+One Flutter codebase → **Web, iOS, Android, Windows, macOS**, in four brand builds.
+
+**Live now: [app.analyticsbyshanikwa.com](https://app.analyticsbyshanikwa.com)** — installable, works
+offline, sells today via link-out checkout at 0% platform fee.
 
 | Build | `APP_NICHE` | App name | Brand track |
 |---|---|---|---|
@@ -9,123 +12,216 @@ One Flutter codebase → native **Windows, macOS, iOS, and Android** apps, in fo
 | Data Analytics | `data` | Analytics by Shanikwa | Web |
 | Bible Stories | `bible` | Faithful Tales | Social (Purple/Lavender/Gold) |
 
-(The Data Portfolio tab was removed by design — the portfolio lives on the website; the app is the play-and-buy surface.)
+Each build shows only its niche's sections and leads with its niche's products.
 
-**Bundled free files (real, from Shanikwa's own catalog, in `assets/freebies/`):** Accounting Analytics Starter Kit (HTML), Accounting Analytics Skill Checker (HTML app), From Numbers to Decisions (HTML ebook), Personal Life OS (xlsx, 8 tabs incl. Debt Tracker + Payoff Timeline + Method Comparison). Listed in `content.json → bundled_files` and surfaced in the Free tab and Rewards Vault.
+## Status — verified 2026-08-10
 
-**Catalog policy: real products only.** The four products, prices, Payhip URLs, and cover images in `content.json` are pulled from the live shop (verified Aug 2026). The four free resources are the live, email-gated downloads on the site (delivered via the Omnisend-powered list — no Kit anywhere). To change the catalog, edit `content.json` and bump the remote version.
+| | State |
+|---|---|
+| **Web** | **Live and selling.** Deployed to GitHub Pages, custom domain, PWA-installable |
+| **Android** | Not started. $25 one-off |
+| **iOS** | Not started. $99/yr |
+| **In-app purchase** | Built and tested, deliberately **off** (`iap_enabled: false`) |
+| **Fulfilment worker** | Built and tested, **not deployed**. Refuses everything by default |
+| **Catalog** | 115 products live in the app, from the live Shopify/Payhip stores |
+| **Tests** | **33 Flutter + 40 worker, all passing** |
+| **App icon / privacy policy** | Done, all platforms |
 
-Each build shows only its niche's sections and leads with its niche's products, per the Sibling-Brand Track System.
+New here? Read **`START-HERE.md`** — the whole path to selling, in dependency order.
 
 ## What's inside
 
-- **Today** — this week's letter, daily **Stewardship Audit** (Proverbs 27:23, four questions, streaks), steward rank progress, newsletter join.
-- **Stories** — all 30 Bible stories across the three series, series filter, read tracking, deep links to full articles, cross-sell to Scripture Memory System / Bible Timeline.
-- **Play — the flagship tab.** Organized into four sections (Today & this week / Arcade — real games / Drills & decks / Records & rewards). The **Talents economy** (named for the parable):
-  - **Word Search** — 9×9 grid hiding six real niche terms (Bible names from the story catalog, accounting terms, data terms); **click/drag selection** like a real puzzle book — press a letter and drag along the word (snaps to straight lines, live highlight), with tap-first/tap-last kept as an accessibility fallback (+15 daily)
-  - **Memory Flip** — classic concentration, 8 themed pairs (+15 daily)
-  - **Number Slide** — the classic 3×3 sliding puzzle, always-solvable shuffle (+15 daily)
-  - **Letter Hunt** — hangman-style term guessing, six lives (+15 daily)
-  - **Tic-Tac-Toe** — vs a classic heuristic AI (win > block > center > corner); beat it for +15 daily
-  - **Follow the Pattern** — Simon-style memory: watch, repeat, sequence grows; round 5 pays +15 daily, best tracked
-  - **Coin Catch** — 30-second tap-reflex round; 15+ catches pays +15 daily, best tracked
-  - Both real-time games have a persisted **four-tier speed selector** (🐌 Gentle / 🐢 Relaxed / ⚖️ Standard / ⚡ Quick) — same +15 at every speed, with Coin Catch payout thresholds effort-normalized per tier (10/12/15/18 catches) so slower modes aren't quietly punished
-  - Coin Catch includes a two-stage **🎯 Find my speed** calibration (2×10s): round 1 probes at the standard 700ms hop for a provisional tier; round 2 re-measures at that tier's own hop and moves ±1 tier by catch-rate (≥80% up, ≤35% down, clamped). Fixes the understated-slow-player case — 3 catches at 700ms says nothing about 1300ms. If a confirmation round MOVES the tier, one more confirmation runs at the new tier (cap: 3 rounds/session), so even a two-tier miss lands in a single 🎯 session. Both stages are pure functions (`recommendCoinSpeed`, `refineCoinSpeed`), fully tested; no payout or best-score pollution in either stage
-  - Word Search placement is **guaranteed**: board-level retries plus a deterministic row fallback (`lib/games/word_search_gen.dart`, proven over 500 seeded boards in `flutter test`)
-  - **Daily Challenge** — one question a day, double reward (+20)
-  - **Weekly Quest** — 5 different activities in a calendar week → +75
-  - **Quiz decks** — Bible / Accounting & CPA / Data Analytics (+10 per first-time correct)
-  - **Ledger Lines** (accounting builds) — debit/credit true-false drill with why-explanations (+5 each)
-  - **Data Signals** (data builds) — statistics & SQL true-false drill (+5 each)
-  - **Scripture Memory** — word-rebuild game (+15 per verse mastered clean)
-  - **Lightning Round** — 60 seconds, all decks mixed, +2 per correct on the first run each day, all-time best score tracked
-  - **Story Match** — pair stories to their scripture references (+15 daily)
-  - **Order the Story** — arrange five real events in biblical order, from the curated `story_order` chronology (+15 daily)
-  - **Talents Ledger** — every earn posted with date, label, and running balance ("numbers tie, even here")
-  - **Steward's Badges** — 10 achievements, +25 each. **All ten badges pay exactly 250 Talents — a complete path to the reward.** Market it: "Earn every badge, earn the reward."
-  - **Number Crunch** — procedurally generated mental math (accounting equation & net income for accounting builds; means & ranges for data builds) — never runs out; first 5 correct per day pay +5 each
-  - **The Gauntlet** — 10 correct in a row, one miss ends the run; +30 first win each day, best streak tracked forever
-  - **Who Am I?** — 10 characters from the actual story catalog, 3 progressive clues each (+5 per solve)
-  - **Template Trivia** — every question is a real feature of a real product; every answer reveals the live listing (+5 each). The most honest ad format ever shipped.
-  - **Rewards Vault** — the full real catalog (live Payhip listings with real cover art + the four site freebies + the four bundled files) and the 250-Talent reward reveal
+- **Today** — this week's letter, daily **Stewardship Audit** (Proverbs 27:23, four questions,
+  streaks), steward rank progress, newsletter join.
+- **Stories** — 30 Bible stories across three series, series filter, read tracking, deep links,
+  cross-sell to Scripture Memory System / Bible Timeline.
+- **Play — the flagship tab.** Four sections (Today & this week / Arcade / Drills & decks /
+  Records & rewards), all paying into the **Talents economy** (named for the parable). 20+ games —
+  Word Search, Memory Flip, Number Slide, Letter Hunt, Tic-Tac-Toe, Follow the Pattern, Coin Catch,
+  Daily Challenge, Weekly Quest, quiz decks, Ledger Lines, Data Signals, Scripture Memory,
+  Lightning Round, Story Match, Order the Story, Number Crunch, The Gauntlet, Who Am I?,
+  Template Trivia, plus the Talents Ledger, Steward's Badges and Rewards Vault.
+  See **"Games worth knowing about"** below for the non-obvious ones.
+- **Shop** — Featured (the 4 hero products) + **All 115**, with search, category chips and a
+  Bundles filter. Dual Payhip/Shopify checkout in an in-app browser.
+- **Free** — the four real lead magnets.
+- **Remote content updates** — the app fetches `analyticsbyshanikwa.com/app/content.json` on launch;
+  a higher `version` replaces bundled content instantly, **no store re-release**.
 
-  The niche builds now play differently: accounting gets Ledger Lines, data gets Data Signals, bible gets the story games — same engine, distinct daily loops.
-- **Shop** — all four products with dual Payhip/Shopify checkout opening in an in-app browser (no Apple 30% cut, since checkout happens on the web).
-- **Free** — the four lead magnets, funneling to the email-gated site downloads.
-- **Remote content updates** — the app checks `analyticsbyshanikwa.com/app/content.json` on launch; a higher `version` number replaces bundled content instantly, no store re-release.
+All progress (Talents, streaks, audit journal) is stored **on-device only** — no accounts, no server,
+no privacy liability. That is a genuine App Store data-safety answer: *no data collected*.
 
-All progress (Talents, streaks, audit journal) is stored **on-device only** — no accounts, no server, no privacy liability.
+### Games worth knowing about
+
+- **Word Search** — 9×9 grid, six real niche terms. **Click-and-drag selection** like a real puzzle
+  book: press a letter and drag along the word (snaps to straight lines, live highlight), with
+  tap-first/tap-last as an accessibility fallback. The drag uses a custom eager-accept gesture
+  recognizer (`_BoardPanRecognizer`) so the surrounding scroll view cannot steal the gesture — that
+  bug made vertical words undraggable. Placement is **guaranteed** via board-level retries plus a
+  deterministic row fallback (`lib/games/word_search_gen.dart`, proven over 500 seeded boards).
+- **Coin Catch / Follow the Pattern** — persisted **four-tier speed selector**
+  (🐌 Gentle / 🐢 Relaxed / ⚖️ Standard / ⚡ Quick). Same +15 at every speed, with Coin Catch payout
+  thresholds effort-normalized per tier (10/12/15/18) so slower modes aren't quietly punished.
+- **🎯 Find my speed** — two-stage calibration (2×10s). Round 1 probes at the standard 700ms hop;
+  round 2 re-measures at that tier's own hop and moves ±1 tier by catch-rate. If round 2 *moves* the
+  tier, one more confirmation runs (cap: 3/session), so a two-tier miss still lands in one session.
+  Both stages are pure functions (`recommendCoinSpeed`, `refineCoinSpeed`), fully tested, with no
+  payout or best-score pollution.
+- **Steward's Badges** — 10 achievements, +25 each. **All ten pay exactly 250 Talents — a complete
+  path to the reward.** Market it: "Earn every badge, earn the reward."
+- **Template Trivia** — every question is a real feature of a real product; every answer reveals the
+  live listing. The most honest ad format ever shipped.
+
+The niche builds play differently: accounting gets Ledger Lines, data gets Data Signals, bible gets
+the story games — same engine, distinct daily loops.
+
+## Catalog policy: real products only
+
+Every product, price, URL and cover image in `content.json` comes from the **live** Shopify and
+Payhip stores. The four free resources are the live, email-gated downloads on the site (delivered via
+Omnisend — no Kit anywhere). Never add a product here that isn't really for sale.
+
+The 115-item catalog is generated by `tools/import_catalog.py`, which scores each product into a
+category (tags weighted 3×) and greedily assigns **one bundle zip per product**, aborting on
+duplicate IAP ids rather than shipping an ambiguous mapping.
+
+## How selling works, and why it's built this way
+
+Link-out earns **~$17.60** on a $18.99 sale; iOS IAP at the 15% Small Business rate earns $16.14. So
+the app links out **wherever the rules allow** and only falls back to IAP where they don't:
+
+- `commerce.link_out_regions` is currently `["US", "JP"]` — the US after the Epic injunction, Japan
+  since 2025-12-18 under the Mobile Software Competition Act (Apple charges 15% steering there).
+- Everywhere else, linking out is still a **Guideline 3.1.1** violation, so the Shop hides link-out
+  buttons entirely. `AppConfig.canLinkOut()` **fails closed** when the region is unknown.
+- **Web builds ignore all of this** — no store, no rules, no cut.
+- Both lists are remote-configurable: edit `content.json`, bump `version`, done. No app release.
+
+A product only ever shows a buy button when it can actually be delivered
+(`Purchases.sellable()` — needs `iap_enabled` **and** a non-empty `iap_id` **and** a
+`fulfillment_url`). **The app will never take money it cannot fulfil.**
+
+## Fulfilment worker (`worker/`)
+
+Paid downloads are served by a Cloudflare Worker backed by a **private** R2 bucket, so unlike a
+folder on a static host there is no public URL to leak.
+
+```
+POST /grant     { productId, platform, receipt }  -> { url, expiresIn: 300 }
+GET  /download?t=<token>                          -> the file
+```
+
+- Tokens are **HMAC-SHA256**, 5-minute TTL, verified in constant time before any JSON parsing.
+- The file key is **re-derived server-side** from the product id — a token cannot pin an old file,
+  and the client can never choose which file it gets.
+- `ENTITLEMENT_MODE` gates who may be granted a link: `disabled` (default — `/grant` returns 501),
+  `shared-secret` (sandbox testing only), or `stores` (real receipt validation).
+- **Real** Apple (ES256 JWT → App Store Server API, production→sandbox fallback, checks bundleId,
+  productId and `revocationDate`) and Google (RS256 JWT → OAuth → Android Publisher, requires
+  `purchaseState === 0`) verification in `worker/src/entitlement.js`.
+- **Everything fails closed.** Missing config, network error, malformed id or mismatch → denied.
+  There is no code path where an error grants a download.
+
+**Not yet proven:** no real Apple or Google receipt has ever been validated, because no developer
+account exists yet. The 40 tests use real ES256/RSA keys and a real R2 round-trip, but only the store
+HTTP responses are mocked. **Sandbox testing is required, not optional** — see `worker/GO-LIVE.md`.
 
 ## One-time setup
 
 1. Install Flutter (stable, **3.29 or newer**): https://docs.flutter.dev/get-started/install
-2. From inside this folder, generate the platform scaffolding (this adds `android/`, `ios/`, `windows/`, `macos/` without touching the existing `lib/` and `assets/`):
-
-```bash
-flutter create --org com.analyticsbyshanikwa --project-name analyticsbyshanikwa_app --platforms=android,ios,windows,macos .
-flutter pub get
-```
-
+2. `flutter pub get`
 3. Run it:
 
 ```bash
-flutter run                                   # all-in-one build on whatever device is connected
-flutter run --dart-define=APP_NICHE=bible     # Faithful Tales build
+flutter run -d chrome                          # web
+flutter run --dart-define=APP_NICHE=bible      # Faithful Tales build
 ```
+
+### Java / Gradle
+
+Android Gradle needs **JDK 17**, not 22. JDK 17.0.20 LTS is installed at `C:\Users\nikki\jdk-17` and
+Flutter is already pointed at it:
+
+```bash
+flutter config --jdk-dir "C:\Users\nikki\jdk-17"   # already done
+```
+
+JDK 22 remains the system default for everything else — only Flutter/Gradle use 17. Verified: Gradle
+9.1.0 launches on `17.0.20 (Microsoft 17.0.20+8-LTS)`.
 
 ## Building releases
 
 ```bash
-# Android (Play Store)
-flutter build appbundle --dart-define=APP_NICHE=full
-
-# iOS (App Store — requires a Mac + Xcode + Apple Developer account $99/yr)
-flutter build ipa --dart-define=APP_NICHE=full
-
-# Windows (Microsoft Store or direct .exe distribution)
+flutter build web --base-href /                       # web (what's deployed today)
+flutter build appbundle --dart-define=APP_NICHE=full  # Android (Play Store)
+flutter build ipa --dart-define=APP_NICHE=full        # iOS — needs a Mac; use Codemagic's free tier
 flutter build windows --dart-define=APP_NICHE=full
-
-# macOS
 flutter build macos --dart-define=APP_NICHE=full
 ```
 
-Repeat any command with `APP_NICHE=accounting`, `data`, or `bible` for the niche builds. In-app branding, colors, sections, and product ordering switch automatically. **Note:** if you ship multiple niche builds to the same store, each needs its own application ID (Android: `applicationId` in `android/app/build.gradle`; iOS: bundle identifier in Xcode) and its own store listing — set those once per niche after `flutter create`.
-
-App icons: generate per-niche icon sets with the `flutter_launcher_icons` package (add it to `dev_dependencies`, point it at a 1024×1024 PNG per niche — orb logo on brand gradient).
+Repeat with `APP_NICHE=accounting`, `data`, or `bible`. **If you ship multiple niche builds to the
+same store, each needs its own application ID and store listing.**
 
 ## Remote content updates (no re-release needed)
 
-1. Edit `remote/content.json` (same schema as the bundled file).
-2. **Bump the `"version"` number** — the app ignores files with an equal or lower version.
-3. Upload it to your site so it's reachable at:
-   `https://analyticsbyshanikwa.com/app/content.json`
-4. Every installed app picks it up on next launch (silent, offline-safe — failures fall back to cache, then bundled).
+1. Edit `remote/content.json`.
+2. **Bump `"version"`** — the app ignores files with an equal or lower version. Live is **v12**.
+3. Upload to `https://analyticsbyshanikwa.com/app/content.json`.
+4. Installed apps pick it up on next launch (silent, offline-safe: remote → cache → bundled).
 
-Use this to rotate `this_week`, add stories, change prices, add quiz questions, or add products.
+Use this to rotate `this_week`, add stories or products, change prices, or flip commerce flags.
+
+**Gotcha:** the CDN caches for ~10 minutes, and a remote file *without* a key overrides the bundled
+one that has it — that's how the Shop once showed "All 0". Always verify the live JSON after upload.
 
 ## Before you ship — launch checklist
 
-- [ ] **Reward at 250 Talents**: the app promises "a shop reward" at the Five Talents rank. Create a real discount code in Payhip **and** Shopify (e.g. `FIVETALENTS`) and add the code text to the reward card copy in `lib/screens/play_screen.dart` and `lib/screens/shop_screen.dart` — right now the copy is deliberately vague so nothing false ships.
-- [ ] Store listings: Apple rejects apps that are "just a website wrapper" — this app is safe because the games, audit journal, streaks, and offline story reader are native functionality, but lead your App Store description with those, not the shop.
-- [ ] Privacy policy URL (App Store + Play Store both require one): your existing `analyticsbyshanikwa.com/privacy-policy.html` works — confirm it mentions that the app stores progress locally and collects nothing.
-- [ ] Test the four niche builds once each (`flutter run --dart-define=...`).
-- [ ] Verses in the memory game are KJV (public domain) — if you ever swap in NIV/ESV text, licensing applies.
+- [ ] **Reward at 250 Talents**: the app promises "a shop reward". Create a real discount code in
+      Payhip **and** Shopify (e.g. `FIVETALENTS`) and put the code in the reward card copy in
+      `lib/screens/play_screen.dart` and `shop_screen.dart` — the copy is deliberately vague today so
+      nothing false ships.
+- [ ] Store listings: lead with the games, audit journal, streaks and offline reader — **not** the
+      shop. `SELLING.md` §6d has review notes that pre-empt the two likely rejections (3.1.1 external
+      links, 4.2 minimum functionality).
+- [ ] Data safety: **no data collected** — true, and a selling point. Category **Education**, not Games.
+- [ ] Privacy policy URL: `analyticsbyshanikwa.com/privacy-policy.html`, already mentions the app.
+- [ ] Test the four niche builds once each.
+- [ ] Verses are KJV (public domain). Swapping in NIV/ESV triggers licensing.
+- [ ] **Re-read Guideline 3.1.1 on the day you submit** — it changed twice in 18 months.
+
+## Documentation map
+
+| File | What it's for |
+|---|---|
+| **`START-HERE.md`** | The whole path to a sellable app, in dependency order. Start here. |
+| `SHIP.md` | Per-platform build and store-submission detail |
+| `SELLING.md` | Commercial side: pricing, fees, regions, App Store review notes |
+| `worker/GO-LIVE.md` | Exact steps to take real money, with a verification after each |
+| `worker/README.md` | Worker architecture and threat model |
+| `DEVICE_TEST_CHECKLIST.md` | Manual test pass before a release |
 
 ## Project map
 
 ```
 lib/
-  app_config.dart          # niche switch, two-track brand tokens, section lists
-  models.dart              # defensive JSON models
-  content_repository.dart  # bundled → cached → remote content loading
+  app_config.dart          # niche switch, brand tokens, canLinkOut() region gate
+  models.dart              # defensive JSON models incl. CatalogItem
+  content_repository.dart  # bundled -> cached -> remote content loading
   app_state.dart           # Talents economy, streaks, persistence
-  main.dart                # theme + app scope
-  widgets/common.dart      # link opener (in-app browser), chips, cards
-  screens/                 # today, stories, story detail, play (daily
-                           # challenge, quizzes, lightning, match, badges),
-                           # verse game, shop, resources, audit
-assets/content/content.json  # bundled content database (v1)
-remote/content.json          # copy to host at /app/content.json
+  main.dart                # PurchasesScope > AppScope > MaterialApp (scopes MUST sit
+                           # above MaterialApp or pushed routes can't reach them)
+  commerce/purchases.dart  # in_app_purchase service + sellable() safety gate
+  games/                   # word search generation, speed calibration
+  widgets/                 # common, BrandOrb, file_opener (web/io conditional import)
+  screens/                 # today, stories, play, shop, catalog, resources, audit, +20 games
+assets/content/content.json  # bundled content database
+remote/content.json          # copy hosted at /app/content.json (live: v12)
+tools/                       # catalog import, fulfilment packaging + publishing
+worker/                      # signed-download Cloudflare Worker (src, tests, runbook)
+test/                        # 33 Flutter tests
 ```
+
+**Branches:** source lives on **`source`**. `main` holds the deployed web build and is **public** —
+never commit paid inventory to it. `build/` and `worker/.staging/` are gitignored for that reason.
 
 — Built from real work. Not theory.
