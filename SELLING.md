@@ -190,15 +190,37 @@ is unit-tested.
 
 Turn it on in this order.
 
-**1. Host the four files somewhere the app can open.**
-This is the real prerequisite. Payhip download links are per-purchase, so they
-cannot be baked into the app. Put the four files at stable URLs — e.g.
-`analyticsbyshanikwa.com/app/files/scripture-memory-system.xlsx` — and paste
-each into `fulfillment_url` in `content.json`.
+**1. Publish the four files — one command.**
+The hosting is built. `analyticsbyshanikwa.com/app/files/` exists, is excluded
+in `robots.txt`, and there is a tool that does the whole step:
 
-*Honest caveat:* with no backend, those URLs are unlisted rather than secured.
-Anyone who has one can share it. For $15–20 templates that is the normal
-trade-off; if it ever matters, put them behind a signed-URL service.
+```
+cd analyticsbyshanikwa-app
+python tools/publish_fulfillment.py --list        # see what is still missing
+python tools/publish_fulfillment.py     p1="C:/path/Scripture Memory System.xlsx"     p2="C:/path/Bible Timeline Spreadsheet.xlsx"     p3="C:/path/Career Pivot Suite Guide.pdf"     p4="C:/path/ADHD Life Planner Bundle.pdf"
+```
+
+It copies each file under an unguessable slug (title + 16 random hex chars),
+writes the URL into `fulfillment_url` in both content files, and bumps the
+remote version. `--dry-run` shows what it would do. You can do one product at a
+time. Then commit and push the site repo.
+
+**I did not do this for you, on purpose.** I could not identify your four paid
+files with confidence — `downloads/` on the site holds the *free* resources, and
+two of the closest name matches (`ScriptureMemoryTracker`, `CareerPivotChecklist`)
+are the free f4 and f3, not the $18.99 and $19.99 products. Shipping a free
+tracker as a paid purchase would take someone's money and hand them the wrong
+thing, so it needs your eyes. The pipeline was tested end-to-end with a
+throwaway file and then reverted — nothing dummy is published.
+
+*Honest caveat, unchanged:* these are public URLs with unguessable names.
+GitHub Pages cannot send an `X-Robots-Tag` header, so `robots.txt` is the only
+crawl control and it is a request, not a wall. Anyone holding a link can pass it
+on. Normal for $15–20 templates. **Re-running the tool for a product mints a new
+slug and deletes the old file** — that is how you rotate a link that leaked. If
+it ever matters more than that, move the files behind a Cloudflare Worker that
+checks a store receipt and issues a short-lived signed URL; only
+`fulfillment_url` changes.
 
 **2. Create the products in both consoles.** Use one id per product, identical
 on both platforms, reverse-DNS style:
