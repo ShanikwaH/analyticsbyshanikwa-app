@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accounting Analytics Skill Checker — Analytics by Shanikwa</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1E3A5F; --blue:#2563EB; --sky:#DBEAFE; --lblue:#EAF2FF;
+  --green:#14532D; --sage:#16A34A; --mint:#DCFCE7;
+  --amber:#D97706; --gold:#FBBF24; --sand:#FEF3C7;
+  --coral:#F56400; --red:#DC2626;
+  --purple:#7C3AED; --lpurple:#EDE9FE;
+  --ink:#0F172A; --slate:#334155; --mid:#64748B; --border:#E2E8F0;
+  --paper:#F8FAFC; --white:#FFFFFF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--paper);color:var(--ink);min-height:100vh}
+
+/* SCREENS */
+.screen{display:none;min-height:100vh}
+.screen.active{display:flex;flex-direction:column}
+
+/* ─── WELCOME ─────────────────────────────────────────── */
+#s-welcome{
+  background: linear-gradient(145deg, #0D1B2E 0%, #1E3A5F 50%, #0C2240 100%);
+  align-items:center; justify-content:center;
+  padding:48px 24px; text-align:center; position:relative; overflow:hidden;
+}
+#s-welcome::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37,99,235,.25) 0%, transparent 70%);
+}
+#s-welcome::after{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+}
+.welcome-inner{position:relative;z-index:1;max-width:560px;width:100%}
+.w-badge{
+  display:inline-block;
+  background:rgba(251,191,36,.15);border:1px solid rgba(251,191,36,.3);
+  color:var(--gold);padding:6px 18px;border-radius:20px;
+  font-size:.72rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  margin-bottom:32px;
+}
+.w-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(2.4rem,8vw,4rem);font-weight:800;
+  color:#fff;line-height:1.05;margin-bottom:16px;
+  letter-spacing:-1px;
+}
+.w-title span{color:var(--gold)}
+.w-sub{
+  font-size:1rem;color:rgba(255,255,255,.6);
+  max-width:420px;margin:0 auto 40px;line-height:1.65;
+}
+.w-features{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:10px;margin-bottom:40px;text-align:left;
+}
+.w-feat{
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  padding:14px 16px;display:flex;align-items:flex-start;gap:10px;
+}
+.w-feat .ico{font-size:1.1rem;margin-top:1px;flex-shrink:0}
+.w-feat p{font-size:.8rem;color:rgba(255,255,255,.7);line-height:1.5}
+.w-feat strong{display:block;font-size:.85rem;color:#fff;font-weight:600;margin-bottom:2px}
+.start-btn{
+  background:linear-gradient(135deg,var(--gold),var(--amber));
+  color:var(--ink);border:none;padding:18px 48px;border-radius:14px;
+  font-size:1rem;font-weight:800;cursor:pointer;
+  font-family:'Syne',sans-serif;letter-spacing:-.3px;
+  box-shadow:0 8px 32px rgba(251,191,36,.35);
+  transition:transform .15s,box-shadow .15s;
+}
+.start-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(251,191,36,.45)}
+.w-footer{margin-top:28px;color:rgba(255,255,255,.3);font-size:.75rem}
+
+/* ─── QUIZ ────────────────────────────────────────────── */
+#s-quiz{background:var(--white)}
+.quiz-topbar{
+  background:var(--navy);padding:16px 28px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.qtb-brand{color:#fff;font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;opacity:.8}
+.qtb-right{display:flex;align-items:center;gap:16px}
+.progress-track{width:180px;height:5px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--amber));border-radius:10px;transition:width .4s ease}
+.progress-label{color:rgba(255,255,255,.5);font-size:.75rem;font-weight:600;white-space:nowrap}
+
+.quiz-scroll{flex:1;overflow-y:auto;padding:0}
+.section-block{padding:32px 28px 0}
+.sec-header{
+  background:var(--navy);border-radius:14px;
+  padding:16px 22px;margin-bottom:22px;
+  display:flex;align-items:center;gap:14px;
+}
+.sec-icon{width:42px;height:42px;border-radius:10px;background:rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.sec-meta .sec-num{font-size:.65rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:3px}
+.sec-meta .sec-title{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;color:#fff}
+
+.q-card{
+  background:var(--paper);border:2px solid var(--border);
+  border-radius:14px;padding:20px;margin-bottom:14px;
+  transition:border-color .2s,background .2s;
+}
+.q-card.answered{border-color:var(--sage);background:#F0FFF4}
+.q-text{font-size:.92rem;font-weight:500;color:var(--slate);margin-bottom:16px;line-height:1.55}
+.q-number{font-size:.7rem;font-weight:700;color:var(--mid);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.q-options{display:flex;gap:8px}
+.q-opt{
+  flex:1;padding:11px 14px;border:2px solid var(--border);
+  border-radius:10px;cursor:pointer;font-size:.85rem;
+  font-weight:600;text-align:center;transition:all .15s;
+  background:var(--white);color:var(--mid);
+}
+.q-opt:hover{border-color:var(--blue);background:var(--lblue);color:var(--navy)}
+.q-opt.sel-yes{border-color:var(--sage);background:var(--mint);color:var(--green)}
+.q-opt.sel-no{border-color:var(--red);background:#FEF2F2;color:var(--red)}
+
+.quiz-nav{
+  padding:16px 28px;background:var(--white);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;bottom:0;
+}
+.nav-info{font-size:.8rem;color:var(--mid);font-weight:500}
+.nav-btns{display:flex;gap:10px}
+.btn-nav{padding:10px 24px;border-radius:10px;font-size:.85rem;font-weight:700;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.btn-back{background:var(--paper);color:var(--mid)}
+.btn-next{background:var(--navy);color:#fff}
+.btn-next:disabled{background:var(--border);color:var(--mid);cursor:default}
+.btn-submit{background:linear-gradient(135deg,var(--sage),#15803d);color:#fff}
+
+/* ─── PROCESSING ─────────────────────────────────────── */
+#s-processing{
+  background:linear-gradient(145deg,var(--navy),#1d4ed8);
+  align-items:center;justify-content:center;text-align:center;padding:48px;
+}
+.proc-ring{
+  width:90px;height:90px;border-radius:50%;
+  border:4px solid rgba(255,255,255,.15);
+  border-top:4px solid var(--gold);
+  margin:0 auto 28px;
+  animation:spin 1.2s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proc-title{font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:#fff;margin-bottom:10px}
+.proc-sub{color:rgba(255,255,255,.5);font-size:.9rem;margin-bottom:32px}
+.proc-bar-wrap{width:280px;height:5px;background:rgba(255,255,255,.15);border-radius:10px;overflow:hidden;margin:0 auto}
+.proc-bar{height:100%;background:linear-gradient(90deg,var(--gold),var(--amber));animation:fill 2.5s ease forwards;width:0}
+@keyframes fill{to{width:100%}}
+
+/* ─── RESULTS ────────────────────────────────────────── */
+#s-results{background:var(--paper)}
+.results-hero{
+  padding:48px 28px 0;text-align:center;max-width:680px;margin:0 auto;
+}
+.level-badge{
+  display:inline-block;padding:8px 24px;border-radius:30px;
+  font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;
+  margin-bottom:20px;
+}
+.results-headline{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.4rem,4vw,2rem);font-weight:800;
+  color:var(--navy);margin-bottom:12px;line-height:1.25;
+}
+.results-sub{color:var(--mid);font-size:.9rem;line-height:1.65;max-width:500px;margin:0 auto 32px}
+
+/* Score ring */
+.score-ring-wrap{position:relative;width:110px;height:110px;margin:0 auto 36px}
+.score-ring-wrap svg{transform:rotate(-90deg)}
+.score-center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.score-big{font-family:'Syne',sans-serif;font-size:1.8rem;font-weight:800;color:var(--navy);line-height:1}
+.score-of{font-size:.65rem;color:var(--mid);font-weight:600}
+
+.results-body{max-width:680px;margin:0 auto;padding:0 28px 60px}
+.r-section{background:var(--white);border-radius:16px;border:1px solid var(--border);overflow:hidden;margin-bottom:18px;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.r-section-hdr{padding:14px 20px;display:flex;align-items:center;gap:10px;font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+.r-section-body{padding:4px 20px 18px}
+
+/* Score bars */
+.score-row{padding:10px 0;border-bottom:1px solid var(--border)}
+.score-row:last-child{border-bottom:none}
+.score-row-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}
+.score-row-name{font-size:.85rem;font-weight:600;color:var(--slate)}
+.score-row-val{font-size:.8rem;font-weight:800}
+.score-bar-bg{height:7px;background:var(--border);border-radius:10px;overflow:hidden}
+.score-bar-fill{height:100%;border-radius:10px;transition:width .8s ease}
+
+/* Gap items */
+.gap-item{display:flex;align-items:flex-start;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)}
+.gap-item:last-child{border-bottom:none}
+.gap-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.gap-text h4{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:3px}
+.gap-text p{font-size:.8rem;color:var(--mid);line-height:1.5}
+.gap-text .gap-link{font-size:.75rem;color:var(--blue);font-weight:600;margin-top:4px}
+
+/* Product recs */
+.prod-rec{display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px solid var(--border)}
+.prod-rec:last-child{border-bottom:none}
+.prod-icon{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.prod-info h4{font-size:.85rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.prod-info p{font-size:.75rem;color:var(--mid)}
+.prod-price{font-weight:800;color:var(--coral);font-size:.88rem;margin-left:auto;flex-shrink:0}
+
+/* Free steps */
+.free-step{display:flex;align-items:flex-start;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
+.free-step:last-child{border-bottom:none}
+.fs-n{width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:.8rem;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.fs-text{font-size:.85rem;color:var(--slate);line-height:1.5}
+
+/* CTA footer */
+.results-cta{
+  background:linear-gradient(135deg,var(--coral),#ea580c);
+  border-radius:16px;padding:28px;text-align:center;margin-top:20px;
+}
+.results-cta h3{color:#fff;font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:800;margin-bottom:8px}
+.results-cta p{color:rgba(255,255,255,.8);font-size:.85rem;margin-bottom:18px;line-height:1.55}
+.cta-btn{display:inline-block;background:#fff;color:var(--coral);padding:12px 28px;border-radius:10px;font-weight:800;font-size:.88rem;cursor:pointer;border:none;font-family:'Inter',sans-serif}
+.retake{display:block;text-align:center;margin-top:18px;background:none;border:2px solid var(--border);color:var(--mid);padding:10px 24px;border-radius:10px;font-size:.82rem;font-weight:600;cursor:pointer;font-family:'Inter',sans-serif}
+.retake:hover{border-color:var(--navy);color:var(--navy)}
+.results-footer{text-align:center;margin-top:24px;font-size:.73rem;color:var(--mid);line-height:1.9}
+
+@media(max-width:580px){
+  .w-features{grid-template-columns:1fr}
+  .quiz-topbar{flex-direction:column;gap:10px;padding:12px 20px}
+  .progress-track{width:240px}
+  .section-block{padding:20px 16px 0}
+  .quiz-nav{padding:14px 16px}
+  .results-hero{padding:36px 16px 0}
+  .results-body{padding:0 16px 40px}
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 1: WELCOME                                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="screen active" id="s-welcome">
+  <div class="welcome-inner">
+    <div class="w-badge">Analytics by Shanikwa · Free Tool</div>
+    <h1 class="w-title">Accounting Analytics<br><span>Skill Checker</span></h1>
+    <p class="w-sub">Answer 15 questions in 5 minutes. Get a personalized Skill Gap Report with your exact next steps — free, no signup required.</p>
+
+    <div class="w-features">
+      <div class="w-feat"><div class="ico">📊</div><div><strong>15 Questions</strong><p>Across 5 skill areas: Excel, SQL, Analytics, Portfolio, and CPA Track</p></div></div>
+      <div class="w-feat"><div class="ico">🎯</div><div><strong>4 Skill Levels</strong><p>Personalized result with your exact gaps identified</p></div></div>
+      <div class="w-feat"><div class="ico">🛠️</div><div><strong>Tool Recommendations</strong><p>Specific products matched to your level and gaps</p></div></div>
+      <div class="w-feat"><div class="ico">⚡</div><div><strong>Free Next Steps</strong><p>3 things you can do today at zero cost</p></div></div>
+    </div>
+
+    <button class="start-btn" onclick="startQuiz()">Start My Assessment →</button>
+    <div class="w-footer">Built by Nikki Haynes · MS Data Analytics (WGU) · BS Accounting (UMPI) · analyticsbyshanikwa.com</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 2: QUIZ                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s-quiz">
+  <div class="quiz-topbar">
+    <div class="qtb-brand">Analytics by Shanikwa</div>
+    <div class="qtb-right">
+      <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+      <div class="progress-label" id="prog-label">0 of 15</div>
+    </div>
+  </div>
+  <div class="quiz-scroll" id="quiz-body"></div>
+  <div class="quiz-nav">
+    <div class="nav-info" id="nav-info">Section 1 of 5</div>
+    <div class="nav-btns">
+      <button class="btn-nav btn-back" id="btn-back" onclick="prevSec()" style="display:none">← Back</button>
+      <button class="btn-nav btn-next" id="btn-next" onclick="nextSec()" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 3: PROCESSING                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s-processing">
+  <div class="proc-ring"></div>
+  <div class="proc-title">Analyzing your results…</div>
+  <div class="proc-sub">Building your personalized Skill Gap Report</div>
+  <div class="proc-bar-wrap"><div class="proc-bar"></div></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- SCREEN 4: RESULTS                                           -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="screen" id="s-results">
+  <div class="results-hero">
+    <div class="level-badge" id="level-badge">Level 1</div>
+    <h2 class="results-headline" id="results-headline">Your Skill Gap Report</h2>
+    <p class="results-sub" id="results-sub">Based on your 15 answers</p>
+    <div class="score-ring-wrap">
+      <svg width="110" height="110" viewBox="0 0 110 110">
+        <circle cx="55" cy="55" r="46" fill="none" stroke="#E2E8F0" stroke-width="9"/>
+        <circle cx="55" cy="55" r="46" fill="none" stroke-width="9"
+          stroke-linecap="round" id="score-arc"
+          stroke="#2563EB" stroke-dasharray="0 289"/>
+      </svg>
+      <div class="score-center">
+        <div class="score-big" id="score-big">0</div>
+        <div class="score-of">of 15</div>
+      </div>
+    </div>
+  </div>
+  <div class="results-body" id="results-body"></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────────────────
+// DATA
+// ─────────────────────────────────────────────────────────
+const SECTIONS = [
+  {
+    id: 'excel',
+    title: 'Excel & Financial Analysis',
+    icon: '📊',
+    color: '#1E3A5F',
+    questions: [
+      'Can you build a pivot table from scratch and explain what the output is showing to someone?',
+      'Have you used Excel to actually analyze financial data — not just enter or format numbers?',
+      'Can you write a SUMIFS formula that totals expenses for a specific department and time period?',
+    ]
+  },
+  {
+    id: 'sql',
+    title: 'SQL & Database Skills',
+    icon: '💻',
+    color: '#0E4429',
+    questions: [
+      'Have you ever written a SQL query — even a simple SELECT statement?',
+      'Can you explain what a JOIN does and give an accounting example of when you would use one?',
+      'Have you used any business intelligence tool — Power BI, Tableau, Looker, or similar?',
+    ]
+  },
+  {
+    id: 'analytics',
+    title: 'Accounting Analytics Application',
+    icon: '📈',
+    color: '#7C3AED',
+    questions: [
+      'Can you calculate AND interpret a current ratio without looking it up?',
+      'Have you done a budget vs. actual variance analysis and written up the findings in plain English?',
+      'Have you analyzed financial data to find an anomaly, error, or something unusual?',
+    ]
+  },
+  {
+    id: 'portfolio',
+    title: 'Career & Portfolio',
+    icon: '🗂️',
+    color: '#B45309',
+    questions: [
+      'Do you have a portfolio with at least one data or accounting project you could show an employer today?',
+      'Have you turned VITA experience or coursework into a specific, quantified resume bullet?',
+      'Do you know what FP&A stands for and what those analysts do day-to-day?',
+    ]
+  },
+  {
+    id: 'cpa',
+    title: 'CPA Track & Firm Tools',
+    icon: '🏛️',
+    color: '#0369A1',
+    questions: [
+      'Are you actively preparing for any CPA exam section right now?',
+      'Do you know which discipline section (BAR, ISC, or TCP) fits your career goals and why?',
+      'Can you name 3 tools Big Four firms use in audit analytics engagements?',
+    ]
+  }
+];
+
+const LEVEL_CONFIG = [
+  { // Level 1: 0-5
+    label: 'Level 1 — Starting Line',
+    color: '#DC2626', bg: '#FEF2F2',
+    headline: "You're at the Starting Line — and that's exactly where this path begins.",
+    sub: "You have accounting knowledge from coursework. The gap right now is practical tools and analytical application. Every resource in your report addresses that specific gap with achievable next steps.",
+    recs: [
+      { icon: '📊', name: 'SQL Query Library (Enhanced)', desc: '50+ copy-paste SQL queries — includes Beginner Path tab for ordered learning', price: '$9' },
+      { icon: '📈', name: 'Financial Ratio Calculator (Enhanced)', desc: 'Enter financials once, 25+ ratios calculate + Industry Benchmarks tab', price: '$9' },
+      { icon: '📚', name: 'CPA Exam Study Tracker (Enhanced)', desc: 'FAR + REG + AUD Topics, Study Hour Calculator, Score Improvement', price: '$11' },
+    ]
+  },
+  { // Level 2: 6-9
+    label: 'Level 2 — Foundation',
+    color: '#D97706', bg: '#FEF3C7',
+    headline: "You have a foundation — now you need structure and real practice.",
+    sub: "You know some tools and concepts. The gap is converting that knowledge into demonstrated, portfolio-ready skills. The resources below close that specific gap.",
+    recs: [
+      { icon: '🎯', name: 'Accounting Interview Prep (Enhanced)', desc: '50 Q&As + Technical Skills Demo + Salary Negotiation Scripts', price: '$12' },
+      { icon: '📄', name: 'Data Analyst Resume Template (Enhanced)', desc: 'ATS-optimized + LinkedIn Optimization + Interview Story Bank', price: '$12' },
+      { icon: '🏗️', name: 'No-Internship Portfolio Builder', desc: '5 complete projects with datasets, walkthroughs, and README templates', price: '$27' },
+    ]
+  },
+  { // Level 3: 10-12
+    label: 'Level 3 — Applied Skills',
+    color: '#2563EB', bg: '#EAF2FF',
+    headline: "You're further along than most — your gap is documented proof.",
+    sub: "You have real skills. The gap is portfolio evidence and strategic positioning. You need documentation and interview preparation to match your actual ability.",
+    recs: [
+      { icon: '📦', name: 'Bundle A — Data Analyst Starter Kit', desc: 'P1 + P2 + P3 + P6 Enhanced + NP01 + NP02 (6 tools, 30+ tabs)', price: '$35' },
+      { icon: '💼', name: 'Real-World Case Files', desc: '3 messy datasets with guided walkthroughs and portfolio write-up templates', price: '$29' },
+      { icon: '🗺️', name: 'CPA Track Reality Map', desc: 'Exam-to-tools mapping + 60-Day Parallel Plan (study + portfolio simultaneously)', price: '$21' },
+    ]
+  },
+  { // Level 4: 13-15
+    label: 'Level 4 — Advanced',
+    color: '#14532D', bg: '#DCFCE7',
+    headline: "You're advanced — your next step is specialization and positioning.",
+    sub: "Strong foundation across all five skill areas. Your next step is deepening in one specialization and positioning for analytics-forward accounting roles.",
+    recs: [
+      { icon: '🏆', name: 'Bundle C — Complete Career Kit', desc: 'All 17 tools — 7 enhanced + 10 new products — with 5 situation-specific roadmaps', price: '$75' },
+      { icon: '🔬', name: 'Real-World Case Files', desc: 'Three portfolio-grade case files with messy data, walkthroughs, and write-up templates', price: '$29' },
+      { icon: '🤖', name: 'Month-End Close Automation Kit', desc: 'Excel automation + 3 Python scripts — cut close time in half without IT', price: '$22' },
+    ]
+  }
+];
+
+const GAP_MAP = {
+  excel: {
+    title: 'Excel as an Analysis Engine',
+    desc: "You're using Excel as a calculator. The gap is pivot tables, SUMIFS, and structured tables for financial analysis.",
+    link: '→ Accountant\'s Excel Analytics Playbook ($19)'
+  },
+  sql: {
+    title: 'SQL for Accounting Work',
+    desc: "SQL appears on every accounting analytics job description. You can learn enough in 30 focused days.",
+    link: '→ SQL Query Library Enhanced ($9) · SQL for Accountants 30-Day Program ($24)'
+  },
+  analytics: {
+    title: 'Turning Numbers into Narratives',
+    desc: "You can calculate correctly but struggle to explain what results mean and recommend action.",
+    link: '→ Accounting Data Translator ($15)'
+  },
+  portfolio: {
+    title: 'Portfolio and Career Positioning',
+    desc: "You have skills but no documented evidence. Three portfolio projects changes your interview outcome.",
+    link: '→ No-Internship Portfolio Builder ($27)'
+  },
+  cpa: {
+    title: 'CPA Track & Firm Tools Alignment',
+    desc: "Connecting exam content to real firm tools creates a competitive advantage most candidates don't have.",
+    link: '→ CPA Track Reality Map ($21) · CPA Exam Study Tracker Enhanced ($11)'
+  }
+};
+
+const FREE_STEPS = [
+  "Watch: 'SQL for Accountants — Your First 10 Queries' free on YouTube · @AnalyticsByShaniwa",
+  "Download the free Accounting Analytics Starter Kit at analyticsbyshanikwa.com (this dashboard's freebie tab)",
+  "Create a free GitHub account → make a repository called 'accounting-analytics-portfolio' → add a README",
+  "Run this in DBeaver (free): SELECT * FROM any_table LIMIT 10; — your first SQL query on real data",
+  "Follow @AnalyticsByShaniwa on TikTok for daily 60-second accounting analytics tips",
+];
+
+// ─────────────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────────────
+let currentSec = 0;
+let answers = {}; // index (0-14) → true/false
+
+function qIndex(sec, q) { return sec * 3 + q; }
+function totalAnswered() { return Object.keys(answers).length; }
+
+// ─────────────────────────────────────────────────────────
+// RENDER QUIZ SECTION
+// ─────────────────────────────────────────────────────────
+function renderSection() {
+  const sec = SECTIONS[currentSec];
+  const body = document.getElementById('quiz-body');
+
+  const questionsHtml = sec.questions.map((q, qi) => {
+    const idx = qIndex(currentSec, qi);
+    const ans = answers[idx];
+    return `
+    <div class="q-card${ans !== undefined ? ' answered' : ''}" id="qcard-${idx}">
+      <div class="q-number">Question ${idx + 1} of 15</div>
+      <div class="q-text">${q}</div>
+      <div class="q-options">
+        <div class="q-opt${ans === true ? ' sel-yes' : ''}" onclick="selectAnswer(${idx}, true)">✓ Yes, I can do this</div>
+        <div class="q-opt${ans === false ? ' sel-no' : ''}" onclick="selectAnswer(${idx}, false)">✗ Not yet</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  body.innerHTML = `
+    <div class="section-block">
+      <div class="sec-header" style="background:${sec.color}">
+        <div class="sec-icon">${sec.icon}</div>
+        <div class="sec-meta">
+          <div class="sec-num">Section ${currentSec + 1} of 5</div>
+          <div class="sec-title">${sec.title}</div>
+        </div>
+      </div>
+      ${questionsHtml}
+      <div style="height:20px"></div>
+    </div>`;
+
+  // Update navigation
+  const isLast = currentSec === SECTIONS.length - 1;
+  const allAnswered = sec.questions.every((_, qi) => answers[qIndex(currentSec, qi)] !== undefined);
+
+  document.getElementById('btn-back').style.display = currentSec > 0 ? '' : 'none';
+  const btnNext = document.getElementById('btn-next');
+  btnNext.textContent = isLast ? 'Get My Report ✓' : 'Next →';
+  btnNext.className = 'btn-nav ' + (isLast ? 'btn-submit' : 'btn-next');
+  btnNext.disabled = !allAnswered;
+  document.getElementById('nav-info').textContent = `Section ${currentSec + 1} of 5 · ${SECTIONS[currentSec].title}`;
+
+  // Update progress
+  const answered = totalAnswered();
+  document.getElementById('prog-fill').style.width = (answered / 15 * 100) + '%';
+  document.getElementById('prog-label').textContent = `${answered} of 15`;
+}
+
+function selectAnswer(idx, val) {
+  answers[idx] = val;
+  renderSection();
+}
+
+// ─────────────────────────────────────────────────────────
+// NAVIGATION
+// ─────────────────────────────────────────────────────────
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() { showScreen('s-quiz'); renderSection(); }
+
+function prevSec() {
+  if (currentSec > 0) { currentSec--; renderSection(); document.querySelector('.quiz-scroll').scrollTop = 0; }
+}
+
+function nextSec() {
+  if (currentSec < SECTIONS.length - 1) {
+    currentSec++;
+    renderSection();
+    document.querySelector('.quiz-scroll').scrollTop = 0;
+  } else {
+    showScreen('s-processing');
+    setTimeout(buildResults, 2800);
+  }
+}
+
+// ─────────────────────────────────────────────────────────
+// BUILD RESULTS
+// ─────────────────────────────────────────────────────────
+function buildResults() {
+  const score = Object.values(answers).filter(v => v).length;
+  const pct = Math.round(score / 15 * 100);
+
+  // Level
+  const levelIdx = score <= 5 ? 0 : score <= 9 ? 1 : score <= 12 ? 2 : 3;
+  const lvl = LEVEL_CONFIG[levelIdx];
+
+  // Score ring
+  const circ = 2 * Math.PI * 46;
+  const filled = (pct / 100) * circ;
+  document.getElementById('score-arc').setAttribute('stroke-dasharray', `${filled} ${circ}`);
+  document.getElementById('score-arc').style.stroke = lvl.color;
+  document.getElementById('score-big').textContent = score;
+
+  // Level badge
+  const badge = document.getElementById('level-badge');
+  badge.textContent = lvl.label;
+  badge.style.background = lvl.bg;
+  badge.style.color = lvl.color;
+  document.getElementById('results-headline').textContent = lvl.headline;
+  document.getElementById('results-sub').textContent = lvl.sub;
+
+  // Section scores
+  const secScores = SECTIONS.map((sec, si) => {
+    const right = sec.questions.filter((_, qi) => answers[qIndex(si, qi)] === true).length;
+    return { id: sec.id, name: sec.title, score: right, pct: Math.round(right / 3 * 100) };
+  });
+
+  const weakSecs = secScores.filter(s => s.pct < 67).sort((a, b) => a.pct - b.pct);
+
+  // Section bar colors
+  function barColor(p) { return p >= 67 ? '#16A34A' : p >= 34 ? '#D97706' : '#DC2626'; }
+
+  // Build results HTML
+  document.getElementById('results-body').innerHTML = `
+
+    <!-- Section Scores -->
+    <div class="r-section" style="margin-top:24px">
+      <div class="r-section-hdr" style="background:${lvl.bg};color:${lvl.color}">
+        📊 Your Scores by Section
+      </div>
+      <div class="r-section-body">
+        ${secScores.map(s => `
+          <div class="score-row">
+            <div class="score-row-top">
+              <span class="score-row-name">${s.name}</span>
+              <span class="score-row-val" style="color:${barColor(s.pct)}">${s.score} / 3</span>
+            </div>
+            <div class="score-bar-bg">
+              <div class="score-bar-fill" style="width:${s.pct}%;background:${barColor(s.pct)}"></div>
+            </div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Gaps -->
+    ${weakSecs.length > 0 ? `
+    <div class="r-section">
+      <div class="r-section-hdr" style="background:#FEF2F2;color:#DC2626">
+        🎯 Your Top ${Math.min(weakSecs.length, 3)} Skill Gaps
+      </div>
+      <div class="r-section-body">
+        ${weakSecs.slice(0, 3).map(s => {
+          const g = GAP_MAP[s.id];
+          return g ? `
+          <div class="gap-item">
+            <div class="gap-dot" style="background:#DC2626"></div>
+            <div class="gap-text">
+              <h4>${g.title}</h4>
+              <p>${g.desc}</p>
+              <p class="gap-link">${g.link}</p>
+            </div>
+          </div>` : '';
+        }).join('')}
+      </div>
+    </div>` : ''}
+
+    <!-- Recommendations -->
+    <div class="r-section">
+      <div class="r-section-hdr" style="background:#FEF3C7;color:#D97706">
+        🛍️ Recommended for Your Level
+      </div>
+      <div class="r-section-body">
+        ${lvl.recs.map(r => `
+          <div class="prod-rec">
+            <div class="prod-icon" style="background:var(--lblue)">${r.icon}</div>
+            <div class="prod-info"><h4>${r.name}</h4><p>${r.desc}</p></div>
+            <div class="prod-price">${r.price}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- Free Steps -->
+    <div class="r-section">
+      <div class="r-section-hdr" style="background:var(--mint);color:var(--green)">
+        ✅ Free Next Steps — Start Today
+      </div>
+      <div class="r-section-body">
+        ${FREE_STEPS.map((s, i) => `
+          <div class="free-step">
+            <div class="fs-n">${i + 1}</div>
+            <div class="fs-text">${s}</div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="results-cta">
+      <h3>Shop All Tools at analyticsbyshanikwa.com</h3>
+      <p>Every tool is built from real WGU MSDA graduate projects and UMPI accounting coursework. Instant download. Works in Excel and Google Sheets.</p>
+      <button class="cta-btn" onclick="window.open('https://analyticsbyshanikwa.com','_blank')">Visit the Shop →</button>
+    </div>
+
+    <button class="retake" onclick="retake()">↩ Retake the Assessment</button>
+
+    <div class="results-footer">
+      Built by Nikki Haynes · MS Data Analytics (WGU) · BS Accounting (UMPI)<br>
+      AICPA & GSCPA Student Member · VITA Certified · CPA Track, Georgia<br>
+      <strong>analyticsbyshanikwa.com</strong> · @AnalyticsByShaniwa
+    </div>
+  `;
+
+  showScreen('s-results');
+}
+
+function retake() {
+  answers = {}; currentSec = 0;
+  showScreen('s-welcome');
+}
+</script>
+</body>
+</html>

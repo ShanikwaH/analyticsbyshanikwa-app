@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Accounting Analytics Starter Kit — Free Download · Analytics by Shanikwa</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:#1E3A5F; --blue:#2563EB; --sky:#DBEAFE; --lblue:#EAF2FF;
+  --green:#14532D; --sage:#16A34A; --mint:#DCFCE7;
+  --amber:#D97706; --sand:#FEF3C7; --gold:#FBBF24;
+  --coral:#F56400; --red:#DC2626;
+  --ink:#0D1117; --slate:#1E293B; --mid:#64748B; --muted:#94A3B8;
+  --border:#E2E8F0; --paper:#FAFAF8; --cream:#F5F4EF; --white:#FFFFFF;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+}
+
+/* PRINT BAR */
+.print-bar {
+  background: var(--navy); color: #fff;
+  padding: 10px 28px;
+  display: flex; align-items: center; justify-content: space-between;
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  font-size: .8rem;
+}
+.print-bar strong { font-weight: 700; }
+.print-btn {
+  background: var(--gold); color: var(--ink);
+  border: none; padding: 6px 18px; border-radius: 6px;
+  font-size: .78rem; font-weight: 700; cursor: pointer;
+}
+body { padding-top: 44px; }
+
+/* PAGES */
+.page {
+  max-width: 680px; margin: 0 auto;
+  background: var(--white);
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── COVER PAGE ─────────────────────────────────────── */
+.cover-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, #0D1B2E 0%, var(--navy) 55%, #0C2240 100%);
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  padding: 64px 56px;
+  color: #fff;
+}
+.cover-page::after {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 80% 20%, rgba(37,99,235,.2) 0%, transparent 60%);
+}
+.cov-top { position: relative; z-index: 1; }
+.cov-badge {
+  display: inline-block;
+  background: rgba(251,191,36,.15); border: 1px solid rgba(251,191,36,.35);
+  color: var(--gold); padding: 6px 16px; border-radius: 20px;
+  font-size: .7rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+  margin-bottom: 36px;
+}
+.cov-eyebrow { font-size: .8rem; font-weight: 600; opacity: .45; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+.cov-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 8vw, 4.5rem);
+  font-weight: 900; line-height: 1.05;
+  margin-bottom: 12px;
+}
+.cov-title em { color: var(--gold); font-style: italic; }
+.cov-sub {
+  font-size: 1rem; opacity: .6;
+  max-width: 440px; line-height: 1.65;
+  margin-bottom: 48px; font-style: italic;
+}
+.cov-promise-list {
+  display: flex; flex-direction: column; gap: 10px;
+  margin-bottom: 48px;
+}
+.cov-promise-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  font-size: .88rem; opacity: .8; line-height: 1.5;
+}
+.cov-promise-item .ico { color: var(--gold); font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+.cov-bottom { position: relative; z-index: 1; }
+.cov-author {
+  background: rgba(255,255,255,.07);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 14px; padding: 22px 28px;
+  max-width: 440px;
+}
+.cov-author-name { font-size: .98rem; font-weight: 700; margin-bottom: 8px; }
+.cov-author-creds { font-size: .74rem; opacity: .5; line-height: 2; letter-spacing: .3px; }
+
+/* ── INNER PAGES ─────────────────────────────────────── */
+.inner-page {
+  padding: 56px 56px;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+}
+.page-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 40px;
+}
+.page-num {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: .85rem; font-weight: 800; color: #fff; flex-shrink: 0;
+}
+.page-label { font-size: .7rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+
+.page-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 5vw, 2.6rem);
+  font-weight: 700; color: var(--navy);
+  line-height: 1.2; margin-bottom: 14px;
+}
+.page-lead {
+  font-size: .98rem; color: var(--mid);
+  border-left: 3px solid var(--amber);
+  padding-left: 18px; line-height: 1.7;
+  font-style: italic; margin-bottom: 36px;
+}
+.inner-page p { font-size: .92rem; line-height: 1.75; margin-bottom: 1.2rem; color: var(--slate); }
+.inner-page h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem; color: var(--navy);
+  margin: 2rem 0 .75rem;
+}
+strong { color: var(--navy); }
+
+/* Comparison table */
+.compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: .85rem; }
+.compare-table th { background: var(--navy); color: #fff; padding: 10px 14px; text-align: left; font-weight: 600; }
+.compare-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); }
+.compare-table tr:nth-child(even) td { background: var(--cream); }
+.td-old { color: var(--mid); font-style: italic; }
+.td-new { color: var(--green); font-weight: 600; }
+
+/* Assessment box */
+.assess-box {
+  background: var(--cream); border: 2px solid var(--border);
+  border-radius: 14px; padding: 24px; margin: 1.5rem 0;
+}
+.assess-box h3 { font-size: .95rem; font-family: 'IBM Plex Sans',sans-serif; font-weight: 700; color: var(--navy); margin-bottom: 18px; margin-top: 0; }
+.q-row {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.q-row:last-child { border-bottom: none; }
+.q-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--navy); color: #fff;
+  font-size: .74rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+}
+.q-text { font-size: .87rem; flex: 1; color: var(--slate); line-height: 1.5; padding-top: 2px; }
+.q-yn {
+  display: flex; gap: 6px; flex-shrink: 0;
+}
+.yn { padding: 3px 10px; border-radius: 20px; font-size: .7rem; font-weight: 700; border: 1.5px solid var(--border); color: var(--muted); cursor: default; }
+.score-key {
+  background: var(--sky); border-radius: 10px; padding: 14px 16px; margin-top: 14px;
+}
+.score-key h4 { font-size: .8rem; font-weight: 800; color: var(--navy); margin-bottom: 8px; }
+.sk-row { font-size: .8rem; color: var(--slate); padding: 3px 0; display: flex; gap: 8px; }
+.sk-row strong { color: var(--blue); min-width: 50px; }
+
+/* Tools */
+.tool-card {
+  background: var(--cream); border: 2px solid var(--border);
+  border-radius: 14px; padding: 20px; margin-bottom: 14px;
+  display: flex; gap: 16px;
+}
+.tool-icon { font-size: 2rem; flex-shrink: 0; margin-top: 2px; }
+.tool-body h4 { font-size: .92rem; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
+.tool-body p { font-size: .83rem; color: var(--mid); margin-bottom: 8px; line-height: 1.5; }
+.do-box { background: var(--sand); border-radius: 8px; padding: 10px 12px; }
+.do-label { font-size: .65rem; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--amber); margin-bottom: 4px; }
+.do-box p { font-size: .8rem; color: var(--slate); margin: 0; line-height: 1.5; }
+.gap-note { background: var(--mint); border-radius: 8px; padding: 8px 12px; margin-top: 8px; }
+.gap-note p { font-size: .78rem; color: var(--green); margin: 0; font-weight: 600; }
+
+/* 90-day plan */
+.plan-week {
+  border-left: 3px solid var(--blue);
+  padding-left: 18px; margin-bottom: 20px;
+}
+.plan-week .wk-badge {
+  font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
+  color: var(--blue); margin-bottom: 6px;
+}
+.plan-week h4 { font-size: .9rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.plan-week ul { list-style: none; }
+.plan-week ul li {
+  font-size: .83rem; color: var(--slate); padding: 3px 0;
+  padding-left: 14px; position: relative; line-height: 1.5;
+}
+.plan-week ul li::before { content: '→'; position: absolute; left: 0; color: var(--blue); font-weight: 700; }
+
+/* Tool grid */
+.tool-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1.2rem 0; }
+.tg-card {
+  background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+  border-radius: 10px; padding: 12px;
+}
+.tg-price { font-size: .75rem; font-weight: 800; color: var(--gold); margin-bottom: 3px; }
+.tg-name { font-size: .83rem; font-weight: 700; color: #fff; margin-bottom: 3px; line-height: 1.3; }
+.tg-desc { font-size: .72rem; color: rgba(255,255,255,.6); line-height: 1.4; }
+
+/* Final CTA */
+.final-page {
+  min-height: 100vh;
+  background: linear-gradient(160deg, var(--green) 0%, var(--sage) 100%);
+  padding: 64px 56px;
+  color: #fff;
+  display: flex; flex-direction: column; justify-content: space-between;
+}
+.cta-content { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+
+/* Callouts */
+.callout-tip {
+  background: var(--sand); border-left: 4px solid var(--amber);
+  border-radius: 0 10px 10px 0; padding: 16px 20px; margin: 1.2rem 0;
+}
+.callout-tip .tip-lbl { font-size: .68rem; font-weight: 800; text-transform: uppercase; letter-spacing: .8px; color: var(--amber); margin-bottom: 6px; }
+.callout-tip p { font-size: .87rem; color: var(--slate); margin: 0; line-height: 1.6; }
+
+/* Page footer line */
+.page-foot {
+  margin-top: auto; padding-top: 32px;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .72rem; color: var(--muted); border-top: 1px solid var(--border);
+}
+
+/* PRINT */
+@media print {
+  .print-bar { display: none; }
+  body { padding-top: 0; }
+  .page { margin-bottom: 0; page-break-after: always; }
+}
+@media (max-width: 600px) {
+  .cover-page, .inner-page, .final-page { padding: 40px 24px; }
+  .tool-grid { grid-template-columns: 1fr; }
+  .compare-table { font-size: .78rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="print-bar">
+  <div><strong>Analytics by Shanikwa</strong> · Accounting Analytics Starter Kit · Free</div>
+  <button class="print-btn" onclick="window.print()">⬇ Save as PDF</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- COVER PAGE                                                  -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page cover-page">
+  <div class="cov-top">
+    <div class="cov-badge">Free Download · Analytics by Shanikwa</div>
+    <div class="cov-eyebrow">The Quick-Start Guide for Accounting Students</div>
+    <h1 class="cov-title">The Accounting<br>Analytics<br><em>Starter Kit</em></h1>
+    <p class="cov-sub">5 things every accounting student needs to know about data analytics — and the one free tool to start with today</p>
+    <div class="cov-promise-list">
+      <div class="cov-promise-item"><span class="ico">📊</span>What accounting analytics actually is — and isn't</div>
+      <div class="cov-promise-item"><span class="ico">✅</span>A 5-question self-assessment to find your exact gap</div>
+      <div class="cov-promise-item"><span class="ico">🔧</span>3 free tools to start with — zero cost, start today</div>
+      <div class="cov-promise-item"><span class="ico">📅</span>A 90-day plan with specific weekly actions</div>
+      <div class="cov-promise-item"><span class="ico">🎯</span>Honest next steps based on where you actually are right now</div>
+    </div>
+  </div>
+  <div class="cov-bottom">
+    <div class="cov-author">
+      <div class="cov-author-name">Shanikwa "Nikki" Haynes</div>
+      <div class="cov-author-creds">
+        MS Data Analytics · Western Governors University<br>
+        BS Accounting · University of Maine at Presque Isle<br>
+        AICPA & GSCPA Student Member · VITA Certified Tax Preparer<br>
+        CPA Track, Georgia · analyticsbyshanikwa.com · @AnalyticsByShaniwa
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 2: WHAT IT ACTUALLY IS                                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page inner-page">
+  <div class="page-eyebrow">
+    <div class="page-num" style="background:var(--navy)">2</div>
+    <div class="page-label">The Reality Check</div>
+  </div>
+  <h2 class="page-title">This Is Not What Your Professor Told You</h2>
+  <p class="page-lead">Accounting analytics is not data science. It's not programming. It's using modern tools to do the same accounting work faster, deeper, and more clearly — so your findings actually influence decisions.</p>
+
+  <p>When I was finishing my accounting degree at UMPI, nobody told me that the firms recruiting on campus were looking for accountants who could write a SQL query or build a Power BI dashboard. I was at Allied Universal writing SQL against access control databases before I even knew what to formally call it. <strong>That gap — between what school teaches and what firms actually use — almost cost me.</strong> This guide is the thing I needed and couldn't find.</p>
+
+  <h3>What It IS vs. What People Think It Is</h3>
+  <table class="compare-table">
+    <thead><tr><th>What People Think It Is</th><th>What It Actually Is</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="td-old">Data science for accountants</td>
+        <td class="td-new">Excel used as an analysis engine, not a calculator</td>
+      </tr>
+      <tr>
+        <td class="td-old">Learning to code from scratch</td>
+        <td class="td-new">SQL to query financial databases — 10 queries to start</td>
+      </tr>
+      <tr>
+        <td class="td-old">Replacing accounting jobs</td>
+        <td class="td-new">Dashboards that tell the story behind the numbers</td>
+      </tr>
+      <tr>
+        <td class="td-old">A whole separate career</td>
+        <td class="td-new">Python to automate the repetitive month-end close work</td>
+      </tr>
+      <tr>
+        <td class="td-old">Something you need years to learn</td>
+        <td class="td-new">Skills learnable in 30–90 focused days with the right starting point</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout-tip">
+    <div class="tip-lbl">💡 The One Sentence That Changes Everything</div>
+    <p>A spreadsheet is a place to <strong>put</strong> data. An analysis engine is a place to <strong>ask questions of</strong> data. Same tool. Completely different mindset. That shift is the entire difference between a data entry accountant and a financial analyst.</p>
+  </div>
+
+  <div class="page-foot">
+    <span>Analytics by Shanikwa · Accounting Analytics Starter Kit</span>
+    <span>analyticsbyshanikwa.com · Free</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 3: SELF-ASSESSMENT                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page inner-page">
+  <div class="page-eyebrow">
+    <div class="page-num" style="background:var(--sage)">3</div>
+    <div class="page-label">Know Where You Stand</div>
+  </div>
+  <h2 class="page-title">Your Skills Right Now — And the Gap That Matters Most</h2>
+  <p class="page-lead">You have more than you think. The question is what's missing — and whether it's the gap that's costing you interviews or career progress right now.</p>
+
+  <div class="assess-box">
+    <h3>5-Question Skill Assessment — Circle Yes or No</h3>
+
+    <div class="q-row">
+      <div class="q-num">1</div>
+      <div class="q-text">Can you build a pivot table from scratch and explain what the output is showing to someone who doesn't know Excel?</div>
+      <div class="q-yn"><span class="yn">YES</span><span class="yn">NO</span></div>
+    </div>
+    <div class="q-row">
+      <div class="q-num">2</div>
+      <div class="q-text">Have you used Excel to actually analyze financial data — not just enter it or format it?</div>
+      <div class="q-yn"><span class="yn">YES</span><span class="yn">NO</span></div>
+    </div>
+    <div class="q-row">
+      <div class="q-num">3</div>
+      <div class="q-text">Do you know what a SQL query is — even if you've never written one yourself?</div>
+      <div class="q-yn"><span class="yn">YES</span><span class="yn">NO</span></div>
+    </div>
+    <div class="q-row">
+      <div class="q-num">4</div>
+      <div class="q-text">Can you explain a financial variance without using the phrases "it went up" or "it went down"?</div>
+      <div class="q-yn"><span class="yn">YES</span><span class="yn">NO</span></div>
+    </div>
+    <div class="q-row">
+      <div class="q-num">5</div>
+      <div class="q-text">Do you have at least one analysis, project, or report you built yourself that you could show an employer today?</div>
+      <div class="q-yn"><span class="yn">YES</span><span class="yn">NO</span></div>
+    </div>
+
+    <div class="score-key">
+      <h4>What Your Score Means</h4>
+      <div class="sk-row"><strong>0–1 YES:</strong>Your foundation needs building. Start with Excel analytics basics and SQL Query 1. Page 4 shows you exactly how.</div>
+      <div class="sk-row"><strong>2–3 YES:</strong>You have a foundation. Your gap is practical application. Build one portfolio project this month using the 90-day plan on page 5.</div>
+      <div class="sk-row"><strong>4–5 YES:</strong>You're ready to position and apply. Your gap is interview preparation and portfolio documentation — see analyticsbyshanikwa.com.</div>
+    </div>
+  </div>
+
+  <p style="font-size:.83rem;color:var(--mid);margin-top:8px">
+    <strong style="color:var(--navy)">Want the full 15-question assessment with a personalized Skill Gap Report?</strong><br>
+    Take the free Accounting Analytics Skill Checker — 5 minutes, no signup, personalized results with specific product recommendations for your exact level.
+  </p>
+
+  <div class="page-foot">
+    <span>Analytics by Shanikwa · Accounting Analytics Starter Kit</span>
+    <span>analyticsbyshanikwa.com · Free</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 4: 3 FREE TOOLS                                        -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page inner-page">
+  <div class="page-eyebrow">
+    <div class="page-num" style="background:var(--blue)">4</div>
+    <div class="page-label">Start Today</div>
+  </div>
+  <h2 class="page-title">3 Tools. $0 to Start. Real Skills in 30 Days.</h2>
+  <p class="page-lead">Everything you need to begin already exists for free. Here's what to use and exactly what to do on day one with each tool.</p>
+
+  <div class="tool-card">
+    <div class="tool-icon">📊</div>
+    <div class="tool-body">
+      <h4>Tool 1 — Microsoft Excel (or Google Sheets — free)</h4>
+      <p>You almost certainly have it. The question is whether you're using it as a calculator or an analysis engine. The difference is one mindset shift and three functions: pivot tables, SUMIFS, and structured tables.</p>
+      <div class="do-box">
+        <div class="do-label">✅ Do This Today — 20 Minutes</div>
+        <p>Find any company's income statement on SEC EDGAR (free at sec.gov/edgar). Paste it into Excel. Press <strong>Ctrl+T</strong> to make it a structured table. Build a pivot table summarizing revenue by year. You have just done financial data analysis.</p>
+      </div>
+      <div class="gap-note">
+        <p>What blocks most people: not knowing which question to ask the data. → The Accountant's Excel Analytics Playbook ($19) at analyticsbyshanikwa.com solves that.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-icon">💻</div>
+    <div class="tool-body">
+      <h4>Tool 2 — DBeaver (Free SQL Editor) + Sample Accounting Database</h4>
+      <p>DBeaver is a free database tool — download it at dbeaver.io in 5 minutes. Connect it to the free sample accounting database at github.com/ShanikwaH/WGU_Portfolio.</p>
+      <div class="do-box">
+        <div class="do-label">✅ Do This Today — 30 Minutes</div>
+        <p>Download DBeaver. Connect to the sample database. Type: <span style="font-family:'IBM Plex Mono',monospace;background:#F1F5F9;padding:2px 6px;border-radius:4px;font-size:.82rem">SELECT * FROM general_ledger LIMIT 100;</span> — hit run. You have just queried a financial database. That is SQL.</p>
+      </div>
+      <div class="gap-note">
+        <p>What blocks most people: they don't know what accounting questions to ask. → SQL Query Library ($9) has 50+ accounting-specific queries to copy and paste.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tool-card">
+    <div class="tool-icon">🐙</div>
+    <div class="tool-body">
+      <h4>Tool 3 — GitHub (Free Portfolio Hosting)</h4>
+      <p>GitHub is where you store and show your work. Every recruiter who receives your resume and wants to verify your skills will look here. If there's nothing, it doesn't help you. If there's documented work, it changes everything.</p>
+      <div class="do-box">
+        <div class="do-label">✅ Do This Today — 15 Minutes</div>
+        <p>Go to github.com. Create a free account. Create a repository called <strong>accounting-analytics-portfolio</strong>. Add a README that says who you are and what you're building. You now have a portfolio — empty, but it will not stay empty.</p>
+      </div>
+      <div class="gap-note">
+        <p>What blocks most people: not knowing what to put in it. → No-Internship Portfolio Builder ($27) gives you 5 complete projects with datasets, guides, and README templates.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-foot">
+    <span>Analytics by Shanikwa · Accounting Analytics Starter Kit</span>
+    <span>analyticsbyshanikwa.com · Free</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PAGE 5: 90-DAY PLAN + TOOLS GRID                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="page final-page">
+  <div class="cta-content">
+    <div style="margin-bottom:36px">
+      <div style="display:inline-block;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:rgba(255,255,255,.9);padding:5px 16px;border-radius:20px;font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:20px">Page 5 · Your Action Plan</div>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:#fff;line-height:1.15;margin-bottom:12px">Your 90-Day<br>Accounting Analytics Path</h2>
+      <p style="font-size:.92rem;color:rgba(255,255,255,.65);max-width:440px;line-height:1.65;margin-bottom:32px;font-style:italic">Consistency beats perfection. 30 minutes a day compounds into something real in 90 days — here is exactly what to do with that time.</p>
+    </div>
+
+    <div class="plan-week">
+      <div class="wk-badge">Days 1–14 · Foundation · 30 min/day</div>
+      <h4 style="color:#fff">Excel + SQL Basics</h4>
+      <ul>
+        <li style="color:rgba(255,255,255,.8)">Excel — convert one real dataset to a structured table, build one pivot table</li>
+        <li style="color:rgba(255,255,255,.8)">Excel — build your first financial chart (revenue trend or expense breakdown)</li>
+        <li style="color:rgba(255,255,255,.8)">SQL — download DBeaver, connect to sample database, run your first 5 queries</li>
+        <li style="color:rgba(255,255,255,.8)">SQL — document 5 more queries with one-sentence business context each</li>
+      </ul>
+    </div>
+
+    <div class="plan-week" style="border-left-color:rgba(255,255,255,.3)">
+      <div class="wk-badge" style="color:rgba(255,255,255,.5)">Days 15–45 · First Project · 45 min/day</div>
+      <h4 style="color:#fff">Build Your First Portfolio Project</h4>
+      <ul>
+        <li style="color:rgba(255,255,255,.8)">Find a public dataset from SEC EDGAR or Kaggle accounting data</li>
+        <li style="color:rgba(255,255,255,.8)">Define your business question before opening Excel</li>
+        <li style="color:rgba(255,255,255,.8)">Analyze, chart, write a 3-sentence business summary</li>
+        <li style="color:rgba(255,255,255,.8)">Upload to GitHub with a clear README</li>
+      </ul>
+    </div>
+
+    <div class="plan-week" style="border-left-color:rgba(255,255,255,.3)">
+      <div class="wk-badge" style="color:rgba(255,255,255,.5)">Days 46–90 · Apply · 45 min/day</div>
+      <h4 style="color:#fff">Two More Projects + Job Search</h4>
+      <ul>
+        <li style="color:rgba(255,255,255,.8)">Project 2: SQL analysis — 5 queries answering one accounting question</li>
+        <li style="color:rgba(255,255,255,.8)">Project 3: Financial dashboard in Excel</li>
+        <li style="color:rgba(255,255,255,.8)">Rewrite resume with 4–6 quantified bullets · Update LinkedIn</li>
+        <li style="color:rgba(255,255,255,.8)">Apply 3–5 roles/week · Follow up at day 10</li>
+      </ul>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:.78rem;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px">Tools That Make the 90 Days Faster</div>
+      <div class="tool-grid">
+        <div class="tg-card"><div class="tg-price">$9</div><div class="tg-name">SQL Query Library (Enhanced)</div><div class="tg-desc">50+ accounting-specific SQL queries</div></div>
+        <div class="tg-card"><div class="tg-price">$9</div><div class="tg-name">Financial Ratio Calculator</div><div class="tg-desc">25+ ratios + Industry Benchmarks</div></div>
+        <div class="tg-card"><div class="tg-price">$19</div><div class="tg-name">Excel Analytics Playbook</div><div class="tg-desc">5 modules + 4 templates + practice GL</div></div>
+        <div class="tg-card"><div class="tg-price">$27</div><div class="tg-name">No-Internship Portfolio Builder</div><div class="tg-desc">5 complete projects with datasets</div></div>
+        <div class="tg-card"><div class="tg-price">$12</div><div class="tg-name">Accounting Interview Prep</div><div class="tg-desc">50 Q&As + Salary Scripts</div></div>
+        <div class="tg-card"><div class="tg-price">$35–75</div><div class="tg-name">Bundles A, B, C</div><div class="tg-desc">Save 50–79% vs. individual tools</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15)">
+    <div style="font-size:.95rem;font-weight:700;color:#fff;margin-bottom:6px">analyticsbyshanikwa.com</div>
+    <div style="font-size:.75rem;color:rgba(255,255,255,.45);line-height:1.8">@AnalyticsByShaniwa on TikTok · YouTube · Instagram · Pinterest<br>Questions? Message me on any platform — I answer every one personally. — Nikki</div>
+    <div style="margin-top:10px;font-size:.7rem;color:rgba(255,255,255,.25)">Free to share · Not for resale · analyticsbyshanikwa.com</div>
+  </div>
+</div>
+
+</body>
+</html>
