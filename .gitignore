@@ -18,3 +18,4 @@ icon_src/compare.png
 worker/.staging/
 worker/node_modules/
 .wrangler/
+worker/.dev.vars
