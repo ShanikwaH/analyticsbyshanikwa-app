@@ -36,7 +36,7 @@ is issued or purchased once you have the account. Nothing is blocked on "making 
 | | State |
 |---|---|
 | **Web** | **Live and selling** at app.analyticsbyshanikwa.com, 0% platform fee |
-| **Windows** | **Builds** — `analyticsbyshanikwa_app.exe`, 30 MB. Not packaged or submitted |
+| **Windows** | **Submitted for certification 2026-08-11**, package 1.0.1.0, rated Everyone 3+ |
 | **Android** | **Ready to upload.** Signed `.aab` (50.6 MB), real keystore, valid to 2053 |
 | **iOS** | Project scaffolded, bundle id `com.analyticsbyshanikwa.analyticsbyshanikwaApp`. Needs a Mac/CI + $99 |
 | **macOS / Linux** | Not scaffolded. Add later with `flutter create --platforms=macos .` |

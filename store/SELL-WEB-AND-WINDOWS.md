@@ -66,6 +66,13 @@ change the catalog.
 
 # Phase 2 · Windows (Microsoft Store) — $0
 
+> **Status: SUBMITTED FOR CERTIFICATION on 2026-08-11**, package `1.0.1.0`.
+> Partner Center account registered (free), name reserved, IARC rating
+> **Everyone 3+**, listing and assets complete. Result emails
+> nikki.19972010@hotmail.com; certification usually takes a few days.
+> Everything below is the record of how it was done — useful for the next
+> update, since the same steps apply minus registration.
+
 Everything technical is done: the app builds, the icon and metadata are right,
 and `dart run msix:create --store` produces a 23 MB package. **Microsoft signs
 Store submissions**, so there is no certificate to buy.
