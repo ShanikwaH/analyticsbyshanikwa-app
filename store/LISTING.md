@@ -145,21 +145,50 @@ URL: `https://analyticsbyshanikwa.com/privacy-policy.html`
 Tick **Windows 10/11 Desktop only.** The package is x64 desktop; leaving Mobile,
 Xbox, Team or Mixed Reality ticked is a hard submission error.
 
+### Restricted capability justification  (paste into the runFullTrust box)
+Partner Center requires a written justification before it will approve
+`runFullTrust`. This is a required field, separate from Notes for certification.
+```
+Analytics by Shanikwa is a Flutter desktop application: a native Win32
+executable packaged as MSIX. runFullTrust is required because the app runs as a
+full-trust Win32 process rather than a UWP app, and the capability is declared
+automatically by the MSIX packaging tool (the Dart "msix" package).
+
+It is used only for ordinary desktop app behaviour:
+
+1. The Flutter engine renders natively via Direct3D/ANGLE, which requires
+   full-trust process execution.
+2. Storing the user's progress (game scores, streaks, and their daily audit
+   journal) in the application's own local data folder.
+3. Opening the user's default browser for product links, and opening the bundled
+   free resource files (HTML and spreadsheet) with the user's default
+   application.
+
+The app does not require or request elevation, does not install drivers or
+services, does not modify system settings, and writes nothing outside its own
+package and per-user app-data folder. It installs per-user and collects no
+personal data.
+```
+
+### Publishing hold options
+**"Publish as soon as it passes certification."** Nothing is tied to a launch
+date, and a manual hold is a step that is easy to forget.
+
 ### Microsoft certification notes  (paste into Notes for certification)
 ```
-This is a Flutter desktop application packaged as MSIX. The runFullTrust
-capability is required because the app is a standard Win32 executable running
-inside an MSIX container — it is declared automatically by the MSIX packaging
-tooling and is not used for any elevated or privileged behaviour.
+No account or login is required. All functionality is available immediately on
+first launch, and the app works fully offline.
 
-The app stores all data locally on the device, collects no user data, requires
-no account, and uses internetClient only to fetch its content file
-(analyticsbyshanikwa.com/app/content.json) and to open product links in the
-user's default browser.
+Where to find the main features:
+- Play tab: 20+ games including Word Search, Memory Flip, Number Slide,
+  Tic-Tac-Toe, and daily challenges.
+- Stories tab: 30 Bible stories, King James text.
+- Today tab: the daily Stewardship Audit and progress tracking.
+- Shop tab: a catalogue of spreadsheet templates. Selecting one opens the user's
+  browser at Payhip or Shopify; purchases are not made inside the app.
 
-Reviewer notes: no login is needed. All features are available immediately —
-20+ games under Play, 30 Bible stories under Stories, and a daily audit under
-Today. The app works fully offline.
+All user progress is stored locally on the device. The app makes one network
+request, to analyticsbyshanikwa.com, to fetch its content file.
 ```
 
 ---
