@@ -112,3 +112,48 @@ if __name__ == "__main__":
         path, size = fn()
         ok = "OK " if size == expect else "BAD"
         print(f"  {ok} {path.name}  {size[0]}x{size[1]}")
+
+
+def _brand_panel(w, h, orb_frac, title_size, sub_size, title_y_frac):
+    """Shared layout for the Microsoft Store logo images: brand gradient,
+    the circular orb, then the name. Sized by fraction so one layout serves
+    both the 9:16 poster and the 1:1 box art."""
+    img = horizontal_gradient(w, h, INDIGO, PLUM)
+    draw = ImageDraw.Draw(img)
+    size = int(min(w, h) * orb_frac)
+    orb, _, mask = circular_orb(size, (0, 0))
+    img.paste(orb, ((w - size) // 2, int(h * title_y_frac) - size - int(h * 0.06)), mask)
+
+    f_title = font(FONTS, title_size)
+    f_sub = font(FONTS_REG, sub_size)
+    for text, f, dy, fill in (
+        ("Analytics by Shanikwa", f_title, 0, WHITE),
+        ("Bible stories · games · templates", f_sub,
+         int(title_size * 1.35), (223, 220, 250)),
+    ):
+        tw = draw.textbbox((0, 0), text, font=f)[2]
+        draw.text(((w - tw) // 2, int(h * title_y_frac) + dy), text, font=f, fill=fill)
+    return img
+
+
+def poster_9x16():
+    """Main Store logo on Windows 10/11."""
+    img = _brand_panel(1440, 2160, 0.46, 96, 44, 0.62)
+    p = OUT / "ms-poster-9x16-1440x2160.png"
+    img.save(p)
+    return p, img.size
+
+
+def boxart_1x1():
+    """Fallback/secondary logo used in various Store layouts."""
+    img = _brand_panel(1080, 1080, 0.44, 74, 34, 0.66)
+    p = OUT / "ms-boxart-1x1-1080x1080.png"
+    img.save(p)
+    return p, img.size
+
+
+if True:
+    OUT.mkdir(parents=True, exist_ok=True)
+    for fn, expect in ((poster_9x16, (1440, 2160)), (boxart_1x1, (1080, 1080))):
+        path, size = fn()
+        print(f"  {'OK ' if size == expect else 'BAD'} {path.name}  {size[0]}x{size[1]}")
