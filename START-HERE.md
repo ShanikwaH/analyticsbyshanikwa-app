@@ -68,18 +68,19 @@ whether the app converts at all, which is the only honest basis for paying Apple
 Do this before Android. It is now **free**, there is no tester requirement, and it is the
 fastest way to have a real store listing.
 
-- [ ] **Open a Microsoft Partner Center account.** Individual registration fees were
-      dropped — it is $0, with identity verification (government ID + selfie) instead of a
-      credit card.
+- [x] **Partner Center account — registered 2026-08-11**, Individual (free), ID +
+      selfie verified. Name `Analytics by Shanikwa` reserved.
 - [x] **MSIX packaging configured and proven.** `msix_config` is in `pubspec.yaml` and
       `dart run msix:create --store` produces a **23 MB** `.msix` in
       `build/windows/x64/runner/Release/`. Confirmed: **Store mode needs no certificate** —
       Microsoft signs it.
-- [ ] **Fill in the three identity fields** in `pubspec.yaml → msix_config` from
-      Partner Center (Product → Product identity): `identity_name`,
-      `publisher` (`CN=…`), `publisher_display_name`. They must match **exactly** or the
-      upload is rejected. Then re-run `dart run msix:create --store` and upload.
-- [ ] Submit. Review is typically days, not weeks.
+- [x] **Identity fields filled** from Product identity and verified inside the
+      built package's `AppxManifest.xml`, not just in the config.
+- [x] **SUBMITTED FOR CERTIFICATION 2026-08-11**, package `1.0.1.0`,
+      IARC rating **Everyone 3+**. Result emails nikki.19972010@hotmail.com.
+      Gotchas hit along the way are recorded in `store/LISTING.md`: Desktop-only
+      device family, the runFullTrust justification and its silent 500-character
+      cap, and why the privacy question must be answered "Yes".
 
 **If you also want a plain downloadable `.exe`** from your own site: that is the one case
 where you'd buy an Authenticode certificate (~$200–400/yr). Without it Windows SmartScreen
