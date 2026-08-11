@@ -1,5 +1,6 @@
 import 'dart:ui' show PlatformDispatcher;
-import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/foundation.dart'
+    show defaultTargetPlatform, kIsWeb, TargetPlatform, visibleForTesting;
 import 'package:flutter/material.dart';
 
 /// Which niche this build targets. Set at build time:
@@ -105,12 +106,29 @@ class AppConfig {
   /// risking a violation.
   static bool canLinkOut(List<String> allowedRegions) {
     if (kIsWeb) return true; // store rules do not apply to the web build
+    if (!_regionGateApplies) return true;
     if (allowedRegions.isEmpty) return true; // nothing configured
     final region =
         PlatformDispatcher.instance.locale.countryCode?.toUpperCase();
     if (region == null || region.isEmpty) return false; // fail closed
     return allowedRegions.contains(region);
   }
+
+  /// Anti-steering rules are an **iOS and Android** phenomenon: Apple's
+  /// Guideline 3.1.1 and Google Play's payments policy. The Microsoft Store
+  /// imposes no such restriction, and a directly-distributed desktop build
+  /// answers to no store at all.
+  ///
+  /// Without this, a Windows user in the UK would see no Shop — the gate would
+  /// silently hide the storefront to satisfy a rule that does not apply to
+  /// them.
+  static bool get _regionGateApplies =>
+      defaultTargetPlatform == TargetPlatform.iOS ||
+      defaultTargetPlatform == TargetPlatform.android;
+
+  /// Exposed so tests can assert the desktop carve-out without faking a store.
+  @visibleForTesting
+  static bool get regionGateAppliesForTest => _regionGateApplies;
 
   static bool get isSocialTrack => niche == AppNiche.bible;
 

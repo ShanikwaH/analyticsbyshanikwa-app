@@ -3,6 +3,8 @@ import 'dart:io';
 
 import 'package:analyticsbyshanikwa_app/commerce/purchases.dart';
 import 'package:analyticsbyshanikwa_app/models.dart';
+import 'package:analyticsbyshanikwa_app/app_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -77,6 +79,41 @@ void main() {
       for (final p in content.products) {
         expect(p.payhipUrl, contains('utm_source=app'));
         expect(p.payhipUrl, contains('utm_content=${p.id}'));
+      }
+    });
+  });
+
+  // Regression: the link-out region gate exists for Apple's Guideline 3.1.1 and
+  // Google Play's payments policy. Applying it on desktop hid the Shop from,
+  // say, a Windows user in the UK - satisfying a rule that does not apply to
+  // them and costing the sale.
+  group('link-out region gate applies only to mobile stores', () {
+    final mobile = {TargetPlatform.iOS, TargetPlatform.android};
+
+    tearDown(() => debugDefaultTargetPlatformOverride = null);
+
+    test('desktop platforms always allow linking out, whatever the region', () {
+      for (final tp in [
+        TargetPlatform.windows,
+        TargetPlatform.macOS,
+        TargetPlatform.linux,
+      ]) {
+        debugDefaultTargetPlatformOverride = tp;
+        expect(AppConfig.regionGateAppliesForTest, isFalse, reason: '$tp');
+        // 'ZZ' can never match the host locale, so this assertion has teeth on
+        // any machine — without the desktop carve-out it returns false.
+        expect(
+          AppConfig.canLinkOut(const ['ZZ']),
+          isTrue,
+          reason: '$tp must show the Shop regardless of region',
+        );
+      }
+    });
+
+    test('mobile platforms still enforce the gate', () {
+      for (final tp in mobile) {
+        debugDefaultTargetPlatformOverride = tp;
+        expect(AppConfig.regionGateAppliesForTest, isTrue, reason: '$tp');
       }
     });
   });

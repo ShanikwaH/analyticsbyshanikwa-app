@@ -1,4 +1,12 @@
-# Selling this app everywhere — the whole path, in order
+# Selling this app — the whole path, in order
+
+> **Current plan (2026-08-11): Web + Windows only. No Mac, no iOS, no Android.**
+> Total cost **$0**. Follow **`store/SELL-WEB-AND-WINDOWS.md`** — that is the
+> live plan, and the web app already covers iPhone and Android users as an
+> installable PWA at 0% commission.
+>
+> The mobile phases below are kept for reference in case that changes. The
+> Android keystore and signed `.aab` are done and will keep.
 
 One page. `SHIP.md`, `SELLING.md` and `worker/GO-LIVE.md` are detail you only need
 when you reach that step.
