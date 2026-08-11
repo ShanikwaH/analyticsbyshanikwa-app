@@ -117,6 +117,27 @@ bible, christian, scripture, accounting, CPA, analytics, offline
 ### Category
 **Education** → sub-category **Reference**
 
+### Device family availability
+Tick **Windows 10/11 Desktop only.** The package is x64 desktop; leaving Mobile,
+Xbox, Team or Mixed Reality ticked is a hard submission error.
+
+### Microsoft certification notes  (paste into Notes for certification)
+```
+This is a Flutter desktop application packaged as MSIX. The runFullTrust
+capability is required because the app is a standard Win32 executable running
+inside an MSIX container — it is declared automatically by the MSIX packaging
+tooling and is not used for any elevated or privileged behaviour.
+
+The app stores all data locally on the device, collects no user data, requires
+no account, and uses internetClient only to fetch its content file
+(analyticsbyshanikwa.com/app/content.json) and to open product links in the
+user's default browser.
+
+Reviewer notes: no login is needed. All features are available immediately —
+20+ games under Play, 30 Bible stories under Stories, and a daily audit under
+Today. The app works fully offline.
+```
+
 ---
 
 # APP STORE (for Phase 3)

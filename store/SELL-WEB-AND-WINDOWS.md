@@ -114,7 +114,20 @@ dart run msix:create --store
     `https://analyticsbyshanikwa.com/privacy-policy.html`
 13. Submit. Review is usually days.
 
-### 2e. Every update
+### 2e. Two things Partner Center says on upload (both expected)
+
+**Error — "You must provide a package that supports each selected device
+family."** The package is x64 desktop only. In *Device family availability*,
+**uncheck everything except `Windows 10/11 Desktop`**. Xbox accepts x64 packages,
+but a Flutter Win32 app will not run there — leave it off.
+
+**Warning — "restricted capabilities require approval: runFullTrust."** Not a
+blocker. Every packaged Win32 desktop app declares it; it is how a traditional
+executable runs inside MSIX, and the MSIX tooling adds it automatically. Explain
+it in **Notes for certification** — text is in `store/LISTING.md` under
+*Microsoft certification notes*.
+
+### 2f. Every update
 Bump `msix_version` (must increase; last digit stays `0`), rebuild, re-upload.
 
 > **Do not** distribute a bare `.exe` from your site instead. That is the only
