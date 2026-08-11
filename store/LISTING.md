@@ -147,27 +147,23 @@ Xbox, Team or Mixed Reality ticked is a hard submission error.
 
 ### Restricted capability justification  (paste into the runFullTrust box)
 Partner Center requires a written justification before it will approve
-`runFullTrust`. This is a required field, separate from Notes for certification.
+`runFullTrust`. Separate required field from Notes for certification, and it is
+**length-limited** — the long version was rejected as too long on 2026-08-11.
+Use the longest of these that the box accepts.
+
+**532 characters:**
 ```
-Analytics by Shanikwa is a Flutter desktop application: a native Win32
-executable packaged as MSIX. runFullTrust is required because the app runs as a
-full-trust Win32 process rather than a UWP app, and the capability is declared
-automatically by the MSIX packaging tool (the Dart "msix" package).
+Flutter desktop app: a native Win32 executable packaged as MSIX. runFullTrust is required because it runs as a full-trust Win32 process rather than a UWP app, and is added automatically by the MSIX packaging tool. It is used only for native Direct3D rendering, storing user progress in the app's own data folder, and opening the user's default browser or file handler. The app never elevates, installs no drivers or services, changes no system settings, writes nothing outside its own app-data folder, and collects no personal data.
+```
 
-It is used only for ordinary desktop app behaviour:
+**288 characters:**
+```
+Flutter desktop app: a native Win32 executable packaged as MSIX, so it runs full-trust rather than as a UWP app. The capability is added automatically by the MSIX packaging tool. No elevation, no drivers or services, no system changes, and nothing written outside its own app-data folder.
+```
 
-1. The Flutter engine renders natively via Direct3D/ANGLE, which requires
-   full-trust process execution.
-2. Storing the user's progress (game scores, streaks, and their daily audit
-   journal) in the application's own local data folder.
-3. Opening the user's default browser for product links, and opening the bundled
-   free resource files (HTML and spreadsheet) with the user's default
-   application.
-
-The app does not require or request elevation, does not install drivers or
-services, does not modify system settings, and writes nothing outside its own
-package and per-user app-data folder. It installs per-user and collects no
-personal data.
+**189 characters:**
+```
+Native Win32 (Flutter) app packaged as MSIX; runFullTrust is required for full-trust execution and is added automatically by the packaging tool. No elevation, no drivers, no system changes.
 ```
 
 ### Publishing hold options
