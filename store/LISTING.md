@@ -149,11 +149,10 @@ Xbox, Team or Mixed Reality ticked is a hard submission error.
 Partner Center requires a written justification before it will approve
 `runFullTrust`. Separate required field from Notes for certification, and it is
 **length-limited** — the long version was rejected as too long on 2026-08-11.
-Use the longest of these that the box accepts.
-
-**532 characters:**
+**The field caps at exactly 500 characters and truncates silently** — a 532-char
+version was cut mid-sentence on 2026-08-11. Use this 468-char one:
 ```
-Flutter desktop app: a native Win32 executable packaged as MSIX. runFullTrust is required because it runs as a full-trust Win32 process rather than a UWP app, and is added automatically by the MSIX packaging tool. It is used only for native Direct3D rendering, storing user progress in the app's own data folder, and opening the user's default browser or file handler. The app never elevates, installs no drivers or services, changes no system settings, writes nothing outside its own app-data folder, and collects no personal data.
+Flutter desktop app: a native Win32 executable packaged as MSIX. runFullTrust is required because it runs full-trust rather than as a UWP app, and is added automatically by the MSIX packaging tool. It is used only for native Direct3D rendering, storing user progress in the app's own data folder, and opening the user's default browser or file handler. The app never elevates, installs no drivers or services, changes no system settings, and collects no personal data.
 ```
 
 **288 characters:**
