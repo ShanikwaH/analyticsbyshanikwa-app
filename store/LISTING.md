@@ -117,6 +117,30 @@ bible, christian, scripture, accounting, CPA, analytics, offline
 ### Category
 **Education** → sub-category **Reference**
 
+### Properties → privacy question
+**Answer "Yes, my product uses personal information."**
+
+Counter-intuitive, but correct. The question is capability-driven: the package
+declares `internetClient`, so Partner Center hard-requires a privacy policy URL,
+and answering "No" contradicts that and leaves the page permanently incomplete.
+It is also defensible on the merits — any outbound request carries an IP
+address, which is personal data under GDPR. The app makes exactly one, to fetch
+`content.json`, and section 10 of the privacy policy says so.
+
+This is **not** inconsistent with the Play data-safety answer below ("no data
+collected"). Play asks which specific data *types* are collected; the app
+collects none. Microsoft asks whether anything identifying could be transmitted.
+
+URL: `https://analyticsbyshanikwa.com/privacy-policy.html`
+(Section 10 covers the app — added 2026-08-11.)
+
+### Other Properties answers
+- Support address fields: **leave blank** — they publish on the listing.
+- System requirements: **all "Not specified"**. Marking Keyboard or Mouse as
+  minimum puts a hardware warning in front of touch users and blocks them from
+  reviewing.
+- Product declarations and Mixed Reality: leave unchecked.
+
 ### Device family availability
 Tick **Windows 10/11 Desktop only.** The package is x64 desktop; leaving Mobile,
 Xbox, Team or Mixed Reality ticked is a hard submission error.
