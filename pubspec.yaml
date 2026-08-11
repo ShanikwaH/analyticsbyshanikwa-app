@@ -32,15 +32,19 @@ dev_dependencies:
 #   dart run msix:create                 # test-signed, for local install only
 #   dart run msix:create --store         # the .msix you upload to Partner Center
 #
-# BEFORE SUBMITTING: replace publisher_display_name / identity_name / publisher
-# with the exact values Partner Center shows under Product > Product identity.
-# They must match character for character or the upload is rejected. Microsoft
-# signs the Store package, so no purchased certificate is needed.
+# identity_name / publisher / publisher_display_name are copied verbatim from
+# Partner Center > Product management > Product identity (2026-08-11). They must
+# match character for character or the upload is rejected. Not secrets: the
+# publisher CN appears in every published MSIX. Microsoft signs the Store
+# package, so no purchased certificate is needed.
+#
+# Bump msix_version for every submission. It must increase, and the last digit
+# must stay 0 - the Store reserves it.
 msix_config:
   display_name: Analytics by Shanikwa
   publisher_display_name: Analytics by Shanikwa
-  identity_name: REPLACE.WithPartnerCenterIdentityName
-  publisher: CN=REPLACE-WITH-PARTNER-CENTER-PUBLISHER-ID
+  identity_name: AnalyticsbyShanikwa.AnalyticsbyShanikwa
+  publisher: CN=82609663-1176-497C-A1B0-947A85A73EEF
   msix_version: 1.0.0.0
   logo_path: icon_src/icon_master.png
   capabilities: internetClient
