@@ -87,6 +87,11 @@ flutter:
   assets:
     - assets/brand/
     - assets/content/
+    # Inter, bundled. google_fonts loads matching files from this folder and,
+    # with allowRuntimeFetching disabled in main.dart, never contacts
+    # fonts.gstatic.com. That keeps the app's only network call our own
+    # content.json, and makes "works offline" true on first launch too.
+    - assets/google_fonts/
     # Was "assets/freebies/content.json" — that file does not exist, and a
     # declared-but-missing asset fails the build. The code loads freebies by
     # name at runtime (rootBundle.load('assets/freebies/${bundled.file}')),

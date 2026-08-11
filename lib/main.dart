@@ -13,6 +13,14 @@ import 'widgets/common.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Inter ships inside the app (assets/google_fonts/). Without this, the
+  // google_fonts package downloads it from fonts.gstatic.com on first launch,
+  // which hands the user's IP address to Google and makes the app's privacy
+  // claims and its "works offline" claim untrue. Bundled + disabled means the
+  // only server this app ever talks to is our own content.json.
+  GoogleFonts.config.allowRuntimeFetching = false;
+
   runApp(const AbsApp());
 }
 
