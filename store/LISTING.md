@@ -147,10 +147,12 @@ Xbox, Team or Mixed Reality ticked is a hard submission error.
 
 ### Restricted capability justification  (paste into the runFullTrust box)
 Partner Center requires a written justification before it will approve
-`runFullTrust`. Separate required field from Notes for certification, and it is
-**length-limited** — the long version was rejected as too long on 2026-08-11.
-**The field caps at exactly 500 characters and truncates silently** — a 532-char
-version was cut mid-sentence on 2026-08-11. Use this 468-char one:
+`runFullTrust`. It is a separate required field from Notes for certification.
+
+**The box caps at exactly 500 characters and truncates silently rather than
+warning you.** On 2026-08-11 a 532-character version was accepted by the form
+but stored cut off mid-sentence. Use this 468-character one, which fits and ends
+cleanly:
 ```
 Flutter desktop app: a native Win32 executable packaged as MSIX. runFullTrust is required because it runs full-trust rather than as a UWP app, and is added automatically by the MSIX packaging tool. It is used only for native Direct3D rendering, storing user progress in the app's own data folder, and opening the user's default browser or file handler. The app never elevates, installs no drivers or services, changes no system settings, and collects no personal data.
 ```
