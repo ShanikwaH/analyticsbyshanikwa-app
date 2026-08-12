@@ -65,6 +65,50 @@ Review is usually days.
 digit must stay `0`), rebuild, re-upload. No certificate ever — Microsoft signs
 Store packages.
 
+### A5. **DO THIS NEXT** — upload 1.0.2.0 once 1.0.1.0 clears certification
+
+1.0.1.0 was packaged before the Five Talents reward code existed, so it still
+shows the old "look for the reward note at checkout" line with no code. **The
+package that fixes it is already built and verified** — nothing needs building:
+
+```
+build/windows/x64/runner/Release/analyticsbyshanikwa_app.msix   (1.0.2.0)
+```
+
+**Why wait rather than replace it now:** Partner Center allows one submission in
+flight. Uploading now means cancelling 1.0.1.0 and restarting certification for
+no gain — reaching 250 Talents takes all ten badges, so nobody hits the stale
+copy in the meantime.
+
+**Trigger:** the certification result email to **nikki.19972010@hotmail.com**.
+
+**Steps (about two minutes):**
+
+1. Partner Center → the app → **Product → Submissions → New submission**.
+   Do *not* edit the in-flight one.
+2. **Packages** → remove 1.0.1.0, upload the `.msix` above. It should read
+   **1.0.2.0**. If it still says 1.0.1.0 you grabbed a stale file — rebuild with
+   `dart run msix:create --store`.
+3. Everything else — pricing, properties, age rating, listing — **carries over
+   from the last submission**. Don't retype it. Two things to eyeball, because
+   they are the ones that bit us the first time:
+   - **Device family: Desktop only.** Confirm it is still ticked.
+   - **`runFullTrust` justification** still filled in. That box silently
+     truncates at exactly 500 characters; the 468-char version that was accepted
+     is in `store/LISTING.md`. If it looks cut off mid-sentence, re-paste it.
+4. **Certification notes:** the reviewer needs to know what changed, or they
+   re-test from scratch:
+
+   > Copy-only update. The reward message on the Shop and Play screens now names
+   > the discount code (FIVETALENTS) that the previous build referred to without
+   > naming. No new features, permissions, or capabilities. Same device family
+   > (Desktop) and same age rating.
+
+5. **Submit.** Same review wait as before.
+
+**Verifying it took, after it goes live:** install from the Store, earn the
+badges or check the About screen version — it should read **1.0.2**.
+
 ---
 
 # B · Google Play — $25 once
