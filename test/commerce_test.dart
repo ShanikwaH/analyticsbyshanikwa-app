@@ -117,4 +117,36 @@ void main() {
       }
     });
   });
+
+  // The app tells anyone reaching 250 Talents that a reward is waiting. For a
+  // long time no code existed anywhere, so that promise was simply false.
+  // These lock the two halves together.
+  group('Five Talents reward', () {
+    late AppContent bundled, remote;
+
+    setUpAll(() {
+      bundled = AppContent.fromJson(jsonDecode(
+          File('assets/content/content.json').readAsStringSync()) as Map<String, dynamic>);
+      remote = AppContent.fromJson(jsonDecode(
+          File('remote/content.json').readAsStringSync()) as Map<String, dynamic>);
+    });
+
+    test('both content files configure the same real code', () {
+      for (final c in [bundled, remote]) {
+        expect(c.hasReward, isTrue,
+            reason: 'a reward must be configured, or the UI promises nothing');
+        expect(c.rewardCode, 'FIVETALENTS');
+        expect(c.rewardDescription, isNotEmpty);
+      }
+    });
+
+    test('an unconfigured reward reads as absent, so the UI stays quiet', () {
+      final none = AppContent.fromJson({'commerce': {}});
+      expect(none.hasReward, isFalse);
+      expect(none.rewardCode, isEmpty);
+      // Whitespace must not count as a configured code.
+      final blank = AppContent.fromJson({'commerce': {'reward_code': '   '}});
+      expect(blank.hasReward, isFalse);
+    });
+  });
 }

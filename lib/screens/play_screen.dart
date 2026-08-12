@@ -403,7 +403,9 @@ class PlayScreen extends StatelessWidget {
                             const SizedBox(height: 4),
                             Text(
                               t.rewardUnlocked
-                                  ? 'Reward unlocked — every download in one place.'
+                                  ? (scope.content.hasReward
+                                      ? 'Reward unlocked — code ${scope.content.rewardCode} at checkout.'
+                                      : 'Reward unlocked — every download in one place.')
                                   : '${t.talents} / 250 Talents · every download in one place. Earn every badge, earn the reward.',
                               style: const TextStyle(
                                   color: Colors.white,

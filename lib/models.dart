@@ -218,6 +218,19 @@ class AppContent {
   /// and fulfilment URLs exist.
   final bool iapEnabled;
 
+  /// The discount code earned at the Five Talents rank (250 Talents), and a
+  /// short description of what it gives. Both come from content.json so the
+  /// offer can be changed, or withdrawn, without shipping an app release.
+  ///
+  /// Empty `rewardCode` means no reward is configured — the UI must then stay
+  /// vague rather than promising something that does not exist. Getting this
+  /// wrong is worse than saying nothing: a player who earns all ten badges and
+  /// finds no code at checkout has been lied to by the app.
+  final String rewardCode;
+  final String rewardDescription;
+
+  bool get hasReward => rewardCode.isNotEmpty;
+
   AppContent.fromJson(Map<String, dynamic> j)
       : version = _i(j['version']),
         urls = (j['urls'] is Map)
@@ -265,7 +278,13 @@ class AppContent {
                 .toList()
             : const [],
         iapEnabled = (j['commerce'] is Map) &&
-            (j['commerce'] as Map)['iap_enabled'] == true;
+            (j['commerce'] as Map)['iap_enabled'] == true,
+        rewardCode = (j['commerce'] is Map)
+            ? _s((j['commerce'] as Map)['reward_code']).trim()
+            : '',
+        rewardDescription = (j['commerce'] is Map)
+            ? _s((j['commerce'] as Map)['reward_description']).trim()
+            : '';
 
   String url(String key) => urls[key] ?? 'https://analyticsbyshanikwa.com';
 }

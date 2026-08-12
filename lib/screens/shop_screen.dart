@@ -61,9 +61,14 @@ class ShopScreen extends StatelessWidget {
                 gradient: AppConfig.heroGradient,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Text(
-                '🏆 Five Talents rank reached — your shop reward is live. Look for the reward note at checkout.',
-                style: TextStyle(
+              child: Text(
+                // Only name a code when one is actually configured. Without
+                // this guard the app promises a reward that does not exist.
+                c.hasReward
+                    ? '🏆 Five Talents rank reached. Use code ${c.rewardCode} at '
+                        'checkout${c.rewardDescription.isEmpty ? '' : ' for ${c.rewardDescription}'}.'
+                    : '🏆 Five Talents rank reached — every download in one place.',
+                style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w600,
                     height: 1.4),
