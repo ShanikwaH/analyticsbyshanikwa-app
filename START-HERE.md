@@ -36,7 +36,7 @@ is issued or purchased once you have the account. Nothing is blocked on "making 
 | | State |
 |---|---|
 | **Web** | **Live and selling** at app.analyticsbyshanikwa.com, 0% platform fee |
-| **Windows** | **Submitted for certification 2026-08-11**, package 1.0.1.0, rated Everyone 3+. **1.0.2.0 built and waiting** — see below |
+| **Windows** | **LIVE on the Microsoft Store** — [9P0FQN3JFWRD](https://apps.microsoft.com/detail/9P0FQN3JFWRD). Passed cert 2026-08-12; 1.0.2.0 uploaded the same day |
 | **Android** | **Ready to upload.** Signed `.aab` (50.6 MB), real keystore, valid to 2053 |
 | **iOS** | Project scaffolded, bundle id `com.analyticsbyshanikwa.analyticsbyshanikwaApp`. Needs a Mac/CI + $99 |
 | **macOS / Linux** | Not scaffolded. Add later with `flutter create --platforms=macos .` |
@@ -81,22 +81,18 @@ fastest way to have a real store listing.
       Gotchas hit along the way are recorded in `store/LISTING.md`: Desktop-only
       device family, the runFullTrust justification and its silent 500-character
       cap, and why the privacy question must be answered "Yes".
-- [x] **1.0.2.0 built, verified, and waiting to upload.** 1.0.1.0 was packaged
-      *before* the Five Talents reward code existed, so it still shows the old
-      vague "look for the reward note at checkout" line. The web app is already
-      correct — it was rebuilt and redeployed with the fix. Windows needs a new
-      package, and 1.0.2.0 is it: verified by reading the compiled `data/app.so`
-      inside the built `.msix`, where the old string is gone and
-      `Five Talents rank reached. Use code ` is present (Dart stores literals
-      containing emoji or em dashes as UTF-16, so grep them that way, not ASCII).
-      Identity and version confirmed in `AppxManifest.xml`. 37 tests pass.
-
-      **When to upload it:** *after* 1.0.1.0 finishes certification. Partner
-      Center allows only one submission in flight — starting a new one now means
-      cancelling the current one and restarting the clock for no real gain.
-      Nobody can reach 250 Talents before then; it takes all ten badges.
-      Then: **Product → Submissions → New submission**, replace the package,
-      note "reward code copy fix" in the certification notes, submit.
+- [x] **PASSED CERTIFICATION 2026-08-12.** Live at
+      <https://apps.microsoft.com/detail/9P0FQN3JFWRD>.
+- [x] **1.0.2.0 uploaded the same day.** 1.0.1.0 was packaged *before* the Five
+      Talents reward code existed, so it showed the old vague "look for the
+      reward note at checkout" line. Verified before upload by reading the
+      compiled `data/app.so` inside the packed `.msix`: the old string is gone
+      and `Five Talents rank reached. Use code ` is present. **Dart stores
+      literals containing emoji or em dashes as UTF-16** — grep them that way,
+      not ASCII, or a correct build looks broken. 37 tests pass.
+- [x] **Store link published** on the site's `app.html`, and cross-linked from
+      the Windows & Mac install card. Partner Center's share link carries a
+      `?cid=DevShareMCLPCS` attribution parameter — strip it.
 
 **If you also want a plain downloadable `.exe`** from your own site: that is the one case
 where you'd buy an Authenticode certificate (~$200–400/yr). Without it Windows SmartScreen

@@ -65,7 +65,12 @@ Review is usually days.
 digit must stay `0`), rebuild, re-upload. No certificate ever — Microsoft signs
 Store packages.
 
-### A5. **DO THIS NEXT** — upload 1.0.2.0 once 1.0.1.0 clears certification
+### A5. ~~Upload 1.0.2.0 once 1.0.1.0 clears certification~~ — **DONE 2026-08-12**
+
+> Certification passed 2026-08-12 and 1.0.2.0 was uploaded the same day. Live at
+> <https://apps.microsoft.com/detail/9P0FQN3JFWRD>. Kept below because the
+> mechanics are the same for every future update.
+
 
 1.0.1.0 was packaged before the Five Talents reward code existed, so it still
 shows the old "look for the reward note at checkout" line with no code. **The
