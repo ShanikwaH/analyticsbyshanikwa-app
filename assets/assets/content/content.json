@@ -1520,7 +1520,10 @@
     ],
     "_note": "Storefronts where linking out of the app to buy digital goods is permitted. US: allowed with no commission after the Epic injunction. JP: allowed since 2025-12-18 under the Mobile Software Competition Act, but Apple charges a 15% steering commission. Everywhere else it is still a Guideline 3.1.1 violation, so the Shop is hidden there. Web builds ignore this entirely. Edit this list and bump version to change behaviour with no app release.",
     "iap_enabled": false,
-    "_iap_note": "Turn this on ONLY after: (1) each product has a non-empty iap_id matching a non-consumable created in App Store Connect AND Google Play Console, and (2) each has a fulfillment_url the app can open after purchase. Until both are set per product, that product shows no buy button — the app will never take money it cannot fulfil. Flip this flag and bump version to go live; no app release needed."
+    "_iap_note": "Turn this on ONLY after: (1) each product has a non-empty iap_id matching a non-consumable created in App Store Connect AND Google Play Console, and (2) each has a fulfillment_url the app can open after purchase. Until both are set per product, that product shows no buy button — the app will never take money it cannot fulfil. Flip this flag and bump version to go live; no app release needed.",
+    "reward_code": "FIVETALENTS",
+    "reward_description": "20% off anything in the shop",
+    "_reward_note": "Earned at the Five Talents rank (250 Talents = all ten badges). Live in BOTH stores as of 2026-08-11: Shopify discount 'Five Talents reward' and Payhip coupon FIVETALENTS, each 20% off the whole order, all customers, no expiry. Clear reward_code here to withdraw the offer - the app then stops naming a code instead of promising one that is gone."
   },
   "catalog": [
     {
