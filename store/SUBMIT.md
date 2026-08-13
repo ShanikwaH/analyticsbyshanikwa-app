@@ -114,6 +114,56 @@ copy in the meantime.
 **Verifying it took, after it goes live:** install from the Store, earn the
 badges or check the About screen version — it should read **1.0.2**.
 
+### A6. FAILED 2026-08-13 — policy 10.8.2, missing in-app-purchase declaration
+
+**This is not a code problem. Do not rebuild. Do not change the package.**
+
+Certification for 1.0.2.0 came back **"Attention needed"** on 08/13/2026:
+
+> **10.8.2 Third-Party In-Product Purchases** — In-Product Purchase Found In:
+> Shop – Payhip. Currently, your product is missing a required declaration.
+> • Product Description Page Declaration: Shop - Payhip
+
+**Why they are right:** the Shop screen links out to Payhip and Shopify, where
+the customer spends money. Even though the transaction happens outside the app
+and outside Microsoft's commerce system, Microsoft requires shoppers to be told
+*before* they click **Get**. The declaration renders as a small text notice
+under the Get button on the listing. It costs nothing and does not change the
+app's behaviour, its rating, or its price.
+
+**The fix — about three minutes, all in Partner Center:**
+
+1. Partner Center → the app → **Product → Submissions → New submission**.
+2. Go to **Properties**.
+3. Under **Product declarations**, tick:
+   **"This app allows users to make purchases, but does not use the Microsoft
+   Store commerce system"**
+4. **Packages: change nothing.** The 1.0.2.0 package carries over from the
+   failed submission. Re-uploading it is unnecessary and only risks grabbing a
+   stale file.
+5. Confirm the two fields that have bitten us before are still intact:
+   **Device family = Desktop only**, and the **`runFullTrust` justification**
+   (it silently truncates at 500 chars; the accepted 468-char text is in
+   `store/LISTING.md`).
+6. **Certification notes** — tell the reviewer exactly what changed, or they
+   re-test from scratch:
+
+   > Resubmission addressing policy 10.8.2. No code, package, or feature change
+   > — the same 1.0.2.0 package as the previous submission. The only change is
+   > in Properties: the product declaration "This app allows users to make
+   > purchases, but does not use the Microsoft Store commerce system" is now
+   > ticked, covering the Shop screen's links out to Payhip and Shopify.
+
+7. **Submit.**
+
+**Keep this ticked on every future submission.** The declaration lives on the
+submission, not on the product, so a future submission that leaves it unticked
+will fail 10.8.2 again. The only way it should ever come off is if the app stops
+linking out to paid products entirely.
+
+Reference:
+<https://docs.microsoft.com/en-us/windows/uwp/publish/product-declarations>
+
 ---
 
 # B · Google Play — $25 once

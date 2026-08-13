@@ -36,7 +36,7 @@ is issued or purchased once you have the account. Nothing is blocked on "making 
 | | State |
 |---|---|
 | **Web** | **Live and selling** at app.analyticsbyshanikwa.com, 0% platform fee |
-| **Windows** | **LIVE on the Microsoft Store** — [9P0FQN3JFWRD](https://apps.microsoft.com/detail/9P0FQN3JFWRD). Passed cert 2026-08-12; 1.0.2.0 uploaded the same day |
+| **Windows** | **LIVE on the Microsoft Store** — [9P0FQN3JFWRD](https://apps.microsoft.com/detail/9P0FQN3JFWRD), serving 1.0.1.0. The 1.0.2.0 update **failed cert 2026-08-13** on policy 10.8.2 — a missing Properties checkbox, not a code fault. Fix: `store/SUBMIT.md` **A6** |
 | **Android** | **Ready to upload.** Signed `.aab` (50.6 MB), real keystore, valid to 2053 |
 | **iOS** | Project scaffolded, bundle id `com.analyticsbyshanikwa.analyticsbyshanikwaApp`. Needs a Mac/CI + $99 |
 | **macOS / Linux** | Not scaffolded. Add later with `flutter create --platforms=macos .` |
@@ -90,6 +90,15 @@ fastest way to have a real store listing.
       and `Five Talents rank reached. Use code ` is present. **Dart stores
       literals containing emoji or em dashes as UTF-16** — grep them that way,
       not ASCII, or a correct build looks broken. 37 tests pass.
+- [ ] **1.0.2.0 FAILED CERTIFICATION 2026-08-13 — policy 10.8.2.** Not a code
+      fault; nothing to rebuild. The Shop screen links out to Payhip/Shopify,
+      so Microsoft requires the listing to declare purchases that bypass its
+      commerce system. Fix is one checkbox in a new submission's **Properties**:
+      *"This app allows users to make purchases, but does not use the Microsoft
+      Store commerce system."* Full steps: `store/SUBMIT.md` **A6**.
+      **Keep it ticked on every future submission** — it lives on the
+      submission, not the product. The live listing is unaffected and still
+      serves 1.0.1.0.
 - [x] **Store link published** on the site's `app.html`, and cross-linked from
       the Windows & Mac install card. Partner Center's share link carries a
       `?cid=DevShareMCLPCS` attribution parameter — strip it.

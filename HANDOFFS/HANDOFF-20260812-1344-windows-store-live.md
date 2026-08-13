@@ -32,8 +32,10 @@ deliberately parked. The authoritative plan is
 
 - **Certification passed 2026-08-12** for package `1.0.1.0`. That is what the
   listing serves today.
-- **`1.0.2.0` was uploaded the same day and is STILL IN CERTIFICATION.** This is
-  the only open item. See *Next steps*.
+- **`1.0.2.0` FAILED certification 2026-08-13 on policy 10.8.2.** Not a code
+  fault — the listing needs a Properties checkbox declaring the Shop screen's
+  link-out purchases. Fix and rationale: `store\SUBMIT.md` **A6**. The live
+  listing is unaffected. This is the only open item.
 - **37 Flutter tests pass** (`flutter test`, run 2026-08-12).
 - **Store URL published in 3 places**, each verified after publishing:
   1. Site `app.html` — badge section `#windows` + cross-link from the
@@ -185,15 +187,15 @@ These each cost real time. Read before acting.
 
 Ordered. Item 1 is the only thing actually pending; the rest are event-driven.
 
-1. **Wait for the 1.0.2.0 certification result email** to
-   `nikki.19972010@hotmail.com`. There is **no way to poll this** — no
-   Outlook/Hotmail MCP is connected, and Partner Center needs her login.
-   Nikki must say so.
-   - **If it passes:** nothing to do. The listing updates itself and the
-     reward-code copy becomes correct. Update `START-HERE.md` and the memory
-     file `project_windows_store_1_0_2.md`.
-   - **If it fails:** ask her to forward the report, then fix and resubmit
-     using `store\SUBMIT.md` **A5**.
+1. **Resubmit 1.0.2.0 with the 10.8.2 declaration ticked.** It failed
+   certification 2026-08-13. **Nikki must do this herself** — it is all
+   Partner Center account work behind her login, and no MCP reaches it.
+   New submission → **Properties → Product declarations** → tick *"This app
+   allows users to make purchases, but does not use the Microsoft Store
+   commerce system"* → leave the package alone → submit. Full steps and the
+   certification-notes text: `store\SUBMIT.md` **A6**.
+   Then wait on the result email to `nikki.19972010@hotmail.com` — **no way to
+   poll it** here. If it fails again, ask her to forward the report.
 2. **Only when she reports a first real subscriber** (anyone other than
    `nikki.19972010@gmail.com`): revisit Sunday Letter scheduling. Not before.
 3. **Optional, unprompted — do not start without asking:** Medium's full About
