@@ -114,7 +114,12 @@ copy in the meantime.
 **Verifying it took, after it goes live:** install from the Store, earn the
 badges or check the About screen version — it should read **1.0.2**.
 
-### A6. FAILED 2026-08-13 — policy 10.8.2, missing in-app-purchase declaration
+### A6. ~~FAILED 2026-08-13 — policy 10.8.2, missing in-app-purchase declaration~~ — **RESUBMITTED 2026-08-13**
+
+> Nikki ticked the declaration and resubmitted the same day. **Awaiting the
+> certification result.** Kept in full below because the declaration must be
+> re-ticked on every future submission — see the note at the end.
+
 
 **This is not a code problem. Do not rebuild. Do not change the package.**
 
