@@ -169,7 +169,7 @@ linking out to paid products entirely.
 Reference:
 <https://docs.microsoft.com/en-us/windows/uwp/publish/product-declarations>
 
-### A7. 1.0.3.0 — storefront domain change (built 2026-08-17)
+### A7. 1.0.3.0 — storefront domain change — **SUBMITTED 2026-08-17, awaiting certification**
 
 **What changed and why:** the Shopify store moved to its own domain, so every
 outbound product link is now `shop.analyticsbyshanikwa.com` instead of
