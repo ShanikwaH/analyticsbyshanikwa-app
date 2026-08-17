@@ -169,6 +169,84 @@ linking out to paid products entirely.
 Reference:
 <https://docs.microsoft.com/en-us/windows/uwp/publish/product-declarations>
 
+### A7. 1.0.3.0 — storefront domain change (built 2026-08-17)
+
+**What changed and why:** the Shopify store moved to its own domain, so every
+outbound product link is now `shop.analyticsbyshanikwa.com` instead of
+`jrip3r-qz.myshopify.com`. Links and content only — no new features, no new
+capabilities, no behaviour change.
+
+> **This release is not what fixed the links.** The app pulls its catalogue at
+> runtime from `analyticsbyshanikwa.com/app/content.json` (see
+> `lib/content_repository.dart`), and that file was bumped to **v14** on
+> 2026-08-17, which every install picks up on next launch. The bundled copy is
+> only the offline floor. So 1.0.3.0 is a freshness release — if certification
+> drags, nobody is stuck on stale links meanwhile. Old myshopify URLs also
+> 301-redirect to the new domain.
+
+**Building it — this machine cannot.** `flutter build windows` requires Visual
+Studio 2022 with the Desktop C++ workload, whose installer needs admin. There is
+no Flutter SDK and no Visual Studio here, and neither can be installed. The build
+therefore runs in CI on a GitHub-hosted Windows runner, which ships that
+toolchain:
+
+- Workflow: `.github/workflows/build-msix.yml` (runs on push to `source` touching
+  `pubspec.yaml`, `lib/**`, `assets/**`, `windows/**`, `icon_src/**`, or the
+  workflow itself; also `workflow_dispatch`).
+- It mirrors the documented local steps exactly:
+  `flutter build windows --release --dart-define=APP_NICHE=full`, then
+  `dart run msix:create --store`.
+- Download the `analyticsbyshanikwa_app-msix` artifact from the run
+  (`gh run download <run-id> -n analyticsbyshanikwa_app-msix -D dist`).
+  Artifacts expire after 30 days; just re-run the workflow if one lapses.
+
+**First build:** run 32018109992, success in 6m 2s. SHA256
+`cc1d4083de56beba1111d0759a2838617232a411bbef85db0601b418bae6c69b`, 22.6 MB.
+Verified by reading the package's own `AppxManifest.xml`: Identity
+`AnalyticsbyShanikwa.AnalyticsbyShanikwa`, Publisher
+`CN=82609663-1176-497C-A1B0-947A85A73EEF`, Version `1.0.3.0`. The bundled
+`content.json` inside the package carries 0 old URLs and 120 new ones.
+
+**Versions bumped in `pubspec.yaml`:** `version: 1.0.2+3 → 1.0.3+4` and
+`msix_version: 1.0.2.0 → 1.0.3.0`. The Store requires msix_version to increase
+and the last digit to stay 0.
+
+**The submission — three things that have each failed us before:**
+
+1. **Tick the declaration** (Properties → Product declarations):
+   *"This app allows users to make purchases, but does not use the Microsoft
+   Store commerce system."* This is what A6 failed on. It lives on the
+   submission, not the product, so it is blank again every time.
+2. **Device family = Desktop only.**
+3. **`runFullTrust` justification** — the box truncates silently at 500
+   characters. Paste the 468-character version from `store/LISTING.md`.
+
+**Notes for certification:**
+
+> New package 1.0.3.0, replacing 1.0.2.0.
+>
+> What changed: the online store moved to a custom domain, so the catalogue's
+> outbound links now point to shop.analyticsbyshanikwa.com instead of the
+> previous myshopify.com address. Links and content only — no new features, no
+> new capabilities, no permission changes, and no change to how the app behaves.
+>
+> Purchases: unchanged from the accepted 1.0.2.0 submission. The Shop screen
+> links out to Payhip and Shopify in the user's default browser. The app does
+> not process payments and does not use the Microsoft Store commerce system. The
+> corresponding product declaration is ticked.
+>
+> Device family: Desktop only. runFullTrust is required because this is a native
+> Win32 (Flutter) app packaged as MSIX; the capability is added automatically by
+> the packaging tool. No elevation, no drivers or services, no system changes.
+>
+> Testing: no account or sign-in is required. Shop links open in the default
+> browser.
+
+**Note vs. declaration — they are different fields.** Notes tell the reviewer
+what changed so they don't re-test from scratch; they do **not** satisfy policy
+10.8.2. Only the declaration tickbox does. Good notes with the declaration
+unticked will fail again.
+
 ---
 
 # B · Google Play — $25 once
