@@ -8,7 +8,7 @@ Sources (all local, all authoritative):
   .../Shopify Bundle Downloads/*.zip      the sellable bundle files
 
 Shopify product URLs are derived from `handle` — the pattern
-https://jrip3r-qz.myshopify.com/products/<handle> was verified live against
+https://shop.analyticsbyshanikwa.com/products/<handle> was verified live against
 the Admin API before this script was written.
 
 Writes a lean `catalog` array. The existing 4-item `products` array is left
@@ -25,7 +25,7 @@ APP = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DP = os.path.join(os.path.dirname(APP), "digital-products-100")
 BUNDLES = ("C:/Users/nikki/OneDrive/0 A Etsy-TikTok-YouTube Content Business/"
            "Etsy Shop/Cursor-Claude Code Digital Products/Shopify Bundle Downloads")
-SHOP = "https://jrip3r-qz.myshopify.com/products"
+SHOP = "https://shop.analyticsbyshanikwa.com/products"
 PAYHIP_STORE = "https://payhip.com/AnalyticsByShanikwa"
 TRACK = "ref=app&utm_source=app&utm_medium=app&utm_content="
 
