@@ -1,8 +1,7 @@
 name: analyticsbyshanikwa_app
 description: "Analytics by Shanikwa — Data, Faith, Finance. One codebase, four niche builds (full / accounting / data / bible) for Windows, macOS, iOS, and Android."
 publish_to: 'none'
-version: 1.0.2+3
-
+version: 1.0.3+4
 environment:
   sdk: '>=3.7.0 <4.0.0'
 
@@ -45,7 +44,7 @@ msix_config:
   publisher_display_name: Analytics by Shanikwa
   identity_name: AnalyticsbyShanikwa.AnalyticsbyShanikwa
   publisher: CN=82609663-1176-497C-A1B0-947A85A73EEF
-  msix_version: 1.0.2.0
+  msix_version: 1.0.3.0
   logo_path: icon_src/icon_master.png
   capabilities: internetClient
   store: false

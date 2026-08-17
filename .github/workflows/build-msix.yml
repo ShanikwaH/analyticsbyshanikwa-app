@@ -1,0 +1,69 @@
+name: Build Store MSIX
+
+# Builds the Partner Center .msix on a GitHub-hosted Windows runner, which
+# ships Visual Studio 2022 with the Desktop C++ workload that `flutter build
+# windows` requires. Download the artifact and upload it to Partner Center.
+#
+# Mirrors the documented local steps in pubspec.yaml:
+#   flutter build windows --dart-define=APP_NICHE=full
+#   dart run msix:create --store
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [source]
+    paths:
+      - 'pubspec.yaml'
+      - 'lib/**'
+      - 'assets/**'
+      - 'windows/**'
+      - 'icon_src/**'
+      - '.github/workflows/build-msix.yml'
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+
+      - name: Versions
+        run: |
+          flutter --version
+          dart --version
+
+      - name: Show packaged version
+        shell: bash
+        run: |
+          grep -E '^version:' pubspec.yaml
+          grep -E 'msix_version:' pubspec.yaml
+
+      - name: Dependencies
+        run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze --no-fatal-infos
+        continue-on-error: true
+
+      - name: Build Windows release
+        run: flutter build windows --release --dart-define=APP_NICHE=full
+
+      - name: Package MSIX for the Store
+        run: dart run msix:create --store
+
+      - name: Locate artifact
+        shell: bash
+        run: ls -la build/windows/x64/runner/Release/*.msix
+
+      - name: Upload MSIX
+        uses: actions/upload-artifact@v4
+        with:
+          name: analyticsbyshanikwa_app-msix
+          path: build/windows/x64/runner/Release/*.msix
+          if-no-files-found: error
+          retention-days: 30
