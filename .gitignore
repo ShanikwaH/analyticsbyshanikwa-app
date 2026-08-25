@@ -1,1 +1,13 @@
 .knowl/
+
+# Knowl / agent configuration.
+#
+# `main` is the GitHub Pages source for app.analyticsbyshanikwa.com and carries
+# `.nojekyll`, so anything tracked here is a candidate to be served publicly.
+# These files are regenerated locally by `knowl init` and are deliberately kept
+# untracked. A reference copy lives on the `knowl-config` branch.
+KNOWL.md
+AGENTS.md
+CLAUDE.md
+.mcp.json
+.claude/
