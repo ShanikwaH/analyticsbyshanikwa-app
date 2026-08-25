@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "knowl": {
+      "command": "knowl",
+      "args": [
+        "serve",
+        "--host",
+        "claude"
+      ]
+    }
+  }
+}
